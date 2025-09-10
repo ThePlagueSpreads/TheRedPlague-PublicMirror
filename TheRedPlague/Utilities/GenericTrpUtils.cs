@@ -104,4 +104,9 @@ public static class GenericTrpUtils
 
         return bounds;
     }
+
+    public static float RemapValue(float value, float originalFrom, float originalTo, float newFrom, float newTo)
+    {
+        return Mathf.Lerp(newFrom, newTo, Mathf.InverseLerp(originalFrom, originalTo, value));
+    }
 }

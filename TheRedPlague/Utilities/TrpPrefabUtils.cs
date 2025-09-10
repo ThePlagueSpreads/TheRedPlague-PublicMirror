@@ -1,8 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Nautilus.Assets;
 using Nautilus.Utility;
+using TheRedPlague.Mono.InfectionLogic;
 using TheRedPlague.Mono.Util;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace TheRedPlague.Utilities;
 
@@ -16,6 +19,18 @@ public static class TrpPrefabUtils
         PrefabUtils.AddWorldForces(cube, 5);
         cube.AddComponent<Pickupable>();
         return cube;
+    }
+
+    public static RedPlagueHost AddPlagueCreationComponents(GameObject creaturePrefab)
+    {
+        var host = creaturePrefab.EnsureComponent<RedPlagueHost>();
+        host.mode = RedPlagueHost.Mode.PlagueCreation;
+        
+        var infectedMixin = host.gameObject.AddComponent<InfectedMixin>();
+        infectedMixin.renderers = Array.Empty<Renderer>(); // NO NEED TO AFFECT THE RENDERERS
+        host.gameObject.AddComponent<InfectOnStart>();
+        
+        return host;
     }
 
     public static IEnumerator GenerateFleshCaveAtmosphereVolumes(GameObject gameObject)
@@ -122,5 +137,10 @@ public static class TrpPrefabUtils
             yield break;
         
         root.transform.Find("FleshCavePrefab/FleshCaveCache/FleshCaveCache").gameObject.GetComponent<Renderer>().material = material;
+    }
+
+    public static void ApplyBennetFleshFormMaterials(GameObject model)
+    {
+        MaterialUtils.ApplySNShaders(model, 7f, 1.3f, 1.3f);
     }
 }
