@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using TheRedPlague.Data;
 using TheRedPlague.Mono.CreatureBehaviour;
+using TheRedPlague.Mono.Util;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace TheRedPlague.Mono.Equipment;
 
@@ -11,6 +13,11 @@ public class PlagueKnifeTool : Knife
     public override string animToolName => "knife";
 
     public float plagueDamage;
+
+    private bool _warpersEnabled = true;
+
+    public FMODAsset attackSoundWarper;
+    public FMODAsset underwaterMissSoundWarper;
 
     public override void OnToolUseAnim(GUIHand hand)
     {
@@ -27,6 +34,7 @@ public class PlagueKnifeTool : Knife
                 closestObj = component.GetMostRecent().gameObject;
             }
         }
+
         if ((bool)closestObj)
         {
             LiveMixin liveMixin = closestObj.FindAncestor<LiveMixin>();
@@ -39,21 +47,25 @@ public class PlagueKnifeTool : Knife
                     liveMixin.TakeDamage(damage, position, damageType);
                     GiveResourceOnDamage(closestObj, liveMixin.IsAlive(), wasAlive);
                 }
-                Utils.PlayFMODAsset(attackSound, base.transform);
+
+                Utils.PlayFMODAsset(_warpersEnabled ? attackSoundWarper : attackSound, base.transform);
                 VFXSurface component2 = closestObj.GetComponent<VFXSurface>();
                 Vector3 euler = MainCameraControl.main.transform.eulerAngles + new Vector3(300f, 90f, 0f);
-                VFXSurfaceTypeManager.main.Play(component2, vfxEventType, position, Quaternion.Euler(euler), Player.main.transform);
+                VFXSurfaceTypeManager.main.Play(component2, vfxEventType, position, Quaternion.Euler(euler),
+                    Player.main.transform);
             }
             else
             {
                 closestObj = null;
             }
         }
+
+        RadiationLeakSuckerObscuring.DamageSuckersInRange(MainCameraControl.main.transform.position, 2, 20f, CustomDamageTypes.PlagueCutting);
         if (closestObj == null && hand.GetActiveTarget() == null)
         {
             if (Player.main.IsUnderwater())
             {
-                Utils.PlayFMODAsset(underwaterMissSound, transform);
+                Utils.PlayFMODAsset(_warpersEnabled ? underwaterMissSoundWarper : underwaterMissSound, transform);
             }
             else
             {
@@ -61,10 +73,23 @@ public class PlagueKnifeTool : Knife
             }
         }
 
-        if (Player.main.GetCurrentSub() == null)
+        if (_warpersEnabled && Player.main.GetCurrentSub() == null)
         {
             StartCoroutine(SpawnWarper(position));
         }
+    }
+
+    public override string GetCustomUseText()
+    {
+        return LanguageCache.GetButtonFormat(
+            _warpersEnabled ? "PlagueKnifeDisableWarperPrompt" : "PlagueKnifeEnableWarperPrompt",
+            GameInput.Button.AltTool);
+    }
+
+    public override bool OnAltDown()
+    {
+        _warpersEnabled = !_warpersEnabled;
+        return true;
     }
 
     private IEnumerator SpawnWarper(Vector3 pos)
@@ -72,18 +97,21 @@ public class PlagueKnifeTool : Knife
         var warperTask = CraftData.GetPrefabForTechTypeAsync(TechType.Warper);
         yield return warperTask;
         var offsetPosition = pos + Random.onUnitSphere * 0.5f;
-        var warperObj = Instantiate(warperTask.GetResult(), offsetPosition, Quaternion.LookRotation((offsetPosition - pos).normalized));
+        var warperObj = Instantiate(warperTask.GetResult(), offsetPosition,
+            Quaternion.LookRotation((offsetPosition - pos).normalized));
         warperObj.AddComponent<FriendlyWarper>();
         warperObj.SetActive(true);
         foreach (var collider in warperObj.GetComponentsInChildren<Collider>())
         {
             collider.enabled = false;
         }
+
         var warper = warperObj.GetComponent<Warper>();
         warper.SetFriend(Player.main.gameObject);
         var colliders = Physics.OverlapSphere(pos, 5, -1, QueryTriggerInteraction.Ignore);
         var warperMeleeAttack = warperObj.GetComponentInChildren<WarperMeleeAttack>();
-        warperMeleeAttack.attackDamage = new AnimationCurve(new Keyframe(0, 100), new Keyframe(4, 100), new Keyframe(2, 100));
+        warperMeleeAttack.attackDamage =
+            new AnimationCurve(new Keyframe(0, 100), new Keyframe(4, 100), new Keyframe(2, 100));
         var attackedTargets = new List<Creature>();
         foreach (var target in colliders)
         {
@@ -95,16 +123,17 @@ public class PlagueKnifeTool : Knife
             if (attackedTargets.Contains(creatureComponent))
                 continue;
             attackedTargets.Add(creatureComponent);
-            
+
             if (warper == null) yield break;
             warper.transform.LookAt(creatureComponent.transform);
             warperMeleeAttack.timeLastBite = 0;
             warper.Aggression.Add(1);
             warperMeleeAttack.OnTouch(creatureComponent.GetComponent<Collider>());
-            
+
             yield return new WaitForSeconds(0.5f);
             yield return null;
         }
+
         warper.WarpOut();
     }
 }

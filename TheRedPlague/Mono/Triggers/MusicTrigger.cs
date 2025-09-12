@@ -6,6 +6,7 @@ public class MusicTrigger : PlayerTrigger
 {
     public FMODAsset music;
     public float musicDuration;
+    public bool highPriority;
 
     public void SetUp(FMODAsset music, float musicDuration)
     {
@@ -15,6 +16,6 @@ public class MusicTrigger : PlayerTrigger
     
     protected override void OnTriggerActivated()
     {
-        TrpEventMusicPlayer.PlayMusic(music, musicDuration);
+        TrpEventMusicPlayer.PlayMusic(music, musicDuration, highPriority);
     }
 }

@@ -9,14 +9,8 @@ public static class CustomBackgroundTypes
 
     public static void RegisterCustomBackgroundTypes()
     {
-        var itemBackground = new Atlas.Sprite(Plugin.AssetBundle.LoadAsset<Sprite>("PlagueItemBackground"));
-        FixItemBackgroundSprite(itemBackground);
+        var itemBackground = Plugin.AssetBundle.LoadAsset<Sprite>("PlagueItemBackground");
         PlagueItem = EnumHandler.AddEntry<CraftData.BackgroundType>("PlagueItem")
             .WithBackground(itemBackground);
-    }
-
-    private static void FixItemBackgroundSprite(Atlas.Sprite sprite)
-    {
-        sprite.slice9Grid = true;
     }
 }

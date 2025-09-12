@@ -25,7 +25,14 @@ public class PlagueArmorFragment : FloatingCorpsePrefab
 
         var light = prefab.AddComponent<Light>();
         light.intensity = 2;
-        light.range = 5;
+        light.range = 3;
         light.color = Color.red;
+        if (MiscSettings.flashes)
+        {
+            var flicker = prefab.AddComponent<LightFlicker>();
+            flicker.maxLightIntensity = 3;
+            flicker.minFlickerSpeed = 0.05f;
+            flicker.maxFlickerSpeed = 0.2f;
+        }
     }
 }

@@ -68,6 +68,13 @@ public class SuckerControllerTarget : MonoBehaviour
         }
     }
 
+    public bool IsValidTarget()
+    {
+        var vehicle = GetComponent<Vehicle>();
+        if (vehicle == null) return true;
+        return !vehicle.docked;
+    }
+
     public void RecalculatePrimarySucker()
     {
         bool foundPrimary = false;
@@ -99,6 +106,7 @@ public class SuckerControllerTarget : MonoBehaviour
             var sqrDist = Vector3.SqrMagnitude(target.transform.position - referencePos);
             if (sqrDist > closestSqrDistance) continue;
             if (sqrDist > maxRange * maxRange) continue;
+            if (!target.IsValidTarget()) continue;
             closestSqrDistance = sqrDist;
             result = target;
         }

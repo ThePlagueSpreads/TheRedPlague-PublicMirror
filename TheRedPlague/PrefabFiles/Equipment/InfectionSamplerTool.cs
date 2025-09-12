@@ -24,9 +24,9 @@ public static class InfectionSamplerTool
         prefab.SetGameObject(CreatePrefab);
         prefab.SetEquipment(EquipmentType.Hand);
         prefab.SetRecipe(new RecipeData(
-                new CraftData.Ingredient(TechType.Titanium, 2),
-                new CraftData.Ingredient(TechType.CopperWire),
-                new CraftData.Ingredient(TechType.Silver)))
+                new Ingredient(TechType.Titanium, 2),
+                new Ingredient(TechType.CopperWire, 1),
+                new Ingredient(TechType.Silver, 1)))
             .WithCraftingTime(5)
             .WithFabricatorType(CraftTree.Type.Fabricator)
             .WithStepsToFabricatorTab(CraftTreeHandler.Paths.FabricatorTools);

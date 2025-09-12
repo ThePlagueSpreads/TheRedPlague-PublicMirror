@@ -26,8 +26,8 @@ public class Toy
         
         customPrefab.SetGameObject(GetGameObject);
         customPrefab.SetRecipe(new RecipeData(
-                new CraftData.Ingredient(TechType.Titanium),
-                new CraftData.Ingredient(TechType.FiberMesh)))
+                new Ingredient(TechType.Titanium, 1),
+                new Ingredient(TechType.FiberMesh, 1)))
             .WithFabricatorType(AdminFabricator.AdminCraftTree)
             .WithCraftingTime(5f);
         customPrefab.SetEquipment(EquipmentType.Hand);

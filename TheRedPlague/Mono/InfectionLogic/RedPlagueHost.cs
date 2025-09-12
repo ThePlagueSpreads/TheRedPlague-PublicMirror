@@ -6,9 +6,11 @@ namespace TheRedPlague.Mono.InfectionLogic;
 
 public class RedPlagueHost : MonoBehaviour
 {
-    private static readonly List<RedPlagueHost> AllTargets = new();
+    private static readonly HashSet<RedPlagueHost> AllTargets = new();
 
     public Mode mode;
+
+    public bool invalidTarget;
     
     // Zombified creatures are Red Plague infected variants of normal creatures; not plague creations
     public bool IsZombified { get; private set; }
@@ -72,7 +74,8 @@ public class RedPlagueHost : MonoBehaviour
 
     private void OnEnable()
     {
-        AllTargets.Add(this);
+        if (!invalidTarget)
+            AllTargets.Add(this);
     }
     
     private void OnDisable()

@@ -158,7 +158,7 @@ public class DomeConstructionVfx : MonoBehaviour
         domeShieldRenderer.enabled = true;
         
         PlayIslandMusic.DisableForTime(600);
-        TrpEventMusicPlayer.PlayMusic(AudioUtils.GetFmodAsset("RedPlagueThemeMusic"), 120);
+        TrpEventMusicPlayer.PlayMusic(AudioUtils.GetFmodAsset("RedPlagueThemeMusic"), 120, true);
     }
 
     private void OnDestroy()

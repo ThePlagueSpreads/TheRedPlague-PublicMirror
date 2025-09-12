@@ -1,7 +1,10 @@
-﻿using TheRedPlague.Mono.CreatureBehaviour.Mutants;
+﻿using System;
+using TheRedPlague.Mono.CreatureBehaviour.Mutants;
 using TheRedPlague.Mono.VFX;
 using TheRedPlague.Utilities;
 using UnityEngine;
+using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 namespace TheRedPlague.Mono.Util;
 
@@ -16,6 +19,8 @@ public class DespawnWhenOffScreen : MonoBehaviour
     public bool playSoundWhenFound;
     public bool rareJumpscare;
 
+    public UnityAction OnDestroyCallback;
+
     private bool _wasSeen;
     private float _timeWasSeen;
 
@@ -29,6 +34,9 @@ public class DespawnWhenOffScreen : MonoBehaviour
 
     private bool _despawning;
     private int _terrainMask;
+    private bool _jumpscared;
+
+    private float _destroyTime;
 
     private void Start()
     {
@@ -46,6 +54,7 @@ public class DespawnWhenOffScreen : MonoBehaviour
                     _wasSeen = true;
                     _timeWasSeen = Time.time;
                 }
+
                 return;
             }
         }
@@ -62,7 +71,10 @@ public class DespawnWhenOffScreen : MonoBehaviour
         else
         {
             _terrainMask = LayerMask.GetMask("Terrain");
-            if (despawnIfViewNotClear && Physics.Raycast(new Ray(transform.position, (MainCamera.camera.transform.position - transform.position).normalized), (MainCamera.camera.transform.position - transform.position).magnitude - 2f, _terrainMask, QueryTriggerInteraction.Ignore))
+            if (despawnIfViewNotClear && Physics.Raycast(
+                    new Ray(transform.position, (MainCamera.camera.transform.position - transform.position).normalized),
+                    (MainCamera.camera.transform.position - transform.position).magnitude - 2f, _terrainMask,
+                    QueryTriggerInteraction.Ignore))
             {
                 Despawn(0f);
             }
@@ -72,15 +84,24 @@ public class DespawnWhenOffScreen : MonoBehaviour
     private void Update()
     {
         if (_despawning)
+        {
+            if (Time.time > _destroyTime)
+            {
+                DestroySelf();
+            }
+
             return;
-        
+        }
+
         var minDistanceToUse = Player.main.IsInBase() ? minDistance / 3 : minDistance;
-        if (despawnIfTooClose && Vector3.SqrMagnitude(transform.position - MainCamera.camera.transform.position) < minDistanceToUse * minDistanceToUse)
+        if (despawnIfTooClose && Vector3.SqrMagnitude(transform.position - MainCamera.camera.transform.position) <
+            minDistanceToUse * minDistanceToUse)
         {
             if (jumpscareWhenTooClose)
             {
                 var canJumpScareThisFrame = !rareJumpscare || Random.value < 0.02f * Time.deltaTime;
                 if (!canJumpScareThisFrame) return;
+                _jumpscared = true;
                 Despawn(2f);
                 if (!Player.main.IsInBase() && !Plugin.Options.DisableJumpScares)
                     DeathScare.PlayDeathScare();
@@ -107,6 +128,24 @@ public class DespawnWhenOffScreen : MonoBehaviour
                 return;
             }
         }
-        Destroy(gameObject, timer);
+
+        if (_destroyTime <= Mathf.Epsilon)
+        {
+            _destroyTime = Time.time + timer;
+        }
+        else
+        {
+            _destroyTime = Mathf.Min(Time.time + timer, _destroyTime);
+        }
+    }
+
+    private void DestroySelf()
+    {
+        if (!_jumpscared && OnDestroyCallback != null)
+        {
+            OnDestroyCallback.Invoke();
+        }
+
+        Destroy(gameObject);
     }
 }

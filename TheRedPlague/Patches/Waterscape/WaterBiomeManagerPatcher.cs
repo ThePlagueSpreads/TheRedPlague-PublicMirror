@@ -16,11 +16,11 @@ public static class WaterBiomeManagerPatcherPatcher
             if (settings.name != "dunes") continue;
             
             settings.settings = BiomeUtils.CreateBiomeSettings(
-                new Vector3(8, 11f, 13f),
+                new Vector3(13, 11, 10),
                 0.5f,
-                new Color(0.341f, 0.427f, 0.447f),
+                new Color(0.381f, 0.427f, 0.447f),
                 0.2f,
-                new Color(1, 0.906f, 0.96f),
+                new Color(0.2f, 0.036f, 0.03f),
                 0.02f,
                 25,
                 1,

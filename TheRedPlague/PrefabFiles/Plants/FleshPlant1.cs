@@ -47,6 +47,9 @@ public static class FleshPlant1
         mysteriousRemainsSpawns.spawnClassId = MysteriousRemains.Info.ClassID;
         mysteriousRemainsSpawns.minimumRespawnDistance = 15;
         mysteriousRemainsSpawns.spawnScale = 1.6f;
+
+        obj.AddComponent<DestroyWhenAtOrigin>().maxSqrDistance = 25 * 25;
+        
         prefab.Set(obj);
         yield break;
     }

@@ -30,7 +30,7 @@ public class AggressiveWhenSeeZombies : MonoBehaviour
 
     private void Start()
     {
-        InvokeRepeating(nameof(ScanForAggressionTarget), Random.Range(0f, 1f), 1f);
+        InvokeRepeating(nameof(ScanForAggressionTarget), Random.Range(0f, 1f), 1.5f);
         _isValidTarget = IsTargetValid;
         _techType = CraftData.GetTechType(gameObject);
     }
@@ -101,7 +101,7 @@ public class AggressiveWhenSeeZombies : MonoBehaviour
             return false;
         }
 
-        if (Vector3.Distance(target.transform.position, transform.position) > maxRange)
+        if (Vector3.SqrMagnitude(target.transform.position - transform.position) > maxRange * maxRange)
         {
             return false;
         }

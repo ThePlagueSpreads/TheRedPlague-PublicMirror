@@ -210,7 +210,6 @@ public class PlagueNeutralizerMachine : MonoBehaviour
     {
         material.EnableKeyword("FX_BUILDING");
         material.SetTexture(ShaderPropertyID._EmissiveTex, fabricatorEmissiveTexture);
-        material.SetFloat(ShaderPropertyID._Cutoff, 0.4f);
         material.SetColor(ShaderPropertyID._BorderColor, new Color(2, 0.4f, 0.4f));
         material.SetFloat(ShaderPropertyID._Built, 0f);
         material.SetFloat(ShaderPropertyID._Cutoff, 0.42f);

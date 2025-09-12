@@ -13,6 +13,7 @@ using TheRedPlague.Mono.CreatureBehaviour.Neural;
 using TheRedPlague.Mono.InfectionLogic;
 using TheRedPlague.PrefabFiles.Buildable;
 using TheRedPlague.PrefabFiles.Items;
+using TheRedPlague.Utilities;
 using TheRedPlague.Utilities.Gadgets;
 using UnityEngine;
 
@@ -30,8 +31,8 @@ public class ConsciousNeuralMatter : CreatureAsset
     {
         CustomPrefab.SetPdaGroupCategory(CustomTechCategories.PlagueBiotechGroup,
             CustomTechCategories.PlagueBiotechCategory);
-        CustomPrefab.SetRecipe(new RecipeData(new CraftData.Ingredient(DormantNeuralMatter.Info.TechType),
-                new CraftData.Ingredient(TechType.Battery), new CraftData.Ingredient(TechType.Diamond)))
+        CustomPrefab.SetRecipe(new RecipeData(new Ingredient(DormantNeuralMatter.Info.TechType, 1),
+                new Ingredient(TechType.Battery, 1), new Ingredient(TechType.Diamond, 1)))
             .WithCraftingTime(20)
             .WithFabricatorType(PlagueAltar.CraftTreeType)
             .WithStepsToFabricatorTab(PlagueAltar.PetsTab);
@@ -65,7 +66,8 @@ public class ConsciousNeuralMatter : CreatureAsset
 
     protected override IEnumerator ModifyPrefab(GameObject prefab, CreatureComponents components)
     {
-        prefab.AddComponent<RedPlagueHost>().mode = RedPlagueHost.Mode.PlagueCreation;
+        TrpPrefabUtils.AddPlagueCreationComponents(prefab);
+        
         var heldFish = prefab.GetComponent<HeldFish>();
         heldFish.ikAimRightArm = false;
 

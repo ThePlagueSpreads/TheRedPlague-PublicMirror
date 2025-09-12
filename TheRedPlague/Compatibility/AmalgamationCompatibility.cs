@@ -3,6 +3,7 @@ using Nautilus.Handlers;
 using TheRedPlague.Data;
 using TheRedPlague.Managers;
 using TheRedPlague.Managers.Amalgamation;
+using TheRedPlague.Mono.CreatureBehaviour;
 using UnityEngine;
 
 namespace TheRedPlague.Compatibility;
@@ -145,6 +146,7 @@ internal static class AmalgamationCompatibility
             head.transform.localScale = location.Item3;
             head.GetComponent<Creature>().SetScale(location.Item3.x);
             ZombieManager.Zombify(head);
+            head.AddComponent<AmalgamationParasite>().desiredLossyScale = 1;
             foreach (var collider in head.GetComponentsInChildren<Collider>())
             {
                 if (!collider.isTrigger) collider.enabled = false;

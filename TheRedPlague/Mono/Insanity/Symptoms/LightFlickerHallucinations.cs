@@ -10,12 +10,12 @@ namespace TheRedPlague.Mono.Insanity.Symptoms;
 
 public class LightFlickerHallucinations : InsanitySymptom
 {
-    private const float MinInsanity = 15f;
+    private const float MinInsanity = 18f;
     private const float MaxInsanity = 100f;
-    private const float ChanceAtMinInsanity = 0.2f;
+    private const float ChanceAtMinInsanity = 0.25f;
     private const float ChanceAtMaxInsanity = 0.8f;
-    private const float MinDelay = 24;
-    private const float MaxDelay = 34;
+    private const float MinDelay = 30;
+    private const float MaxDelay = 52;
     private const float VoiceGlitchInitialDelay = 60 * 15;
     private const float VoiceGlitchDelay = 60 * 60;
     
@@ -58,7 +58,8 @@ public class LightFlickerHallucinations : InsanitySymptom
         TechType.Welder,
         TechType.PropulsionCannon,
         TechType.RepulsionCannon,
-        TechType.HeatBlade
+        TechType.HeatBlade,
+        TechType.Seaglide
     };
 
     private void Start()
@@ -127,6 +128,7 @@ public class LightFlickerHallucinations : InsanitySymptom
 
     protected override bool ShouldDisplaySymptoms()
     {
+        if (Plugin.Options.DisablePowerFluctuations) return false;
         return InsanityPercentage >= MinInsanity && MiscSettings.flashes;
     }
 

@@ -19,8 +19,8 @@ public class CustomSoundHallucination : TimedHallucinationSymptom
     private const float MinDistance = 15;
     private const float MaxDistance = 64;
     
-    protected override float MinInterval => 150;
-    protected override float MaxInterval => 250;
+    protected override float MinInterval => 110;
+    protected override float MaxInterval => 210;
     protected override float MinInsanity => 30;
     protected override float MaxInsanity => 100;
     protected override float ChanceAtMinInsanity => 0.25f;

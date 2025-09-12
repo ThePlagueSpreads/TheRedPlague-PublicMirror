@@ -7,6 +7,7 @@ using Nautilus.Utility;
 using TheRedPlague.Data;
 using TheRedPlague.Managers;
 using TheRedPlague.Mono.InfectionLogic;
+using TheRedPlague.Utilities;
 using UnityEngine;
 
 namespace TheRedPlague.PrefabFiles.Creatures;
@@ -48,10 +49,10 @@ public class InvertedSpadeFish : CreatureAsset
 
     protected override IEnumerator ModifyPrefab(GameObject prefab, CreatureComponents components)
     {
-        prefab.AddComponent<RedPlagueHost>().mode = RedPlagueHost.Mode.PlagueCreation;
-
+        TrpPrefabUtils.AddPlagueCreationComponents(prefab);
+        
         var meleeAttack = CreaturePrefabUtils.AddMeleeAttack<MeleeAttack>(prefab, components,
-            prefab.transform.Find("BiteTrigger").gameObject, true, 10f, 9f, false);
+            prefab.transform.Find("BiteTrigger").gameObject, true, 9, 9f, false);
         var biteSound = prefab.AddComponent<FMOD_StudioEventEmitter>();
         biteSound.path = "SmallZombieBite";
         biteSound.minInterval = 2;

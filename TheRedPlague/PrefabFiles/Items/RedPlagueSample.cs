@@ -13,7 +13,7 @@ public static class RedPlagueSample
     
     public static PrefabInfo Info { get; } = PrefabInfo.WithTechType("RedPlagueSample")
         .WithIcon(Plugin.AssetBundle.LoadAsset<Sprite>(SuperEnormouslyLongNameForTheNameForOctoʼsThingThatOctoNamedBecauseHeExportedTheImageMultipleTimesAndNeededDifferentNamesForEachOneSoHeWouldntGetConfusedPlagueSampleSpriteImageAssetNameDotComSlashLogin))
-        .WithSizeInInventory(new Vector2int(2, 2));
+        .WithSizeInInventory(new Vector2int(1, 2));
 
     public static void Register()
     {

@@ -4,21 +4,29 @@ using UnityEngine;
 
 namespace TheRedPlague.Mono.CreatureBehaviour.MrTeeth;
 
-public class MrTeethSpawner : MonoBehaviour
+public class MrTeethSpawner : MonoBehaviour, IManagedUpdateBehaviour
 {
-    /*
-    public float maxDistanceDefault = 12f;
-    public float maxDistancePlagueArmor = 7f;
-    */
-    public float maxDistance = 7f;
+    public float maxDistance = 6.5f;
     public float minInterval = 10f;
     
     private float _timeMrTeethCanSpawnAgain;
     private GameObject _mrTeethInstance;
     
+    public int managedUpdateIndex { get; set; }
+    
     private static readonly FMODAsset SpawnSound = AudioUtils.GetFmodAsset("MrTeethScream");
 
-    private void Update()
+    private void OnEnable()
+    {
+        BehaviourUpdateUtils.Register(this);
+    }
+
+    private void OnDisable()
+    {
+        BehaviourUpdateUtils.Deregister(this);
+    }
+    
+    public void ManagedUpdate()
     {
         if (!MrTeethCanSpawn()) return;
         var maxDistance = GetMaxDistance();
@@ -73,5 +81,10 @@ public class MrTeethSpawner : MonoBehaviour
         mrTeeth.SetActive(true);
         _mrTeethInstance = mrTeeth;
         Utils.PlayFMODAsset(SpawnSound, transform.position);
+    }
+
+    public string GetProfileTag()
+    {
+        return "TRP:MrTeethSpawner";
     }
 }

@@ -189,8 +189,8 @@ public class BuildFX : MonoBehaviour, IManagedUpdateBehaviour
 
         if (_interpolating)
         {
-            CurrentConstructPercent = Mathf.Lerp(_interpolationStartValue, _interpolationEndValue,
-                1f - (_interpolationEndTime - Time.time) / _interpolationDuration);
+            CurrentConstructPercent = Mathf.Clamp01(Mathf.Lerp(_interpolationStartValue, _interpolationEndValue,
+                1f - (_interpolationEndTime - Time.time) / _interpolationDuration));
             if (Mathf.Approximately(CurrentConstructPercent, _interpolationEndValue))
             {
                 CurrentConstructPercent = _interpolationEndValue;

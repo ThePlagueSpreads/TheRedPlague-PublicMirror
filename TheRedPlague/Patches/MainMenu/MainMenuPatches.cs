@@ -1,7 +1,8 @@
-﻿using HarmonyLib;
-using mset;
+﻿using System;
+using System.Collections;
+using HarmonyLib;
+using Nautilus.Handlers.TitleScreen;
 using Nautilus.Utility;
-using TheRedPlague.Managers;
 using UnityEngine;
 
 namespace TheRedPlague.Patches.MainMenu;
@@ -9,69 +10,84 @@ namespace TheRedPlague.Patches.MainMenu;
 [HarmonyPatch(typeof(uGUI_MainMenu))]
 public class MainMenuPatches
 {
+    private const string ReloadSaveWarning =
+        "[<color=#FF0000>The Red Plague</color>] Warning: Save corruption is possible for some mods if you load another save before quitting to desktop!";
+
+    private const string ForceTitleScreenPlayerPrefKey = "TrpForceTitleScreen";
+    
     private static int _timesLoaded;
 
-    private static GameObject _overlayLogoInstance;
-    
     [HarmonyPostfix]
     [HarmonyPatch(nameof(uGUI_MainMenu.Start))]
     public static void StartPostfix()
     {
-        if (!Plugin.Options.DisableRedPlagueMenuOverlay)
-            SpawnOverlayLogo();
-        if (!Plugin.Options.DisableRedPlagueMenuTitle)
-            SpawnRedPlagueLogo();
+        UWE.CoroutineHost.StartCoroutine(SetTitleScreenToTrp());
+        
         _timesLoaded++;
         if (_timesLoaded >= 2)
         {
-            ErrorMessage.AddMessage("[<color=#FF0000>The Red Plague</color>] Warning: Save corruption is possible for" +
-                                    " some mods if you load another save before quitting to desktop!");
+            ErrorMessage.AddMessage(ReloadSaveWarning);
         }
     }
 
-    private static void SpawnOverlayLogo()
+    private static IEnumerator SetTitleScreenToTrp()
     {
-        var logo = Object.Instantiate(Plugin.AssetBundle.LoadAsset<GameObject>("RedPlagueOverlayLogoPrefab"));
-        var sa = logo.AddComponent<SkyApplier>(); 
-        sa.renderers = logo.GetComponentsInChildren<Renderer>(true);
-        sa.anchorSky = Skies.Custom;
-        sa.SetCustomSky(Object.FindObjectOfType<Sky>());
-        logo.transform.position = new Vector3(-25.5f, 1, 40);
-        logo.transform.eulerAngles = Vector3.up * 180;
-        MaterialUtils.ApplySNShaders(logo);
-        UpdateOverlayLogoProgress(logo.transform);
-        _overlayLogoInstance = logo;
-    }
-
-    private static void SpawnRedPlagueLogo()
-    {
-        var logo = Object.Instantiate(Plugin.AssetBundle.LoadAsset<GameObject>("RedPlagueLogoPrefab"));
-        var sa = logo.AddComponent<SkyApplier>(); 
-        sa.renderers = logo.GetComponentsInChildren<Renderer>();
-        sa.anchorSky = Skies.Custom;
-        sa.SetCustomSky(Object.FindObjectOfType<Sky>());
-        logo.transform.position = new Vector3(5, 6f, 35f);
-        logo.transform.eulerAngles = Vector3.up * 180;
-        logo.transform.localScale = Vector3.one * 0.6f;
-        MaterialUtils.ApplySNShaders(logo);
-    }
-
-    private static void UpdateOverlayLogoProgress(Transform parent)
-    {
-        int activeProgress = GlobalRedPlagueProgressTracker.GetCurrentProgressValue();
-        int highestChildIndex = parent.childCount - 1;
-        int activeChildIndex = Mathf.Min(activeProgress - 1, highestChildIndex);
-        for (int i = 0; i < parent.childCount; i++)
+        if (PlayerPrefs.HasKey(ForceTitleScreenPlayerPrefKey))
         {
-            parent.GetChild(i).gameObject.SetActive(activeChildIndex == i);
+            yield break;
         }
-    }
 
-    public static void RefreshMainMenu()
-    {
-        if (_overlayLogoInstance != null)
+        System.Reflection.FieldInfo choiceOptionField;
+        System.Reflection.FieldInfo titleObjectDataField;
+        System.Reflection.MethodInfo onActiveModChanged;
+        try
         {
-            UpdateOverlayLogoProgress(_overlayLogoInstance.transform);
+            var mainMenuPatcherType = AccessTools.TypeByName("Nautilus.Patchers.MainMenuPatcher");
+            choiceOptionField = AccessTools.Field(mainMenuPatcherType, "_choiceOption");
+            titleObjectDataField = AccessTools.Field(mainMenuPatcherType, "TitleObjectDatas");
+            onActiveModChanged = AccessTools.Method(mainMenuPatcherType, "OnActiveModChanged");
         }
+        catch (Exception e)
+        {
+            Plugin.Logger.LogError("Exception thrown while trying to access Nautilus through reflection: " + e);
+            yield break;
+        }
+
+        var giveUpTime = Time.realtimeSinceStartup + 100;
+        
+        yield return new WaitUntil(() => Time.realtimeSinceStartup > giveUpTime || choiceOptionField.GetValue(null) != null);
+        
+        var choiceOption = choiceOptionField.GetValue(null);
+        if (choiceOption == null)
+        {
+            Plugin.Logger.LogError("Title screen changer timed out!");
+            yield break;
+        }
+
+        var titleObjectData = titleObjectDataField.GetValue(null) as SelfCheckingDictionary<string, TitleScreenHandler.CustomTitleData>;
+
+        var indexOfTrp = 0;
+        bool trpFound = false;
+        foreach (var data in titleObjectData)
+        {
+            if (data.Value.localizationKey == TrpTitleScreen.TitleScreenLocalizationName)
+            {
+                trpFound = true;
+                break;
+            }
+            indexOfTrp++;
+        }
+
+        if (!trpFound)
+        {
+            Plugin.Logger.LogWarning("Failed to find TRP!");
+            yield break;
+        }
+
+        var uguiChoice = choiceOption as uGUI_Choice;
+        uguiChoice.value = indexOfTrp + 1;
+        onActiveModChanged.Invoke(null, Array.Empty<object>());
+        
+        PlayerPrefs.SetInt(ForceTitleScreenPlayerPrefKey, 1);
     }
 }

@@ -3,6 +3,7 @@ using Story;
 using TheRedPlague.Compatibility;
 using TheRedPlague.Data;
 using TheRedPlague.Managers;
+using TheRedPlague.Mono.CreatureBehaviour;
 using TheRedPlague.Mono.InfectionLogic;
 using UnityEngine;
 
@@ -16,7 +17,7 @@ public static class InfectedMixinPatcher
     private static readonly int InfectionScale = Shader.PropertyToID("_InfectionScale");
     private static readonly int InfectionOffset = Shader.PropertyToID("_InfectionOffset");
     private const int MinInfectionValue = 1;
-    
+
     private static readonly Texture2D PrecursorDroidRedIllumTexture =
         Plugin.CreaturesBundle.LoadAsset<Texture2D>("Precursor_Droid_illum_evil");
 
@@ -36,7 +37,7 @@ public static class InfectedMixinPatcher
         */
 
         var techType = CraftData.GetTechType(__instance.gameObject);
-        
+
         // Check if the creature has opted into immunity by another mod:
         if (ModCompatibilityManager.IsTechTypeImmune(techType))
         {
@@ -47,6 +48,13 @@ public static class InfectedMixinPatcher
         // Disable infecting creatures in the ACU
         var waterParkCreature = __instance.gameObject.GetComponent<WaterParkCreature>();
         if (waterParkCreature && waterParkCreature.IsInsideWaterPark())
+        {
+            return;
+        }
+        
+        // Ignore anything in the Sea Emperor aquarium
+
+        if (Creature.prisonAquriumBounds.Contains(__instance.transform.position))
         {
             return;
         }
@@ -90,11 +98,11 @@ public static class InfectedMixinPatcher
             if (StoryUtils.IsAct1Complete())
                 return true;
         }
-        
+
         var random = Random.value;
         if (StoryUtils.IsHivemindReleased())
         {
-            return random <= 0.20f;
+            return random <= 0.10f;
         }
 
         if (StoryUtils.IsAct1Complete())
@@ -129,14 +137,22 @@ public static class InfectedMixinPatcher
             }
         }
 
-        for (int i = 0 ; i < __instance.materials.Count; i++)
+        for (int i = 0; i < __instance.materials.Count; i++)
         {
             var material = __instance.materials[i];
-            
+
             material.SetTexture(ShaderPropertyID._InfectionAlbedomap, Plugin.ZombieInfectionTexture);
             if (material.HasProperty(InfectionHeightStrength))
-                material.SetFloat(InfectionHeightStrength,
-                    hasOverridenInfectionSettings ? infectionSettings.InfectionHeight : -0.1f);
+            {
+                var parasite = __instance.GetComponent<AmalgamationParasite>();
+                // scaled objects tend to have (literally) massive issues with infection height strengths that aren't 0
+                if (parasite == null)
+                {
+                    material.SetFloat(InfectionHeightStrength,
+                        hasOverridenInfectionSettings ? infectionSettings.InfectionHeight : -0.1f);
+                }
+            }
+
             if (hasOverridenInfectionSettings) material.SetVector(InfectionScale, infectionSettings.InfectionScale);
             if (hasOverridenInfectionSettings)
                 material.SetVector(InfectionOffset, infectionSettings.InfectionOffset);
@@ -173,6 +189,7 @@ public static class InfectedMixinPatcher
                         material.SetColor(SpecColor, new Color(0, 1, 0.38f));
                         material.SetColor(ShaderPropertyID._GlowColor, new Color(0, 1, 1));
                     }
+
                     break;
                 case TechType.Mesmer:
                     material.SetColor(ShaderPropertyID._Color, Color.black);
@@ -194,7 +211,7 @@ public static class InfectedMixinPatcher
                     break;
             }
         }
-        
+
         if (techType == TechType.SpineEel && __instance.infectedAmount >= MinInfectionValue)
             __instance.transform.Find("model/spine_eel_geo/Spine_eel_geo/Spine_eel_eye_L").gameObject.SetActive(false);
     }

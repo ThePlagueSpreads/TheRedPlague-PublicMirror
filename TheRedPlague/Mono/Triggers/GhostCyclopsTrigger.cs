@@ -1,6 +1,24 @@
-﻿namespace TheRedPlague.Mono.Triggers;
+﻿using Story;
+using TheRedPlague.Mono.CinematicEvents;
 
-public class GhostCyclopsTrigger
+namespace TheRedPlague.Mono.Triggers;
+
+public class GhostCyclopsTrigger : PlayerTrigger
 {
+    public GhostCyclopsCinematic.Path path;
     
+    private string GetStoryGoalKeyName() => $"GhostCyclopsCinematic_{path}";
+    
+    protected override void OnTriggerActivated()
+    {
+        var goalName = GetStoryGoalKeyName();
+        if (StoryGoalManager.main.IsGoalComplete(goalName))
+        {
+            Destroy(this);
+            return;
+        }
+
+        StoryGoalManager.main.OnGoalComplete(goalName);
+        GhostCyclopsCinematic.StartCinematic(path);
+    }
 }

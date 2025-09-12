@@ -115,9 +115,11 @@ public class DomeDroneBehaviour : MonoBehaviour
         {
             if (deconstructTarget == null) continue;
             if (!deconstructTarget.CanDeconstruct()) continue;
+            if (deconstructTarget.deconstructTransforms == null) continue;
             
             foreach (var deconstructPoint in deconstructTarget.deconstructTransforms)
             {
+                if (deconstructPoint == null) continue;
                 var distance = Vector3.SqrMagnitude(deconstructPoint.transform.position - transform.position);
                 if (distance > deconstructTarget.deconstructRange * deconstructTarget.deconstructRange) continue;
                 if (distance > closest) continue;

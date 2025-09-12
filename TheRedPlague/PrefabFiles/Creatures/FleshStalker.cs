@@ -11,6 +11,7 @@ using TheRedPlague.Data;
 using TheRedPlague.Managers;
 using TheRedPlague.Mono.CreatureBehaviour;
 using TheRedPlague.Mono.InfectionLogic;
+using TheRedPlague.Utilities;
 using UnityEngine;
 
 namespace TheRedPlague.PrefabFiles.Creatures;
@@ -57,10 +58,10 @@ public class FleshStalker : CreatureAsset
 
     protected override IEnumerator ModifyPrefab(GameObject prefab, CreatureComponents components)
     {
-        prefab.AddComponent<RedPlagueHost>().mode = RedPlagueHost.Mode.PlagueCreation;
+        TrpPrefabUtils.AddPlagueCreationComponents(prefab);
 
         var meleeAttack = CreaturePrefabUtils.AddMeleeAttack<MeleeAttack>(prefab, components,
-            prefab.transform.Find("BiteTrigger").gameObject, true, 45f, 2.5f);
+            prefab.transform.Find("BiteTrigger").gameObject, true, 20, 2.5f);
         meleeAttack.eatHungerDecrement = 0.5f;
         meleeAttack.biteAggressionThreshold = 0.3f;
         var biteSound = prefab.AddComponent<FMOD_StudioEventEmitter>();
@@ -98,7 +99,7 @@ public class FleshStalker : CreatureAsset
 
     protected override void ApplyMaterials(GameObject prefab)
     {
-        MaterialUtils.ApplySNShaders(prefab, 7f, 2, 1,
+        MaterialUtils.ApplySNShaders(prefab, 6, 2, 1,
             new ColorModifier(new Color(1.5f, 1.5f, 1.5f)));
     }
 }

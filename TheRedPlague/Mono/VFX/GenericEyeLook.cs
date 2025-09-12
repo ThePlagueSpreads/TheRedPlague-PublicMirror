@@ -9,6 +9,8 @@ public class GenericEyeLook : MonoBehaviour, IManagedLateUpdateBehaviour
     public bool useLimits;
 
     public float dotLimit;
+
+    public bool flipDirection;
     
     private Transform _eyeLookDummy;
 
@@ -46,7 +48,6 @@ public class GenericEyeLook : MonoBehaviour, IManagedLateUpdateBehaviour
     {
         if (_eyeLookDummy == null)
         {
-            Plugin.Logger.LogWarning("Eye look dummy not found! Creating new instance.");
             CreateDummy();
         }
 
@@ -60,7 +61,7 @@ public class GenericEyeLook : MonoBehaviour, IManagedLateUpdateBehaviour
         }
         _eyeLookDummy.rotation = Quaternion.RotateTowards(_eyeLookDummy.rotation,
             Quaternion.LookRotation(direction), Time.deltaTime * degreesPerSecond);
-        transform.up = _eyeLookDummy.forward;
+        transform.up = flipDirection ? -_eyeLookDummy.forward : _eyeLookDummy.forward;
     }
 
     public int managedLateUpdateIndex { get; set; }

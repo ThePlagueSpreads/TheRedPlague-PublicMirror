@@ -5,9 +5,11 @@ using ECCLibrary.Data;
 using Nautilus.Assets;
 using Nautilus.Handlers;
 using Nautilus.Utility;
+using Nautilus.Utility.MaterialModifiers;
 using TheRedPlague.Data;
 using TheRedPlague.Managers;
 using TheRedPlague.Mono.InfectionLogic;
+using TheRedPlague.Utilities;
 using UnityEngine;
 
 namespace TheRedPlague.PrefabFiles.Creatures;
@@ -193,10 +195,10 @@ public class MimicPeeper : CreatureAsset
 
     protected override IEnumerator ModifyPrefab(GameObject prefab, CreatureComponents components)
     {
-        prefab.AddComponent<RedPlagueHost>().mode = RedPlagueHost.Mode.PlagueCreation;
+        TrpPrefabUtils.AddPlagueCreationComponents(prefab);
 
         var meleeAttack = CreaturePrefabUtils.AddMeleeAttack<MeleeAttack>(prefab, components,
-            prefab.transform.Find("BiteTrigger").gameObject, true, 8f, 10f, false);
+            prefab.transform.Find("BiteTrigger").gameObject, true, 6, 10f, false);
         var biteSound = prefab.AddComponent<FMOD_StudioEventEmitter>();
         biteSound.path = "SmallZombieBite";
         biteSound.minInterval = 2;
@@ -208,6 +210,6 @@ public class MimicPeeper : CreatureAsset
 
     protected override void ApplyMaterials(GameObject prefab)
     {
-        MaterialUtils.ApplySNShaders(prefab, 7f, 4f, 0.3f);
+        MaterialUtils.ApplySNShaders(prefab, 8f, 1.5f, 0.4f, new GlowStrengthNightModifier(1f, 0.4f));
     }
 }

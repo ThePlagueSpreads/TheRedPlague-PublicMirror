@@ -1,15 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace TheRedPlague.Mono.VFX.Flickering;
 
 public class LightFlickerEvent : MonoBehaviour
 {
-    private const float MinDelay = 0.08f;
-    private const float MaxDelay = 0.15f;
-    private const float MinBrightness = 0;
-    private const float MaxBrightness = 1f;
+    public float minDelay = 0.08f;
+    public float maxDelay = 0.15f;
+    public float minBrightness = 0;
+    public float maxBrightness = 1f;
 
     private float _timeChangeAgain;
 
@@ -54,6 +53,16 @@ public class LightFlickerEvent : MonoBehaviour
             }
         }
     }
+
+    public void SetUp(IEnumerable<FlickerTargetBase> targets, float duration)
+    {
+        Destroy(this, duration);
+
+        foreach (var target in targets)
+        {
+            _targets.Add(target);
+        }
+    }
     
     private void Update()
     {
@@ -62,13 +71,13 @@ public class LightFlickerEvent : MonoBehaviour
             return;
         }
 
-        var newIntensity = Random.Range(MinBrightness, MaxBrightness);
+        var newIntensity = Random.Range(minBrightness, maxBrightness);
         foreach (var target in _targets)
         {
             target.SetIntensity(newIntensity);
         }
 
-        _timeChangeAgain = Time.time + Random.Range(MinDelay, MaxDelay);
+        _timeChangeAgain = Time.time + Random.Range(minDelay, maxDelay);
     }
 
     private void OnDestroy()

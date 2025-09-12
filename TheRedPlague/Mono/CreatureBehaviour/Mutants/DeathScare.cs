@@ -16,6 +16,8 @@ public class DeathScare : MonoBehaviour
     private float _zOffset = 0.5f;
     private static DeathScare _current;
     private float _timeSpawned;
+
+    private bool _wasInvincible;
     
     public static void PlayDeathScare()
     {
@@ -106,6 +108,7 @@ public class DeathScare : MonoBehaviour
     
     private void Start()
     {
+        _wasInvincible = Player.main.liveMixin.invincible;
         Player.main.liveMixin.invincible = true;
         Invoke(nameof(Kill), 2f);
         Utils.PlayFMODAsset(_sound, Player.main.transform.position);
@@ -125,7 +128,7 @@ public class DeathScare : MonoBehaviour
 
     private void Kill()
     {
-        Player.main.liveMixin.invincible = false;
+        Player.main.liveMixin.invincible = _wasInvincible;
         var damage = Random.Range(60f, 75f);
         var willKillPlayer = Player.main.liveMixin.health <= DamageSystem.CalculateDamage(
             damage, DamageType.Normal, Player.main.gameObject);

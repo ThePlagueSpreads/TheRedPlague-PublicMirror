@@ -29,10 +29,10 @@ public static class PlagueRefinery
     {
         var customPrefab = new CustomPrefab(Info);
         customPrefab.SetGameObject(CreatePrefab);
-        customPrefab.SetRecipe(new RecipeData(new CraftData.Ingredient(TechType.PlasteelIngot),
-            new CraftData.Ingredient(TechType.WiringKit),
-            new CraftData.Ingredient(TechType.EnameledGlass),
-            new CraftData.Ingredient(TechType.Magnetite)));
+        customPrefab.SetRecipe(new RecipeData(new Ingredient(TechType.PlasteelIngot, 1),
+            new Ingredient(TechType.WiringKit, 1),
+            new Ingredient(TechType.EnameledGlass, 1),
+            new Ingredient(TechType.Magnetite, 1)));
         customPrefab.SetPdaGroupCategoryBefore(TechGroup.InteriorModules, TechCategory.InteriorModule,
             TechType.Radio);
 
@@ -59,7 +59,7 @@ public static class PlagueRefinery
         var recipeInfo = PrefabInfo.WithTechType("Process" + inputItemTechType, true)
             .WithIcon(SpriteManager.Get(inputItemTechType));
         var customPrefab = new CustomPrefab(recipeInfo);
-        customPrefab.SetRecipe(new RecipeData(new CraftData.Ingredient(inputItemTechType)))
+        customPrefab.SetRecipe(new RecipeData(new Ingredient(inputItemTechType, 1)))
             .WithFabricatorType(CraftTreeType);
         customPrefab.SetGameObject(() => TrpPrefabUtils.CreateLootCubePrefab(recipeInfo));
         customPrefab.Register();
@@ -69,7 +69,7 @@ public static class PlagueRefinery
     {
         var obj = Object.Instantiate(Plugin.AssetBundle.LoadAsset<GameObject>("PlagueRefineryPrefab"));
         obj.SetActive(false);
-        PrefabUtils.AddBasicComponents(obj, Info.ClassID, Info.TechType, LargeWorldEntity.CellLevel.Near);
+        PrefabUtils.AddBasicComponents(obj, Info.ClassID, Info.TechType, LargeWorldEntity.CellLevel.Global);
         MaterialUtils.ApplySNShaders(obj, 7f, 0.3f, 0.6f,
             new DoubleSidedModifier(MaterialUtils.MaterialType.Transparent),
             new RefineryMaterialModifier());

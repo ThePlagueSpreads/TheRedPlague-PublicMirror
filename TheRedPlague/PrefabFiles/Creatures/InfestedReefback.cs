@@ -10,6 +10,7 @@ using TheRedPlague.MaterialModifiers;
 using TheRedPlague.Mono.CreatureBehaviour.Mimics;
 using TheRedPlague.Mono.InfectionLogic;
 using TheRedPlague.Mono.SFX;
+using TheRedPlague.Utilities;
 using UnityEngine;
 
 namespace TheRedPlague.PrefabFiles.Creatures;
@@ -48,7 +49,8 @@ public class InfestedReefback : CreatureAsset
 
     protected override IEnumerator ModifyPrefab(GameObject prefab, CreatureComponents components)
     {
-        prefab.AddComponent<RedPlagueHost>().mode = RedPlagueHost.Mode.PlagueCreation;
+        TrpPrefabUtils.AddPlagueCreationComponents(prefab);
+        
         components.WorldForces.underwaterDrag = 0.1f;
         components.Rigidbody.inertiaTensor = new Vector3(1132427, 1510034, 621844);
 
@@ -91,9 +93,14 @@ public class InfestedReefback : CreatureAsset
         randomSounds.minDelay = 15;
         randomSounds.maxDelay = 35;
         randomSounds.emitter = emitter;
+        randomSounds.lm = components.LiveMixin;
 
+        var spawnSlotsTransform = prefab.transform.Find("SpawnSlots");
         var resourceSpawns = prefab.AddComponent<BlisterbackResourceSpawns>();
-        resourceSpawns.spawnPointsParent = prefab.transform.Find("SpawnSlots");
+        resourceSpawns.identifier = components.PrefabIdentifier;
+        resourceSpawns.spawnPointsParent = spawnSlotsTransform;
+        var identifier = spawnSlotsTransform.gameObject.AddComponent<ChildObjectIdentifier>();
+        identifier.ClassId = "BlisterbackResources";
         
         yield break;
     }

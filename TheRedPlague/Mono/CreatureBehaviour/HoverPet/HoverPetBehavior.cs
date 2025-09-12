@@ -47,6 +47,11 @@ public class HoverPetBehavior : MonoBehaviour
 
     private void Start()
     {
+        if (!HoverPetSpawner.ConditionsMet())
+        {
+            Destroy(gameObject);
+            return;
+        }
         InvokeRepeating(nameof(LazyUpdate), Random.value, 0.3f);
         _startDespawnTime = Time.time + MinimumLifeTime;
         _foundBase = StoryGoalManager.main.IsGoalComplete(StoryUtils.HoverPetReachedMazeBaseGoal.key);

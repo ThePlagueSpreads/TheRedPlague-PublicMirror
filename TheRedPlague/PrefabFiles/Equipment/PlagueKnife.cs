@@ -24,8 +24,8 @@ public static class PlagueKnife
         plagueKnifeTemplate.ModifyPrefab += ModifyPrefab;
         plagueKnife.SetGameObject(plagueKnifeTemplate);
         plagueKnife.SetEquipment(EquipmentType.Hand);
-        plagueKnife.SetRecipe(new RecipeData(new CraftData.Ingredient(TechType.Knife),
-                new CraftData.Ingredient(ModPrefabs.AmalgamatedBone.TechType, 3)))
+        plagueKnife.SetRecipe(new RecipeData(new Ingredient(TechType.Knife, 1),
+                new Ingredient(ModPrefabs.AmalgamatedBone.TechType, 3)))
             .WithCraftingTime(8)
             .WithFabricatorType(AdminFabricator.AdminCraftTree);
         plagueKnife.SetPdaGroupCategoryAfter(TechGroup.Personal, TechCategory.Tools, TechType.Knife);
@@ -51,8 +51,11 @@ public static class PlagueKnife
         var oldKnifeComponent = prefab.GetComponent<Knife>();
 
         var newKnifeComponent = prefab.AddComponent<PlagueKnifeTool>();
-        newKnifeComponent.attackSound = AudioUtils.GetFmodAsset("event:/creature/warper/swipe");
-        newKnifeComponent.underwaterMissSound = AudioUtils.GetFmodAsset("event:/creature/warper/swipe");
+        newKnifeComponent.attackSound = oldKnifeComponent.attackSound;
+        newKnifeComponent.underwaterMissSound = oldKnifeComponent.underwaterMissSound;
+        var warperSwipeSound = AudioUtils.GetFmodAsset("event:/creature/warper/swipe");
+        newKnifeComponent.attackSoundWarper = warperSwipeSound;
+        newKnifeComponent.underwaterMissSoundWarper = warperSwipeSound;
         newKnifeComponent.surfaceMissSound = oldKnifeComponent.surfaceMissSound;
         newKnifeComponent.damageType = oldKnifeComponent.damageType;
         newKnifeComponent.damage = 20;

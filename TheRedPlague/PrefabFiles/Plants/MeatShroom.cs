@@ -28,7 +28,7 @@ public static class MeatShroom
         MaterialUtils.ApplySNShaders(obj, 6);
         var edible = obj.AddComponent<Eatable>();
         edible.decomposes = false;
-        edible.foodValue = 2;
+        edible.foodValue = 3;
         edible.waterValue = 4;
         obj.AddComponent<Pickupable>();
         PrefabUtils.AddWorldForces(obj, 2, 1, 0.1f, true);

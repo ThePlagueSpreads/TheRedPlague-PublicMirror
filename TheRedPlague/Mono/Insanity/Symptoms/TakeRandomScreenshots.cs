@@ -6,8 +6,8 @@ namespace TheRedPlague.Mono.Insanity.Symptoms;
 
 public class TakeRandomScreenshots : InsanitySymptom
 {
-    private const float MinutesDelayMin = 30;
-    private const float MinutesDelayMax = 60;
+    private const float MinutesDelayMin = 25;
+    private const float MinutesDelayMax = 40;
     private const float LowInsanityChance = 0.7f;
     private const float HighInsanityThreshold = 75;
     private const float HighInsanityChance = 1f;

@@ -21,23 +21,17 @@ public static class AmalgamationSettingsDatabase
                         true,
                         new[] {"mouth_damage_trigger", "cine_player_loc8ion", "cine_vehicle_loc8ion"},
                         new AttachableParasite(TechType.Gasopod, 1.5f),
-                        new AttachableParasite(TechType.Stalker, 3f),
                         new AttachableParasite(TechType.Eyeye, 15),
-                        new AttachableParasite(TechType.Warper, 3f),
-                        new AttachableParasite(TechType.SpineEel, 3f),
                         new AttachableParasite(TechType.CrabSquid, 1.5f),
                         new AttachableParasite(TechType.Crash, 8f),
                         new AttachableParasite(TechType.Peeper, 15)
-                    ),
+                    )/*,
                     new ParasiteAttachPoint(
                         new string[]
                         {
-                            "reaper_leviathan/root/clav_left", "reaper_leviathan/root/clav_right",
+                            // "reaper_leviathan/root/clav_left", "reaper_leviathan/root/clav_right",
                             "reaper_leviathan/root/spine1_phys/spine1",
-                            "reaper_leviathan/root/spine1_phys/spine1/spine1p5_phys/spline1p5/spline2_phys/Spine2",
-                            "reaper_leviathan/root/spine1_phys/spine1/spine1p5_phys/spline1p5/spline2_phys/Spine2/spline3_phys/spine3/tail_midBase_phys/tail_midBase/tail_midMid_phys/tail_midMid/fin_leftAnal",
-                            "reaper_leviathan/root/spine1_phys/spine1/spine1p5_phys/spline1p5/spline2_phys/Spine2/spline3_phys/spine3/tail_midBase_phys/tail_midBase/tail_midMid_phys/tail_midMid/fin_rightAnal",
-                            "reaper_leviathan/root/spine1_phys/spine1/spine1p5_phys/spline1p5/spline2_phys/Spine2/spline3_phys/spine3/tail_midBase_phys/tail_midBase/tail_midMid_phys/tail_midMid/tail_midEnd_phys/tail_midEnd"
+                            "reaper_leviathan/root/spine1_phys/spine1/spine1p5_phys/spline1p5/spline2_phys/Spine2"
                         },
                         0.4f,
                         new Vector3(0, 270, 0),
@@ -57,7 +51,7 @@ public static class AmalgamationSettingsDatabase
                         new AttachableParasite(TechType.CaveCrawler, 5f),
                         new AttachableParasite(TechType.Jumper, 4f),
                         new AttachableParasite(TechType.ReaperLeviathan, 0.3f)
-                    )
+                    )*/
                 }
             )
         },
@@ -466,22 +460,21 @@ public static class AmalgamationSettingsDatabase
                         {
                             "warper_anim/root/neck"
                         },
-                        1f,
+                        0.7f,
                         new Vector3(0, 90, 0),
                         true,
                         new string[0],
                         new AttachableParasite(TechType.Stalker, 0.2f, "Stalker_02/root/spine1_phys/spine1"),
                         new AttachableParasite(TechType.Eyeye, 1f),
-                        new AttachableParasite(TechType.Warper, 0.2f),
                         new AttachableParasite(TechType.CrabSquid, 0.04f),
-                        new AttachableParasite(TechType.Crash, 0.3f),
-                        new AttachableParasite(TechType.Peeper, 0.8f),
+                        new AttachableParasite(TechType.Crash, 1f),
+                        new AttachableParasite(TechType.Peeper, 1.3f),
                         new AttachableParasite(TechType.Jellyray, 1f, "jelly_ray_01/root_jnt/spine1_jnt/spine2_jnt/spine3_jnt/spine4_phys/spine4_jnt/tail1_phys"),
-                        new AttachableParasite(TechType.GhostRayBlue, 0.1f),
-                        new AttachableParasite(TechType.Mesmer, 0.8f),
-                        new AttachableParasite(TechType.CaveCrawler, 0.9f),
-                        new AttachableParasite(TechType.Jumper, 0.5f),
-                        new AttachableParasite(TechType.Bleeder, 2f)
+                        new AttachableParasite(TechType.GhostRayBlue, 0.5f),
+                        new AttachableParasite(TechType.Mesmer, 1.3f),
+                        new AttachableParasite(TechType.CaveCrawler, 1.2f),
+                        new AttachableParasite(TechType.Jumper, 1f),
+                        new AttachableParasite(TechType.Bleeder, 3f)
                     )
                 }
             )
@@ -495,7 +488,7 @@ public static class AmalgamationSettingsDatabase
                         {
                             "cave_crawler_01/cave_crawler_01"
                         },
-                        1f,
+                        0.9f,
                         new Vector3(0, 90, 0),
                         false,
                         new string[0],
@@ -520,7 +513,7 @@ public static class AmalgamationSettingsDatabase
                         {
                             "Cave_Crawler_03/Cave_Crawler_blood_01"
                         },
-                        1f,
+                        0.8f,
                         new Vector3(0, 90, 0),
                         false,
                         new string[0],
@@ -556,5 +549,20 @@ public static class AmalgamationSettingsDatabase
                 }
             )
         }
+    };
+    
+    public static readonly Dictionary<TechType, float> BloodFxScales = new()
+    {
+        { TechType.ReaperLeviathan, 10 },
+        { TechType.GhostLeviathan, 13 },
+        { TechType.GhostLeviathanJuvenile, 10 },
+        { TechType.SeaDragon, 13 },
+        { TechType.SeaTreader, 10 },
+        { TechType.Stalker, 3 },
+        { TechType.BoneShark, 3 },
+        { TechType.Warper, 3 },
+        { TechType.Shocker, 3 },
+        { TechType.Sandshark, 2 },
+        { TechType.Gasopod, 4 }
     };
 }

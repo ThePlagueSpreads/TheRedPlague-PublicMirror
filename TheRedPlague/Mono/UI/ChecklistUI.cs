@@ -132,7 +132,14 @@ public class ChecklistUI : MonoBehaviour, IStoryGoalListener
             var entryComponent = entryPrefab.AddComponent<ChecklistUIEntry>();
             entryComponent.text = entryText;
             entryComponent.checkImage = check;
-
+            
+            // Fix formatting
+            checkBackground.EnsureComponent<LayoutElement>().ignoreLayout = true; // pretty sure it already has one
+            entryPrefab.AddComponent<ContentSizeFitter>().verticalFit = ContentSizeFitter.FitMode.PreferredSize;
+            var verticalLayoutGroup = entryPrefab.AddComponent<VerticalLayoutGroup>();
+            verticalLayoutGroup.padding = new RectOffset(90, 10, 20, 20);
+            verticalLayoutGroup.childScaleHeight = true;
+            
             // Assign references
             checklistUi._logModeObjects = new[]
                 { contentParent.Find("ScrollView").gameObject, contentParent.Find("Scrollbar").gameObject };
@@ -179,6 +186,9 @@ public class ChecklistUI : MonoBehaviour, IStoryGoalListener
         {
             AddEntryContainer(entry);
         }
+        
+        // Necessary for the layout group to work properly with content size fitters
+        LayoutRebuilder.ForceRebuildLayoutImmediate(_layoutParent);
     }
 
     private void AddEntryContainer(PdaChecklistAPI.ChecklistEntry entry)

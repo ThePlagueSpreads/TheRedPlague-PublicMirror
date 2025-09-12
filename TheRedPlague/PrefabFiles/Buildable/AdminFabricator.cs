@@ -39,9 +39,9 @@ public static class AdminFabricator
         customPrefab.CreateFabricator(out var craftTree);
         _adminCraftTree = craftTree;
         customPrefab.SetRecipe(new RecipeData(
-            new CraftData.Ingredient(TechType.Titanium),
-            new CraftData.Ingredient(TechType.ComputerChip),
-            new CraftData.Ingredient(TechType.Lead)));
+            new Ingredient(TechType.Titanium, 1),
+            new Ingredient(TechType.ComputerChip, 1),
+            new Ingredient(TechType.Lead, 1)));
         customPrefab.SetPdaGroupCategoryAfter(TechGroup.InteriorModules, TechCategory.InteriorModule, TechType.Fabricator);
         customPrefab.Register();
         KnownTechHandler.SetAnalysisTechEntry(new KnownTech.AnalysisTech
@@ -71,11 +71,22 @@ public static class AdminFabricator
         foreach (var renderer in fabricatorModel.GetComponentsInChildren<Renderer>(true))
         {
             if (renderer is ParticleSystemRenderer) continue;
-            var material = renderer.material;
-            material.mainTexture = Plugin.AssetBundle.LoadAsset<Texture2D>("admin_fabricator_diffuse");
-            material.SetTexture("_SpecTex", Plugin.AssetBundle.LoadAsset<Texture2D>("admin_fabricator_spec"));
-            material.SetTexture("_Illum", Plugin.AssetBundle.LoadAsset<Texture2D>("adminfabricator_illum"));
+            var materials = renderer.materials;
+            foreach (var material in materials)
+            {
+                if (material.name.Contains("glass"))
+                {
+                    material.color = new Color(1, 1, 1, 1.4f);
+                    material.SetFloat("_SpecInt", 1.28f);
+                    material.SetFloat("_Shininess", 7.12f);
+                }
+                else
+                {
+                    material.mainTexture = Plugin.AssetBundle.LoadAsset<Texture2D>("admin_fabricator_diffuse");
+                    material.SetTexture("_SpecTex", Plugin.AssetBundle.LoadAsset<Texture2D>("admin_fabricator_spec"));
+                    material.SetTexture("_Illum", Plugin.AssetBundle.LoadAsset<Texture2D>("adminfabricator_illum"));
+                }
+            }
         }
-
     }
 }

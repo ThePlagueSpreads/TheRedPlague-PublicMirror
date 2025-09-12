@@ -80,7 +80,7 @@ public class SuitChargeBar : MonoBehaviour
 
     private float _timeCanChangeInsanityDisplayAgain;
     private bool _insanityDisplayWasActive;
-    
+
     private void Awake()
     {
         _punchTween = new CoroutineTween(this)
@@ -107,6 +107,7 @@ public class SuitChargeBar : MonoBehaviour
             _pulseAnimationState.layer = 0;
             _pulseAnimationState.speed = 0f;
         }
+
         text.enableCulling = true;
     }
 
@@ -117,6 +118,7 @@ public class SuitChargeBar : MonoBehaviour
         {
             _pulseAnimationState.enabled = true;
         }
+
         _pulseTween.Start();
     }
 
@@ -135,6 +137,7 @@ public class SuitChargeBar : MonoBehaviour
                     _subscribed = true;
                     component.OnChargeEvent += OnCharge;
                 }
+
                 float charge = 100f - component.InfectionPercent;
                 SetValue(charge, 100f);
                 float num2 = Mathf.Clamp01(charge / pulseReferenceCapacity);
@@ -144,18 +147,22 @@ public class SuitChargeBar : MonoBehaviour
                 {
                     _pulseDelay = 0f;
                 }
+
                 _pulseTime = pulseTimeCurve.Evaluate(time);
                 if (_pulseTime < 0f)
                 {
                     _pulseTime = 0f;
                 }
+
                 float num3 = _pulseDelay + _pulseTime;
                 if (_pulseTween.duration > 0f && num3 <= 0f)
                 {
                     _pulseAnimationState.normalizedTime = 0f;
                 }
+
                 _pulseTween.duration = num3;
             }
+
             var pda = main.GetPDA();
             if (pda != null && pda.isInUse)
             {
@@ -175,6 +182,7 @@ public class SuitChargeBar : MonoBehaviour
                 }
             }
         }
+
         if (_pulseAnimationState != null && pulseAnimation.enabled)
         {
             icon.localScale += _punchScale;
@@ -183,29 +191,32 @@ public class SuitChargeBar : MonoBehaviour
         {
             icon.localScale = _punchScale;
         }
+
         if (wasShowingNumbers != _showNumbers)
         {
             _rotationVelocity += Random.Range(0f - rotationRandomVelocity, rotationRandomVelocity);
         }
-        if (MathExtensions.CoinRotation(ref _rotationCurrent, _showNumbers ? 180f : 0f, ref _lastFixedUpdateTime, PDA.time, ref _rotationVelocity, rotationSpringCoef, rotationVelocityDamp, rotationVelocityMax))
+
+        if (MathExtensions.CoinRotation(ref _rotationCurrent, _showNumbers ? 180f : 0f, ref _lastFixedUpdateTime,
+                PDA.time, ref _rotationVelocity, rotationSpringCoef, rotationVelocityDamp, rotationVelocityMax))
         {
             icon.localRotation = Quaternion.Euler(0f, _rotationCurrent, 0f);
         }
     }
-    
+
     private void OnCharge(float chargeAmount)
     {
         float maxScale = 1f + Mathf.Clamp01(chargeAmount / 100f);
         Punch(2.5f, maxScale);
     }
-    
+
     private void Punch(float duration, float maxScale)
     {
         _punchTween.duration = duration;
         _punchMaxScale = maxScale;
         _punchTween.Start();
     }
-    
+
     private void OnDisable()
     {
         _punchTween.Stop();
@@ -214,6 +225,7 @@ public class SuitChargeBar : MonoBehaviour
         {
             return;
         }
+
         _subscribed = false;
         Player main = Player.main;
         if (main != null)
@@ -266,15 +278,17 @@ public class SuitChargeBar : MonoBehaviour
     {
         if (!(_pulseAnimationState == null))
         {
-            _pulseAnimationState.normalizedTime = Mathf.Clamp01((_pulseTween.duration * scalar - _pulseDelay) / _pulseTime);
+            _pulseAnimationState.normalizedTime =
+                Mathf.Clamp01((_pulseTween.duration * scalar - _pulseDelay) / _pulseTime);
         }
     }
 
     private bool UseInsanityDisplay()
     {
-        if (InsanityDeterrenceZone.GetIsInZoneOfDeterrence(Player.main.transform.position, Player.main.IsInBase()))
+        if (InsanityOverrideZone.TryGetZone(Player.main.transform.position, Player.main.IsInBase(),
+                out float overrideValue) && overrideValue <= 0f)
             return false;
-        
+
         if (PlagueDamageStat.main && PlagueDamageStat.main.InfectionPercent >= 50)
         {
             return true;

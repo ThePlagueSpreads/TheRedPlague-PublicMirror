@@ -9,6 +9,7 @@ using TheRedPlague.Managers;
 using TheRedPlague.Mono.CreatureBehaviour;
 using TheRedPlague.Mono.CreatureBehaviour.Mimics;
 using TheRedPlague.Mono.InfectionLogic;
+using TheRedPlague.Utilities;
 using UnityEngine;
 
 namespace TheRedPlague.PrefabFiles.Creatures;
@@ -49,10 +50,11 @@ public class MimicGasopod : CreatureAsset
 
     protected override IEnumerator ModifyPrefab(GameObject prefab, CreatureComponents components)
     {
-        prefab.AddComponent<RedPlagueHost>().mode = RedPlagueHost.Mode.PlagueCreation;
-
+        TrpPrefabUtils.AddPlagueCreationComponents(prefab);
+        
         var attackTrigger = prefab.transform.Find("AttackTrigger").gameObject.AddComponent<MimicGasopodAttackTrigger>();
         attackTrigger.creature = components.Creature;
+        attackTrigger.infectionPodPosition = prefab.transform.Find("InfectionPodSpawn");
 
         var damageInRange = prefab.transform.Find("AttackRangeCenter").gameObject.AddComponent<DamageInRange>();
         damageInRange.normalDamage = 18;

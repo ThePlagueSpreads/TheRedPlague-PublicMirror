@@ -23,6 +23,7 @@ public static class WarperPatcher
         sounds.minDelay = 10;
         sounds.maxDelay = 25;
         sounds.emitter = emitter;
+        sounds.lm = __instance.liveMixin;
 
         __instance.gameObject.EnsureComponent<WarperDropHeartOnDeath>();
         __instance.gameObject.EnsureComponent<InfectOnStart>();

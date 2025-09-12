@@ -7,7 +7,9 @@ using Nautilus.Utility;
 using Nautilus.Utility.MaterialModifiers;
 using TheRedPlague.Data;
 using TheRedPlague.Managers;
+using TheRedPlague.Mono.CreatureBehaviour.Mimics;
 using TheRedPlague.Mono.InfectionLogic;
+using TheRedPlague.Utilities;
 using UnityEngine;
 
 namespace TheRedPlague.PrefabFiles.Creatures;
@@ -35,10 +37,9 @@ public class EyeyeCaptain : CreatureAsset
             StayAtLeashData = new StayAtLeashData(0.4f, 4, 27),
             SwimRandomData = new SwimRandomData(0.2f, 4, new Vector3(10, 2, 10)),
             AvoidObstaclesData = new AvoidObstaclesData(0.7f, 4, true, 5, 4f),
-            AttackLastTargetData = new AttackLastTargetData(0.6f, 5, 0.5f, 6f),
             AggressiveWhenSeeTargetList = new List<AggressiveWhenSeeTargetData>
             {
-                new(EcoTargetType.Shark, 0.3f, 10, 1)
+                new(EcoTargetType.Shark, 0.7f, 20, 1)
             },
             AnimateByVelocityData = new AnimateByVelocityData(4)
         };
@@ -48,7 +49,43 @@ public class EyeyeCaptain : CreatureAsset
 
     protected override IEnumerator ModifyPrefab(GameObject prefab, CreatureComponents components)
     {
-        prefab.AddComponent<RedPlagueHost>().mode = RedPlagueHost.Mode.PlagueCreation;
+        TrpPrefabUtils.AddPlagueCreationComponents(prefab);
+        
+        var attack = prefab.AddComponent<CaptainEyeyeAttack>();
+        attack.swimVelocity = 6;
+        attack.swimInterval = 0.6f;
+        attack.aggressionThreshold = 0.5f;
+        attack.minAttackDuration = 4f;
+        attack.maxAttackDuration = 7f;
+        attack.pauseInterval = 14;
+        attack.rememberTargetTime = 8;
+        attack.lastTarget = components.LastTarget;
+        attack.minDistanceToTarget = 1;
+        attack.maxCastingDistance = 13;
+        attack.lookDirectionTransform = prefab.transform;
+        attack.attackTypes = new[]
+        {
+            new RangedAttackLastTarget.RangedAttackType
+            {
+                ammoPrefab = null,
+                ammoVelocity = 0,
+                animChargeParameter = null,
+                animParameter = null,
+                attackChance = 1,
+                attackSound = null,
+                castDelay = 1,
+                chargeTime = 1,
+                castProjectileInterval = 15,
+                maxProjectiles = 1,
+                projectilesSpread = 0
+            }
+        };
+        attack.creature = components.Creature;
+        attack.model = prefab.transform.Find("EyeyeCaptain").gameObject;
+        var eyeTransform = prefab.transform.Find("EyeyeCaptain/EyeyeCaptainArmature/BodyRoot/Spine/Neck/Eye");
+        attack.eyeTransform = eyeTransform;
+        attack.ammoSpawnPoint = eyeTransform;
+        attack.eyePhysicsMaterial = Plugin.CreaturesBundle.LoadAsset<PhysicMaterial>("BouncyEyeMaterial");
         
         yield break;
     }

@@ -5,6 +5,7 @@ using Nautilus.Crafting;
 using Nautilus.Handlers;
 using TheRedPlague.Mono.UpgradeModules;
 using TheRedPlague.PrefabFiles.Items;
+using TheRedPlague.Utilities;
 using UnityEngine;
 
 namespace TheRedPlague.PrefabFiles.UpgradeModules;
@@ -21,14 +22,13 @@ public static class AntiPossessionModule
         {
             ModifyPrefab = obj => obj.GetComponent<Rigidbody>().isKinematic = true
         });
-        prefab.SetVehicleUpgradeModule()
-            .WithOnModuleAdded(OnAdd)
-            .WithOnModuleRemoved(OnRemove);
+        prefab.SetEquipment(EquipmentType.VehicleModule);
+        VehicleUpgradeUtils.SetOnUpgradeChanged(Info.TechType, OnChanged);
         prefab.SetUnlock(Info.TechType)
             .WithAnalysisTech(null, KnownTechHandler.DefaultUnlockData.BlueprintUnlockSound,
                 KnownTechHandler.DefaultUnlockData.BlueprintUnlockMessage);
-        prefab.SetRecipe(new RecipeData(new CraftData.Ingredient(TechType.SeamothElectricalDefense),
-            new CraftData.Ingredient(DormantNeuralMatter.Info.TechType)))
+        prefab.SetRecipe(new RecipeData(new Ingredient(TechType.SeamothElectricalDefense, 1),
+            new Ingredient(DormantNeuralMatter.Info.TechType, 1)))
             .WithCraftingTime(4.6f)
             .WithFabricatorType(CraftTree.Type.SeamothUpgrades)
             .WithStepsToFabricatorTab(CraftTreeHandler.Paths.VehicleUpgradesCommonModules);
@@ -37,19 +37,14 @@ public static class AntiPossessionModule
         prefab.Register();
     }
 
-    private static void OnAdd(Vehicle vehicle, int slot)
+    private static void OnChanged(Vehicle vehicle, int slot)
     {
         var count = vehicle.modules.GetCount(Info.TechType);
         if (count > 0)
         {
             vehicle.gameObject.EnsureComponent<AntiPossessionModuleBehaviour>();
         }
-    }
-
-    private static void OnRemove(Vehicle vehicle, int slot)
-    {
-        var count = vehicle.modules.GetCount(Info.TechType);
-        if (count <= 0)
+        else
         {
             Object.Destroy(vehicle.gameObject.GetComponent<AntiPossessionModuleBehaviour>());
         }

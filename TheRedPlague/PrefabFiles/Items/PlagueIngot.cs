@@ -20,7 +20,7 @@ public static class PlagueIngot
         var prefab = new CustomPrefab(Info);
         prefab.SetGameObject(CreatePrefab);
         prefab.SetPdaGroupCategory(CustomTechCategories.PlagueBiotechGroup, CustomTechCategories.PlagueBiotechCategory);
-        prefab.SetRecipe(new RecipeData(new CraftData.Ingredient(PlagueCatalyst.Info.TechType)));
+        prefab.SetRecipe(new RecipeData(new Ingredient(PlagueCatalyst.Info.TechType, 1)));
         prefab.SetBackgroundType(CustomBackgroundTypes.PlagueItem);
         prefab.Register();
         

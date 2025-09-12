@@ -8,6 +8,7 @@ using Nautilus.Utility.MaterialModifiers;
 using TheRedPlague.Mono.CreatureBehaviour.Drifter;
 using TheRedPlague.Mono.InfectionLogic;
 using TheRedPlague.Mono.VFX;
+using TheRedPlague.Utilities;
 using UnityEngine;
 
 namespace TheRedPlague.PrefabFiles.Creatures;
@@ -41,6 +42,8 @@ public class DrifterPrefab : CreatureAsset
 
     protected override IEnumerator ModifyPrefab(GameObject prefab, CreatureComponents components)
     {
+        TrpPrefabUtils.AddPlagueCreationComponents(prefab);
+        
         var wf = components.WorldForces;
         wf.aboveWaterGravity = 0;
         wf.aboveWaterDrag = 1;
@@ -75,7 +78,7 @@ public class DrifterPrefab : CreatureAsset
         mistPrefab.AddComponent<DrifterMistInstance>();
         foreach (var renderer in mistPrefab.GetComponentsInChildren<Renderer>(true))
         {
-            renderer.material.color = new Color(0.5f, 0.1f, 0.1f, 0.6f);
+            renderer.material.color = new Color(0.2f, 0.04f, 0.04f, 0.4f);
             renderer.material.SetColor("_ColorStrengthAtNight", Color.gray);
         }
 
@@ -102,9 +105,7 @@ public class DrifterPrefab : CreatureAsset
         var spawnMist = prefab.AddComponent<DrifterSprayMist>();
         spawnMist.mistPrefab = mistPrefab;
         spawnMist.rb = components.Rigidbody;
-
-        prefab.EnsureComponent<RedPlagueHost>().mode = RedPlagueHost.Mode.PlagueCreation;
-
+        
         if (!_flyOnly)
             prefab.EnsureComponent<DrifterHoverAboveTerrain>();
 

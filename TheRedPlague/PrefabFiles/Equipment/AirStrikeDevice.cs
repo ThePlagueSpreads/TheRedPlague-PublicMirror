@@ -21,8 +21,8 @@ public static class AirStrikeDevice
         var prefab = new CustomPrefab(Info);
         prefab.SetGameObject(GetPrefab);
         prefab.SetEquipment(EquipmentType.Hand);
-        prefab.SetRecipe(new RecipeData(new CraftData.Ingredient(TechType.Titanium, 2),
-                new CraftData.Ingredient(TechType.WiringKit)))
+        prefab.SetRecipe(new RecipeData(new Ingredient(TechType.Titanium, 2),
+                new Ingredient(TechType.WiringKit, 1)))
             .WithCraftingTime(4)
             .WithFabricatorType(AdminFabricator.AdminCraftTree);
         prefab.SetPdaGroupCategory(TechGroup.Machines, TechCategory.Machines);

@@ -17,6 +17,7 @@ public class PhantomAttackLastTarget : AttackLastTarget
         {
             voice.emitter.SetAsset(ChargeSound);
             voice.emitter.Play();
+            if (voice.animator) voice.animator.SetTrigger(voice.animatorTriggerParam);
             voice.BlockIdleSoundsForTime(10);
         }
     }

@@ -1,12 +1,17 @@
 ﻿using HarmonyLib;
+using Story;
 using TheRedPlague.Data;
+using TheRedPlague.Mono.CreatureBehaviour.Chaos;
 using TheRedPlague.Mono.CreatureBehaviour.HoverPet;
 using TheRedPlague.Mono.Equipment;
 using TheRedPlague.Mono.InfectionLogic;
 using TheRedPlague.Mono.Insanity;
+using TheRedPlague.Mono.SFX;
 using TheRedPlague.Mono.Systems;
+using TheRedPlague.Mono.Util;
 using TheRedPlague.Mono.VFX;
 using TheRedPlague.PrefabFiles.Equipment;
+using TheRedPlague.Utilities;
 using UnityEngine;
 
 namespace TheRedPlague.Patches.Essential;
@@ -49,6 +54,18 @@ public static class PlayerPatcher
         var eventMusicPlayer = new GameObject("EventMusicPlayer");
         eventMusicPlayer.AddComponent<TrpEventMusicPlayer>();
         eventMusicPlayer.transform.SetParent(trpManagersRoot);
+
+        var chaosEyes = new GameObject("ChaosEyeHallucinationManager");
+        chaosEyes.AddComponent<ChaosEyeHallucinationManager>();
+        chaosEyes.transform.SetParent(trpManagersRoot);
+        
+        var caveSounds = new GameObject("FleshCaveAmbienceSounds");
+        caveSounds.AddComponent<FleshCaveSounds>();
+        caveSounds.transform.SetParent(trpManagersRoot);
+        
+        var globalColliders = new GameObject("TrpGlobalWorldCollidersManager");
+        globalColliders.AddComponent<GlobalWorldColliders>();
+        globalColliders.transform.SetParent(trpManagersRoot);
     }
     
     [HarmonyPatch(nameof(Player.EquipmentChanged))]

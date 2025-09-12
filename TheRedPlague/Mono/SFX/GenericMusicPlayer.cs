@@ -15,6 +15,9 @@ public class GenericMusicPlayer : MonoBehaviour
 
     private void UpdatePlayState()
     {
+        if (!isActiveAndEnabled)
+            return;
+        
         var distance = Vector3.Distance(MainCamera.camera.transform.position, transform.position);
         if (emitter.playing)
         {
@@ -28,5 +31,10 @@ public class GenericMusicPlayer : MonoBehaviour
         {
             emitter.Play();
         }
+    }
+
+    private void OnDisable()
+    {
+        emitter.Stop();
     }
 }

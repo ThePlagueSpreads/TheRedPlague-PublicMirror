@@ -26,10 +26,10 @@ public static class ShuttlePad
         var prefab = new CustomPrefab(Info);
         prefab.SetGameObject(CreatePrefab);
         prefab.SetPdaGroupCategory(TechGroup.ExteriorModules, TechCategory.ExteriorModule);
-        prefab.SetRecipe(new RecipeData(new CraftData.Ingredient(
-                TechType.TitaniumIngot),
-            new CraftData.Ingredient(TechType.ComputerChip),
-            new CraftData.Ingredient(TechType.Lubricant)));
+        prefab.SetRecipe(new RecipeData(new Ingredient(
+                TechType.Titanium, 5),
+            new Ingredient(TechType.ComputerChip, 1),
+            new Ingredient(TechType.Lubricant, 1)));
         prefab.Register();
         KnownTechHandler.SetAnalysisTechEntry(Info.TechType, Array.Empty<TechType>(),
             KnownTechHandler.DefaultUnlockData.BasicUnlockSound,

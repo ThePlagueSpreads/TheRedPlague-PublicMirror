@@ -38,7 +38,7 @@ public static class BloodQuartz
         prefab.Register();
 
         var bloodToNormalQuartzPrefab = new CustomPrefab(_bloodToNormalQuartz);
-        bloodToNormalQuartzPrefab.SetRecipe(new RecipeData(new CraftData.Ingredient(Info.TechType))
+        bloodToNormalQuartzPrefab.SetRecipe(new RecipeData(new Ingredient(Info.TechType, 1))
             {
                 LinkedItems = { TechType.Quartz, TechType.Quartz },
                 craftAmount = 0

@@ -19,7 +19,14 @@ public class GrabberVehicleTarget : GrabberTargetBase
     public override void StartGrab(GrabberCreature grabber)
     {
         UWE.Utils.SetIsKinematicAndUpdateInterpolation(vehicle.GetComponent<Rigidbody>(), isKinematic: true);
-        vehicle.collisionModel.SetActive(value: false);
+        if (vehicle.collisionModel != null)
+        {
+            foreach (var model in vehicle.collisionModel)
+            {
+                if (model)
+                    model.SetActive(false);
+            }
+        }
         if (vehicle is Exosuit exoSuit)
         {
             SafeAnimator.SetBool(vehicle.mainAnimator, "reaper_attack", value: true);
@@ -49,7 +56,14 @@ public class GrabberVehicleTarget : GrabberTargetBase
 
         var rb = vehicle.GetComponent<Rigidbody>();
         UWE.Utils.SetIsKinematicAndUpdateInterpolation(rb, isKinematic: false);
-        vehicle.collisionModel.SetActive(value: true);
+        if (vehicle.collisionModel != null)
+        {
+            foreach (var model in vehicle.collisionModel)
+            {
+                if (model)
+                    model.SetActive(true);
+            }
+        }
         
         rb.AddForce(grabber.grabTransform.forward * LaunchVelocity, ForceMode.VelocityChange);
     }

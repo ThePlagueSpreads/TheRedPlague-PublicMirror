@@ -9,7 +9,7 @@ namespace TheRedPlague.PrefabFiles.Creatures;
 public class PossessedVehicle
 {
     public PrefabInfo Info { get; }
-    
+
     private readonly TechType _vehicleTechType;
 
     public PossessedVehicle(TechType vehicleTechType)
@@ -30,7 +30,7 @@ public class PossessedVehicle
         var task = CraftData.GetPrefabForTechTypeAsync(_vehicleTechType);
         yield return task;
         var obj = UWE.Utils.InstantiateDeactivated(task.GetResult());
-        
+
         // lock vehicle
         var vehicle = obj.GetComponent<Vehicle>();
         if (vehicle is SeaMoth seaMoth)
@@ -40,30 +40,45 @@ public class PossessedVehicle
             lights.lightsOffSound = null;
             lights.lightsOnSound = null;
         }
-        var infectedVehicle = obj.AddComponent<InfectedVehicle>();
-        obj.AddComponent<SuckerControllerTarget>();
+
+        var isExosuit = _vehicleTechType == TechType.Exosuit;
         
+        var infectedVehicle = obj.AddComponent<InfectedVehicle>().isExosuit = isExosuit;
+        obj.AddComponent<SuckerControllerTarget>();
+
         // remove signal/beacon
         Object.DestroyImmediate(obj.GetComponent<PingInstance>());
-        
+
         // remove construct vfx
         Object.DestroyImmediate(obj.GetComponent<VFXConstructing>());
-        
+
         // remove depth crushing
         Object.DestroyImmediate(obj.GetComponent<DepthAlarms>());
         Object.DestroyImmediate(obj.GetComponent<CrushDamage>());
-        
+
         // fix rigidity
-        obj.GetComponent<Rigidbody>().isKinematic = false;
-        
+        var rb = obj.GetComponent<Rigidbody>();
+        rb.isKinematic = false;
+        if (isExosuit)
+            rb.constraints = RigidbodyConstraints.FreezeRotation;
+
         // explode when the player or a creature is close
-        obj.AddComponent<PossessedVehicleExplode>().vehicle = vehicle;
-        
+        if (!isExosuit)
+            obj.AddComponent<PossessedVehicleExplode>().vehicle = vehicle;
+
         // remove eco target type (this used to be a 'shark')
         Object.DestroyImmediate(obj.GetComponent<EcoTarget>());
 
-        obj.EnsureComponent<LargeWorldEntity>().cellLevel = LargeWorldEntity.CellLevel.Far;
-        
+        obj.EnsureComponent<LargeWorldEntity>().cellLevel = isExosuit
+            ? LargeWorldEntity.CellLevel.Near
+            : LargeWorldEntity.CellLevel.Far;
+
+        // fix floating text
+        if (isExosuit)
+        {
+            
+        }
+
         prefab.Set(obj);
     }
 }

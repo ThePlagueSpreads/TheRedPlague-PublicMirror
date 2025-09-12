@@ -7,7 +7,7 @@ public class StabbyDamageTrigger : MonoBehaviour
 {
     public StabbyMotion motion;
     
-    public float normalDamage = 10;
+    public float normalDamage = 8;
     public float penetrativeDamage = 6;
     public float damageInterval = 2f;
     public float knockBackForce = 6;

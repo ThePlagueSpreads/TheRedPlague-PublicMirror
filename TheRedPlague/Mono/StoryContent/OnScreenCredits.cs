@@ -5,7 +5,7 @@ namespace TheRedPlague.Mono.StoryContent;
 
 public class OnScreenCredits : MonoBehaviour
 {
-    public float speed = 40f;
+    public float speed = 160;
     
     public static void Play()
     {
@@ -13,9 +13,8 @@ public class OnScreenCredits : MonoBehaviour
         var rectTransform = credits.GetComponent<RectTransform>();
         rectTransform.SetParent(uGUI.main.transform.Find("ScreenCanvas"));
         rectTransform.localScale = Vector3.one;
-        rectTransform.localPosition = new Vector3(-300, -550);
+        rectTransform.localPosition = new Vector3(-500, -750);
         credits.AddComponent<OnScreenCredits>();
-        Utils.PlayFMODAsset(AudioUtils.GetFmodAsset("RedPlagueThemeMusic"), Player.main.transform.position);
     }
 
     private void Update()

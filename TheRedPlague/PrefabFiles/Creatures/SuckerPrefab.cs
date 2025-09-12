@@ -48,8 +48,6 @@ public class SuckerPrefab
         wf.useRigidbody = rb;
         wf.underwaterDrag = 1.5f;
         wf.underwaterGravity = 4f;
-
-        var blockTrigger = go.transform.Find("BlockTriggers").gameObject;
         
         if (Aurora)
         {
@@ -63,13 +61,7 @@ public class SuckerPrefab
                 skyApplier.anchorSky = Skies.Custom;
             }
 
-            var fix = go.AddComponent<AuroraSuckerFixPhysics>();
-            fix.rigidbody = rb;
-            fix.blockTrigger = blockTrigger;
-        }
-        else
-        {
-            blockTrigger.SetActive(false);
+            go.AddComponent<AuroraSuckerBreachBlocker>();
         }
         
         var look = go.transform.Find("SuckerV2/Sucker2Armature/Root/Eye").gameObject.AddComponent<GenericEyeLook>();

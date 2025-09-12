@@ -5,6 +5,7 @@ using Nautilus.Assets;
 using TheRedPlague.Data;
 using TheRedPlague.Mono.CreatureBehaviour.Sucker;
 using TheRedPlague.Mono.VFX;
+using TheRedPlague.Utilities;
 using UnityEngine;
 
 namespace TheRedPlague.PrefabFiles.Creatures;
@@ -36,6 +37,8 @@ public class SuckerController : CreatureAsset
 
     protected override IEnumerator ModifyPrefab(GameObject prefab, CreatureComponents components)
     {
+        TrpPrefabUtils.AddPlagueCreationComponents(prefab);
+
         var grab = prefab.AddComponent<SuckerGrabVehicles>();
 
         grab.rigidbody = components.Rigidbody;

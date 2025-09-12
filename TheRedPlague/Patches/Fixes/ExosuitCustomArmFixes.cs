@@ -32,7 +32,6 @@ public static class ExosuitCustomArmFixes
             or TechType.ExosuitPropulsionArmModule)
             return;
 
-
         // Ensure the arm is custom (not from another mod)
         var customArms = CustomExosuitArmUtils.GetCustomExosuitArms();
 
@@ -50,19 +49,22 @@ public static class ExosuitCustomArmFixes
         if (!isCustom)
             return;
 
-
         if (parent == null)
         {
             Plugin.Logger.LogInfo("Prawn suit arm parent not found");
             return;
         }
-        
-        // We should expect that the previous arm has NOT been destroyed yet, so instead, check the 2nd child
-        var newArm = parent.GetChild(1);
-        if (newArm == null)
+
+        var lastChildIndex = parent.childCount - 1;
+
+        if (lastChildIndex < 0)
         {
-            newArm = parent.GetChild(0);
+            Plugin.Logger.LogError("Prawn suit arm does not exist!");
+            return;
         }
+        
+        // We should expect that the previous arm has NOT been destroyed yet
+        var newArm = parent.GetChild(lastChildIndex);
         if (newArm == null)
         {
             Plugin.Logger.LogWarning("Failed to find new arm to re-enable!");

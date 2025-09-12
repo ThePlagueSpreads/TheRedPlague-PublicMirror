@@ -8,6 +8,7 @@ using Nautilus.Utility.MaterialModifiers;
 using TheRedPlague.Data;
 using TheRedPlague.Managers;
 using TheRedPlague.Mono.InfectionLogic;
+using TheRedPlague.Utilities;
 using UnityEngine;
 
 namespace TheRedPlague.PrefabFiles.Creatures;
@@ -35,10 +36,10 @@ public class TeethTeeth : CreatureAsset
             StayAtLeashData = new StayAtLeashData(0.4f, 4, 27),
             SwimRandomData = new SwimRandomData(0.2f, 4, new Vector3(10, 2, 10)),
             AvoidObstaclesData = new AvoidObstaclesData(0.7f, 4, true, 5, 4f),
-            AttackLastTargetData = new AttackLastTargetData(0.6f, 5, 0.5f, 6f),
+            AttackLastTargetData = new AttackLastTargetData(0.6f, 6f, 0.5f, 6f, 13f),
             AggressiveWhenSeeTargetList = new List<AggressiveWhenSeeTargetData>
             {
-                new(EcoTargetType.Shark, 0.3f, 10, 1)
+                new(EcoTargetType.Shark, 0.4f, 15, 1)
             },
             AnimateByVelocityData = new AnimateByVelocityData(4)
         };
@@ -48,7 +49,7 @@ public class TeethTeeth : CreatureAsset
 
     protected override IEnumerator ModifyPrefab(GameObject prefab, CreatureComponents components)
     {
-        prefab.AddComponent<RedPlagueHost>().mode = RedPlagueHost.Mode.PlagueCreation;
+        TrpPrefabUtils.AddPlagueCreationComponents(prefab);
 
         var meleeAttack = CreaturePrefabUtils.AddMeleeAttack<MeleeAttack>(prefab, components,
             prefab.transform.Find("BiteTrigger").gameObject, true, 6f, 10f, false);

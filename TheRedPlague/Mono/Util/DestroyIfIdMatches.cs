@@ -11,8 +11,13 @@ public class DestroyIfIdMatches : MonoBehaviour
     {
         if (ShouldIKillMyself())
         {
-            Destroy(gameObject);
+            Kronii();
         }
+    }
+
+    private void Kronii()
+    {
+        Destroy(gameObject);
     }
 
     private bool ShouldIKillMyself()

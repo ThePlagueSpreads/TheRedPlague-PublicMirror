@@ -21,9 +21,10 @@ public static class PlagueNeutralizerFragment
                 obj.EnsureComponent<LargeWorldEntity>().cellLevel = LargeWorldEntity.CellLevel.Near;
                 obj.transform.Find("model/Species_Analyzer/Species_Analyzer/Species_Analyzer_glass1").gameObject.SetActive(false);
                 Object.DestroyImmediate(obj.GetComponent<SpecimenAnalyzer>());
+                Object.DestroyImmediate(obj.GetComponentInChildren<SpecimenAnalyzerBase>());
                 Object.DestroyImmediate(obj.GetComponent<Constructable>());
                 Object.DestroyImmediate(obj.GetComponent<LiveMixin>());
-                Object.DestroyImmediate(obj.GetComponentInChildren<StorageContainer>());
+                Object.DestroyImmediate(obj.GetComponentInChildren<StorageContainer>(true));
                 PrefabUtils.AddResourceTracker(obj, TechType.Fragment);
             }
         });

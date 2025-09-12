@@ -8,6 +8,7 @@ using TheRedPlague.Data;
 using TheRedPlague.Mono.CreatureBehaviour;
 using TheRedPlague.Mono.CreatureBehaviour.HoverPet;
 using TheRedPlague.Mono.InfectionLogic;
+using TheRedPlague.Utilities;
 using UnityEngine;
 
 namespace TheRedPlague.PrefabFiles.Creatures;
@@ -39,8 +40,8 @@ public class Hippopenomenon : CreatureAsset
 
     protected override IEnumerator ModifyPrefab(GameObject prefab, CreatureComponents components)
     {
-        prefab.AddComponent<RedPlagueHost>().mode = RedPlagueHost.Mode.PlagueCreation;
-
+        TrpPrefabUtils.AddPlagueCreationComponents(prefab);
+        
         var followPlayer = prefab.AddComponent<CreatureFollowPlayer>();
         followPlayer.creature = components.Creature;
         followPlayer.distanceToPlayer = 14;

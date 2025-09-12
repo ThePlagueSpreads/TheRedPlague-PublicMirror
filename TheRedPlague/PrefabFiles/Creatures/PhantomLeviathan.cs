@@ -12,6 +12,7 @@ using TheRedPlague.Data;
 using TheRedPlague.Mono.CreatureBehaviour;
 using TheRedPlague.Mono.CreatureBehaviour.PhantomLeviathan;
 using TheRedPlague.Mono.InfectionLogic;
+using TheRedPlague.Utilities;
 using UnityEngine;
 
 namespace TheRedPlague.PrefabFiles.Creatures;
@@ -64,7 +65,7 @@ public class PhantomLeviathan : CreatureAsset
     {
         var phantomCreature = components.Creature as PhantomLeviathanCreature;
         
-        prefab.AddComponent<RedPlagueHost>().mode = RedPlagueHost.Mode.PlagueCreation;
+        TrpPrefabUtils.AddPlagueCreationComponents(prefab);
         
         var aggressiveOnDamage = prefab.AddComponent<AggressiveOnDamage>();
         aggressiveOnDamage.creature = components.Creature;
@@ -179,8 +180,10 @@ public class PhantomLeviathan : CreatureAsset
         voice.emitter = voiceEmitter;
         voice.farThreshold = 50f;
         voice.playSoundOnStart = false;
-        voice.minInterval = 21;
-        voice.maxInterval = 37;
+        voice.minInterval = 18;
+        voice.maxInterval = 30;
+        voice.animator = components.Animator;
+        voice.animatorTriggerParam = "roar";
         
         var attackLastTarget = prefab.AddComponent<PhantomAttackLastTarget>();
         attackLastTarget.evaluatePriority = 0.9f;
@@ -193,6 +196,9 @@ public class PhantomLeviathan : CreatureAsset
         attackLastTarget.resetAggressionOnTime = true;
         attackLastTarget.lastTarget = components.LastTarget;
         attackLastTarget.voice = voice;
+
+        var leashPositionFix = prefab.AddComponent<PhantomLeashFix>();
+        leashPositionFix.creature = components.Creature;
     }
 
     protected override void ApplyMaterials(GameObject prefab)
@@ -208,7 +214,7 @@ public class PhantomLeviathan : CreatureAsset
         {
             if (materialType == MaterialUtils.MaterialType.Transparent && renderer is not ParticleSystemRenderer)
             {
-                material.SetFloat("_SpecInt", 45);
+                material.SetFloat("_SpecInt", 15);
                 material.SetFloat("_Shininess", 8f);
                 material.SetFloat("_Fresnel", 0.76f);
                 material.SetFloat(ShaderPropertyID._GlowStrength, 0.2f);

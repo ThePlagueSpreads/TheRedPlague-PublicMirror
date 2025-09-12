@@ -13,12 +13,12 @@ public class HoverPetSpawner : MonoBehaviour
     private const float MinDepth = 5;
     private const float MaxDepth = 350;
     private const int AttemptSpawnTries = 8;
-    
+
     private bool _hoverPetTimerStarted;
     private float _hoverPetMinSpawnTime;
-    
+
     public static Vector3 MazeBasePosition { get; } = new(-1250, -220, 700);
-    
+
     private void Start()
     {
         InvokeRepeating(nameof(LazyUpdate), Random.value, 1);
@@ -75,11 +75,12 @@ public class HoverPetSpawner : MonoBehaviour
         LargeWorld.main.streamer.cellManager.RegisterEntity(pet);
     }
 
-    private bool ConditionsMet()
+    public static bool ConditionsMet()
     {
         if (!StoryGoalManager.main.IsGoalComplete(StoryUtils.ArriveToDomeGoal.key))
             return false;
-        if (StoryGoalManager.main.IsGoalComplete(StoryUtils.ScanPlagueAltarGoal.key))
+        if (StoryGoalManager.main.IsGoalComplete(StoryUtils.ScanPlagueAltarGoal.key) ||
+            StoryGoalManager.main.IsGoalComplete(StoryUtils.MazeBaseDiscoveryGoal.key))
             return false;
         return true;
     }

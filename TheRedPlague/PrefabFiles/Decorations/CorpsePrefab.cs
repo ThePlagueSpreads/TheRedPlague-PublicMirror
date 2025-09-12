@@ -38,7 +38,7 @@ public class CorpsePrefab
         if (Infected)
         {
             var infect = go.AddComponent<InfectAnything>();
-            infect.infectionHeightStrength = 0.05f;
+            infect.infectionHeightStrength = 0.01f;
         }
 
         foreach (var rb in go.GetComponentsInChildren<Rigidbody>(true))

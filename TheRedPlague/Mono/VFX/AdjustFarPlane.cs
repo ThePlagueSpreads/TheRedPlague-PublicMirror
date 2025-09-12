@@ -13,9 +13,15 @@ public class AdjustFarPlane : MonoBehaviour
 
     private float _changePerSecond;
     private float _currentFarClipPlane;
+    
+    public static AdjustFarPlane Main { get; private set; }
+
+    private bool _overriding;
+    private float _overrideDistance;
 
     private void Start()
     {
+        Main = this;
         _camera = MainCamera.camera;
         _oldFarClipPlane = _camera.farClipPlane;
         _changePerSecond = Mathf.Abs(newFarClipPlane - _oldFarClipPlane) / transitionDuration;
@@ -38,7 +44,22 @@ public class AdjustFarPlane : MonoBehaviour
 
     private float GetActualFarClipPlane()
     {
+        if (_overriding)
+        {
+            return _overrideDistance;
+        }
         return Mathf.Lerp(newFarClipPlane, _oldFarClipPlane,
-            Mathf.InverseLerp(0, maxDepthToApply, Ocean.GetDepthOf(Player.main.gameObject)));
+            Mathf.InverseLerp(0, maxDepthToApply, Ocean.GetDepthOf(_camera.gameObject)));
+    }
+
+    public void OverrideFarClipPlane(float overrideDistance)
+    {
+        _overriding = true;
+        _overrideDistance = overrideDistance;
+    }
+    
+    public void StopOverridingFarClipPlane()
+    {
+        _overriding = false;
     }
 }

@@ -49,7 +49,7 @@ public class Mutant : CreatureAsset
                 new LootDistributionData.BiomeData
                 {
                     biome = BiomeType.ActiveLavaZone_Chamber_Open_CreatureOnly,
-                    probability = 0.04f,
+                    probability = 0.013f,
                     count = 1
                 },
                 /*
@@ -69,7 +69,7 @@ public class Mutant : CreatureAsset
                 new LootDistributionData.BiomeData
                 {
                     biome = BiomeType.ActiveLavaZone_Falls_Open_CreatureOnly,
-                    probability = 0.04f,
+                    probability = 0.02f,
                     count = 1
                 }
             );
@@ -80,55 +80,55 @@ public class Mutant : CreatureAsset
             new LootDistributionData.BiomeData
             {
                 biome = BiomeType.KooshZone_OpenDeep_CreatureOnly,
-                probability = 0.02f,
+                probability = 0.01f,
                 count = 1
             },
             new LootDistributionData.BiomeData
             {
                 biome = BiomeType.KooshZone_OpenShallow_CreatureOnly,
-                probability = 0.02f,
+                probability = 0.01f,
                 count = 1
             },
             new LootDistributionData.BiomeData
             {
                 biome = BiomeType.UnderwaterIslands_OpenShallow_CreatureOnly,
-                probability = 0.02f,
+                probability = 0.01f,
                 count = 1
             },
             new LootDistributionData.BiomeData
             {
                 biome = BiomeType.UnderwaterIslands_OpenDeep_CreatureOnly,
-                probability = 0.02f,
+                probability = 0.01f,
                 count = 1
             },
             new LootDistributionData.BiomeData
             {
                 biome = BiomeType.MushroomForest_Grass,
-                probability = 0.02f,
+                probability = 0.01f,
                 count = 1
             },
             new LootDistributionData.BiomeData
             {
                 biome = BiomeType.CragField_OpenShallow_CreatureOnly,
-                probability = 0.02f,
+                probability = 0.01f,
                 count = 1
             },
             new LootDistributionData.BiomeData
             {
                 biome = BiomeType.CragField_OpenDeep_CreatureOnly,
-                probability = 0.02f,
+                probability = 0.01f,
                 count = 1
             },
             new LootDistributionData.BiomeData
             {
                 biome = BiomeType.GrandReef_OpenShallow_CreatureOnly,
-                probability = 0.02f,
+                probability = 0.01f,
                 count = 1
             },
             new LootDistributionData.BiomeData
             {
                 biome = BiomeType.GrandReef_OpenDeep_CreatureOnly,
-                probability = 0.02f,
+                probability = 0.01f,
                 count = 1
             },
             new LootDistributionData.BiomeData
@@ -164,13 +164,13 @@ public class Mutant : CreatureAsset
             new LootDistributionData.BiomeData
             {
                 biome = BiomeType.InactiveLavaZone_Corridor_Open_CreatureOnly,
-                probability = 0.03f,
+                probability = 0.02f,
                 count = 1
             },
             new LootDistributionData.BiomeData
             {
                 biome = BiomeType.InactiveLavaZone_Chamber_Open_CreatureOnly,
-                probability = 0.03f,
+                probability = 0.02f,
                 count = 1
             }
         );
@@ -180,7 +180,7 @@ public class Mutant : CreatureAsset
     {
         var template = new CreatureTemplate(() => Plugin.AssetBundle.LoadAsset<GameObject>(_prefabName),
             BehaviourType.Shark,
-            EcoTargetType.Shark, 5000f);
+            EcoTargetType.Shark, _settings.HasFlag(Settings.HeavilyMutated) ? 500 : 300);
         CreatureTemplateUtils.SetCreatureDataEssentials(template, LargeWorldEntity.CellLevel.Medium, 500, -0.5f);
         CreatureTemplateUtils.SetCreatureMotionEssentials(template,
             new SwimRandomData(0.3f, IsHeavilyMutated() ? HeavilyMutatedVelocity : NormalVariantVelocity,
@@ -193,6 +193,7 @@ public class Mutant : CreatureAsset
             new AttackLastTargetData(0.5f, IsHeavilyMutated() ? 20f : NormalVariantVelocity * 2f,
                 0.5f, IsHeavilyMutated() ? 30 : 7, IsHeavilyMutated() ? 0.1f : 10);
         template.EyeFOV = IsHeavilyMutated() ? -1f : -0.5f;
+        template.AnimateByVelocityData = new AnimateByVelocityData(5f);
         return template;
     }
 
@@ -213,8 +214,9 @@ public class Mutant : CreatureAsset
         var attackTrigger = prefab.transform.Find("AttackTrigger").gameObject.AddComponent<MutantAttackTrigger>();
         attackTrigger.prefabFileName = _prefabName;
         attackTrigger.settings = _settings;
-        attackTrigger.damage = IsHeavilyMutated() ? 21 : 14;
+        attackTrigger.damage = IsHeavilyMutated() ? 25 : 16;
         attackTrigger.instantKillChance = IsHeavilyMutated() ? 0.33f : 0.1f;
+        attackTrigger.liveMixin = components.LiveMixin;
 
         var emitter = prefab.AddComponent<FMOD_CustomEmitter>();
         emitter.SetAsset(IsHeavilyMutated() ? LargeMutantIdle : NormalMutantIdle);
@@ -225,6 +227,7 @@ public class Mutant : CreatureAsset
         sounds.minDelay = 13;
         // lee 23!!
         sounds.maxDelay = 23;
+        sounds.lm = components.LiveMixin;
         yield break;
     }
 

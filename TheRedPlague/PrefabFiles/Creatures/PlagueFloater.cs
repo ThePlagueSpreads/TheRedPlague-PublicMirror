@@ -10,6 +10,7 @@ using Nautilus.Utility.MaterialModifiers;
 using TheRedPlague.Data;
 using TheRedPlague.Mono.CreatureBehaviour;
 using TheRedPlague.Mono.InfectionLogic;
+using TheRedPlague.Utilities;
 using UnityEngine;
 
 namespace TheRedPlague.PrefabFiles.Creatures;
@@ -52,7 +53,7 @@ public class PlagueFloater : CreatureAsset
 
     protected override IEnumerator ModifyPrefab(GameObject prefab, CreatureComponents components)
     {
-        prefab.AddComponent<RedPlagueHost>().mode = RedPlagueHost.Mode.PlagueCreation;
+        TrpPrefabUtils.AddPlagueCreationComponents(prefab);
 
         var meleeAttack = CreaturePrefabUtils.AddMeleeAttack<MeleeAttack>(prefab, components,
             prefab.transform.Find("AttackTrigger").gameObject, true, 45f, 2.5f);

@@ -24,8 +24,8 @@ public static class AssimilationGenerator
         prefab.SetGameObject(CreatePrefab);
         prefab.SetPdaGroupCategoryAfter(TechGroup.ExteriorModules, TechCategory.ExteriorModule, TechType.ThermalPlant);
         prefab.SetRecipe(new RecipeData(
-            new CraftData.Ingredient(PlagueIngot.Info.TechType, 3),
-            new CraftData.Ingredient(ConsciousNeuralMatter.Info.TechType)));
+            new Ingredient(PlagueIngot.Info.TechType, 3),
+            new Ingredient(ConsciousNeuralMatter.Info.TechType, 1)));
         prefab.SetBackgroundType(CustomBackgroundTypes.PlagueItem);
         prefab.Register();
     }

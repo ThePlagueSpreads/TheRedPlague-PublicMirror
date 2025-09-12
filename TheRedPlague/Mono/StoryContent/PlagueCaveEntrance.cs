@@ -22,6 +22,10 @@ public class PlagueCaveEntrance : MonoBehaviour
     private void OnEnable()
     {
         _all.Add(this);
+        if (StoryGoalManager.main.IsGoalComplete(StoryUtils.OpenPlagueCave.key))
+        {
+            Open(true);
+        }
     }
 
     private void OnDisable()

@@ -22,9 +22,9 @@ public static class DomeDroneFormationPrefab
         var prefab = new CustomPrefab(Info);
         prefab.SetGameObject(GetGameObject);
         prefab.SetRecipe(new RecipeData(
-                new CraftData.Ingredient(TechType.Titanium, 16),
-                new CraftData.Ingredient(TechType.CopperWire, 4),
-                new CraftData.Ingredient(TechType.Quartz, 6)))
+                new Ingredient(TechType.Titanium, 16),
+                new Ingredient(TechType.CopperWire, 4),
+                new Ingredient(TechType.Quartz, 6)))
             .WithFabricatorType(CraftTree.Type.Constructor)
             .WithStepsToFabricatorTab(CraftTreeHandler.Paths.ConstructorVehicles)
             .WithCraftingTime(CraftTime);

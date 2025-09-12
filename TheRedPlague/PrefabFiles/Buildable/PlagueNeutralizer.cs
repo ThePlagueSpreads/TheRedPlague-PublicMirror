@@ -24,10 +24,10 @@ public static class PlagueNeutralizer
             ModifyPrefabAsync = ModifyPrefab
         });
         prefab.SetPdaGroupCategoryBefore(TechGroup.InteriorModules, TechCategory.InteriorModule, TechType.Radio);
-        prefab.SetRecipe(new RecipeData(new CraftData.Ingredient(TechType.Titanium, 2),
-            new CraftData.Ingredient(TechType.WiringKit),
-            new CraftData.Ingredient(TechType.Quartz),
-            new CraftData.Ingredient(TechType.DisinfectedWater)));
+        prefab.SetRecipe(new RecipeData(new Ingredient(TechType.Titanium, 2),
+            new Ingredient(TechType.WiringKit, 1),
+            new Ingredient(TechType.Quartz, 1),
+            new Ingredient(TechType.DisinfectedWater, 1)));
         prefab.Register();
 
         KnownTechHandler.SetAnalysisTechEntry(Info.TechType, System.Array.Empty<TechType>(),
@@ -188,6 +188,9 @@ public static class PlagueNeutralizer
         storageContainer.machine = machine;
 
         prefab.GetComponent<SkyApplier>().renderers = prefab.GetComponentsInChildren<Renderer>(true);
+
+        var bounds = prefab.AddComponent<ConstructableBounds>();
+        bounds.bounds = new OrientedBounds(Vector3.up, Quaternion.identity, new Vector3(0.6f, 0.8f, 0.6f));
     }
 
     private static int _spawnPointIndex;

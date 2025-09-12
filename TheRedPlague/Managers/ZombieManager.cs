@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using ECCLibrary;
 using Nautilus.Utility;
-using Story;
 using TheRedPlague.Managers.Amalgamation;
 using TheRedPlague.Mono.CreatureBehaviour;
 using TheRedPlague.Mono.Equipment;
 using TheRedPlague.Mono.InfectionLogic;
+using TheRedPlague.Utilities;
 using UnityEngine;
 
 namespace TheRedPlague.Managers;
@@ -22,9 +23,14 @@ public static class ZombieManager
 
     private const float PlagueVariantConversionChance = 0.12f;
     private const float PlagueVariantConversionChanceForAct1Only = 0.04f;
-    
-    private const float SmallFishMaxHealth = 80;
-    private const float MediumFishMaxHealth = 200;
+    private const float PlagueVariantConversionDuration = 0.5f;
+    private const int PlagueVariantConversionBloodCount = 4;
+
+    private const float SmallFishMaxHealth = 85;
+    private const float MediumFishMaxHealth = 350;
+    private const float SmallFishDamage = 3;
+    private const float MediumFishDamage = 8;
+    private const float LargeFishDamage = 15;
 
     public static readonly string[] HeavilyInfectedBiomes =
         { "dunes", "fleshcave_upper", "fleshcave_chamber", "infectedzone" };
@@ -39,7 +45,8 @@ public static class ZombieManager
         return false;
     }
 
-    public static void RegisterPlagueVariantConversion(TechType original, TechType plagued, float commonalityMultiplier = 1f)
+    public static void RegisterPlagueVariantConversion(TechType original, TechType plagued,
+        float commonalityMultiplier = 1f)
     {
         CreaturePlagueVariantConversions.Add(original, plagued);
         CreaturePlagueVariantConversionRates[original] = commonalityMultiplier;
@@ -54,6 +61,9 @@ public static class ZombieManager
 
     public static bool TryConversion(GameObject creature)
     {
+        if (creature.GetComponent<AmalgamationParasite>() != null)
+            return false;
+
         var techType = CraftData.GetTechType(creature);
 
         if (CreaturePlagueVariantConversions.TryGetValue(techType, out var conversion))
@@ -68,7 +78,7 @@ public static class ZombieManager
                     return false;
                 }
 
-                UWE.CoroutineHost.StartCoroutine(ConvertToPlagueVariant(creature, conversion));
+                UWE.CoroutineHost.StartCoroutine(ConvertToPlagueVariant(creature, techType, conversion));
                 return true;
             }
         }
@@ -81,13 +91,48 @@ public static class ZombieManager
         return CreaturePlagueVariantConversionRates.TryGetValue(techType, out var commonality) ? commonality : 1f;
     }
 
-    private static IEnumerator ConvertToPlagueVariant(GameObject creatureToReplace, TechType variant)
+    private static IEnumerator ConvertToPlagueVariant(GameObject creatureToReplace, TechType original, TechType variant)
     {
+        var convertTime = Time.time + PlagueVariantConversionDuration;
+
+        var bloodFxResult = new TaskResult<GameObject>();
+        yield return BloodFxUtils.GetRedBloodFx(bloodFxResult);
+
+        if (creatureToReplace == null) yield break;
+
+        var bloodFxPrefab = bloodFxResult.value;
+        GameObject blood = null;
+        if (bloodFxPrefab == null)
+        {
+            Plugin.Logger.LogError("Failed to load blood fx!");
+        }
+        else
+        {
+            for (var i = 0; i < PlagueVariantConversionBloodCount; i++)
+            {
+                var bloodFxScale = AmalgamationSettingsDatabase.BloodFxScales.GetOrDefault(original, 1f) * 1.2f + 0.5f;
+                blood = Object.Instantiate(bloodFxResult.value, creatureToReplace.transform, false);
+                blood.transform.ZeroTransform();
+                blood.transform.ApplyToAllChildrenRecursive(tr => tr.localScale = Vector3.one * bloodFxScale);
+                blood.SetActive(true);
+            }
+        }
+
         var variantPrefabTask = CraftData.GetPrefabForTechTypeAsync(variant);
         yield return variantPrefabTask;
+
+        yield return new WaitUntil(() => Time.time >= convertTime);
+
         if (creatureToReplace == null) yield break;
-        Object.Instantiate(variantPrefabTask.GetResult(), creatureToReplace.transform.position,
+
+        var newCreature = Object.Instantiate(variantPrefabTask.GetResult(), creatureToReplace.transform.position,
             creatureToReplace.transform.rotation);
+
+        if (blood != null)
+        {
+            blood.transform.SetParent(newCreature.transform, true);
+        }
+        
         Object.Destroy(creatureToReplace);
     }
 
@@ -117,13 +162,26 @@ public static class ZombieManager
 
     public static void AddZombieBehaviour(RedPlagueHost host)
     {
+        if (host.gameObject.name == "FAILED TO LOAD PREFAB")
+        {
+            Plugin.Logger.LogError("Trying to infect a prefab that failed to load!");
+            return;
+        }
+
         host.MarkAsZombified();
 
         var creatureComponent = host.GetComponent<Creature>();
+        var liveMixin = host.GetComponent<LiveMixin>();
 
         if (creatureComponent == null)
         {
-            Debug.LogWarning($"No creature component on infected object {host.name}!");
+            Plugin.Logger.LogWarning($"No creature component on infected object {host}!");
+            return;
+        }
+
+        if (liveMixin == null)
+        {
+            Plugin.Logger.LogError($"No live mixin component on infected object {host}!");
             return;
         }
 
@@ -165,14 +223,12 @@ public static class ZombieManager
             host.gameObject.EnsureComponent<ShoalDamageInRange>();
         }
 
-        var liveMixin = host.GetComponent<LiveMixin>();
-
         if (liveMixin.maxHealth >= MediumFishMaxHealth)
         {
             host.gameObject.EnsureComponent<DropAmalgamatedBoneOnDeath>();
         }
 
-        creatureComponent.Scared = new CreatureTrait(0, 100000f);
+        creatureComponent.Scared = new CreatureTrait(0, 10f);
         creatureComponent.Aggression = new CreatureTrait(1, 0.12f);
 
         creatureComponent.ScanCreatureActions();
@@ -186,11 +242,33 @@ public static class ZombieManager
         }
 
         AmalgamationManager.AmalgamateCreature(host);
+
+        var flinchDiseaseData = EvaluateFlinchingDisease(creatureComponent.GetAnimator());
+        if (flinchDiseaseData.HasFlinchDamageParameter)
+        {
+            var flinchDisease = host.gameObject.AddComponent<FlinchingDisease>();
+            flinchDisease.animator = creatureComponent.GetAnimator();
+            flinchDisease.settings = flinchDiseaseData;
+        }
     }
 
     private static void OnConsumeInfectedFish()
     {
         PlagueDamageStat.main.TakeInfectionDamage(Random.Range(18, 25), true);
+    }
+
+    private static FlinchingDisease.FlinchAnimationSettings EvaluateFlinchingDisease(Animator creatureAnimator)
+    {
+        if (Random.value > FlinchingDisease.DiseaseChance)
+            return default;
+        if (creatureAnimator == null)
+            return default;
+        var settings = FlinchingDisease.GetFlinchSettings(creatureAnimator);
+        if (!settings.HasFlinchDamageParameter)
+            return default;
+        if (creatureAnimator.GetComponent<FlinchingDisease>() != null)
+            return default;
+        return settings;
     }
 
     private static void AddMeleeAttack(Creature creature)
@@ -204,7 +282,7 @@ public static class ZombieManager
         var meleeAttack = creature.gameObject.AddComponent<MeleeAttack>();
         meleeAttack.biteAggressionThreshold = 0.2f;
         meleeAttack.biteInterval = 8;
-        meleeAttack.biteDamage = creature.liveMixin.maxHealth >= MediumFishMaxHealth ? 14 : 4;
+        meleeAttack.biteDamage = GetDamageForHealth(creature.liveMixin.maxHealth);
         meleeAttack.biteAggressionDecrement = 0.5f;
         meleeAttack.lastTarget = creature.GetComponent<LastTarget>();
         meleeAttack.creature = creature;
@@ -230,6 +308,21 @@ public static class ZombieManager
         triggerObj.transform.parent = creature.transform;
         triggerObj.transform.localPosition = Vector3.forward * 0.5f;
     }
+    
+    private static float GetDamageForHealth(float health)
+    {
+        if (health < SmallFishMaxHealth)
+        {
+            return SmallFishDamage;
+        }
+
+        if (health < MediumFishMaxHealth)
+        {
+            return MediumFishDamage;
+        }
+
+        return LargeFishDamage;
+    }
 
     private static void MakeCreatureAggressiveToEcoTargetType(Creature creature, EcoTargetType type)
     {
@@ -240,7 +333,7 @@ public static class ZombieManager
         aggressiveComponent.distanceAggressionMultiplier = new AnimationCurve(new Keyframe(0, 1), new Keyframe(1, 0));
         aggressiveComponent.creature = creature;
         aggressiveComponent.targetType = type;
-        var maxHealth = creature.liveMixin.maxHealth;
+        var maxHealth = creature.liveMixin == null ? 30 : creature.liveMixin.maxHealth;
         aggressiveComponent.maxRangeScalar = maxHealth > MediumFishMaxHealth ? 50 : 18;
         aggressiveComponent.ignoreVehicles = maxHealth < MediumFishMaxHealth;
         aggressiveComponent.maxSearchRings = 2;
@@ -265,7 +358,7 @@ public static class ZombieManager
         {
             return;
         }
-        
+
         // Get max health for reference purposes
         var maxHealth = creature.liveMixin.maxHealth;
 
@@ -328,6 +421,7 @@ public static class ZombieManager
         {
             return 0.50f * multiplier;
         }
+
         return 0.30f * multiplier;
     }
 }

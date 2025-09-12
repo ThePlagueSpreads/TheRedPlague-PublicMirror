@@ -18,7 +18,7 @@ public class PlagueRefineryMachine : MonoBehaviour
     private const float InputFallSpeed = 0.08f;
     private const float InputShrinkRate = 0.08f;
     private const float ConveyorBeltMoveSpeed = 0.2f;
-    private const float PowerConsumption = 60;
+    private const float PowerConsumption = 40;
     private const float CraftDurationEstimate = 14;
 
     private static readonly Color[] EffectColors =
@@ -100,7 +100,7 @@ public class PlagueRefineryMachine : MonoBehaviour
                     new List<BucketEntry<TechType>>
                     {
                         new(new[] { ModPrefabs.AmalgamatedBone.TechType, PlagueCatalyst.Info.TechType }, 6),
-                        new(DormantNeuralMatter.Info.TechType, 5),
+                        new(DormantNeuralMatter.Info.TechType, 4),
                         new(ModPrefabs.WarperHeart.TechType, 2),
                         new(new[] { TechType.Silver, TechType.Gold, TechType.Copper }, 4),
                         new(new[] { TechType.AluminumOxide, TechType.Diamond, TechType.Lithium }, 2),

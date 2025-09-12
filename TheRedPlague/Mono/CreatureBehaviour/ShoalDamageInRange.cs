@@ -2,15 +2,27 @@
 
 namespace TheRedPlague.Mono.CreatureBehaviour;
 
-public class ShoalDamageInRange : MonoBehaviour
+public class ShoalDamageInRange : MonoBehaviour, IManagedUpdateBehaviour
 {
     public float damageDistance = 3.3f;
-    public float damageUpdateInterval = 0.5f;
+    public float damageUpdateInterval = 2f;
     public float damage = 1f;
 
     private float _nextCheckTime;
+    
+    public int managedUpdateIndex { get; set; }
 
-    private void Update()
+    private void OnEnable()
+    {
+        BehaviourUpdateUtils.Register(this);
+    }
+
+    private void OnDisable()
+    {
+        BehaviourUpdateUtils.Deregister(this);
+    }
+
+    public void ManagedUpdate()
     {
         if (Time.time < _nextCheckTime) return;
         _nextCheckTime = Time.time + damageUpdateInterval;
@@ -30,5 +42,10 @@ public class ShoalDamageInRange : MonoBehaviour
         }
 
         Player.main.liveMixin.TakeDamage(damage, transform.position, DamageType.Normal, gameObject);
+    }
+
+    public string GetProfileTag()
+    {
+        return "TRP:ShoalDamageInRange";
     }
 }

@@ -15,7 +15,7 @@ public class PlagueDamageStat : MonoBehaviour
 {
     public static PlagueDamageStat main;
 
-    private const float DrainRate = 1f / 32f;
+    private const float DrainRate = 1f / 28f;
     private const float EarlyGameRegenerationRate = 1f / 15f;
     private const float SunlightRegenerationRate = 1f / 60f;
     

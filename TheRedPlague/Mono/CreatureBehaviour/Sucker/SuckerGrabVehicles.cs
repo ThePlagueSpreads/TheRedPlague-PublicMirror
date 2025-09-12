@@ -122,9 +122,15 @@ public class SuckerGrabVehicles : MonoBehaviour, IOnTakeDamage
 
     private void SetCollisionsIgnore(Vehicle vehicle, bool ignore)
     {
-        foreach (var collider in vehicle.collisionModel.GetComponentsInChildren<Collider>())
+        if (vehicle.collisionModel == null) return;
+        foreach (var model in vehicle.collisionModel)
         {
-            Physics.IgnoreCollision(mainCollider, collider, ignore);
+            if (model == null)
+                continue;
+            foreach (var collider in model.GetComponentsInChildren<Collider>())
+            {
+                Physics.IgnoreCollision(mainCollider, collider, ignore);
+            }
         }
     }
 

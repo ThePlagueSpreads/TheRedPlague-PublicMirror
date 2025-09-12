@@ -26,10 +26,10 @@ public static class BoneArmor
         var prefab = new CustomPrefab(Info);
         prefab.SetGameObject(GetPrefab);
         prefab.SetEquipment(EquipmentType.Body);
-        prefab.SetRecipe(new RecipeData(new CraftData.Ingredient(ConsciousNeuralMatter.Info.TechType),
-                new CraftData.Ingredient(ModPrefabs.WarperHeart.TechType),
-                new CraftData.Ingredient(ModPrefabs.AmalgamatedBone.TechType, 6),
-                new CraftData.Ingredient(PlagueIngot.Info.TechType, 3)))
+        prefab.SetRecipe(new RecipeData(new Ingredient(ConsciousNeuralMatter.Info.TechType, 1),
+                new Ingredient(ModPrefabs.WarperHeart.TechType, 1),
+                new Ingredient(ModPrefabs.AmalgamatedBone.TechType, 6),
+                new Ingredient(PlagueIngot.Info.TechType, 3)))
             .WithCraftingTime(16)
             .WithFabricatorType(PlagueAltar.CraftTreeType)
             .WithStepsToFabricatorTab(PlagueAltar.EquipmentTab);

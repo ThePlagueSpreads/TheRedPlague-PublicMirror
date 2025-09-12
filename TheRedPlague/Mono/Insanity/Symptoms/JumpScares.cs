@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Nautilus.Utility;
 using TheRedPlague.Mono.Util;
 using TheRedPlague.Utilities;
@@ -10,17 +11,22 @@ namespace TheRedPlague.Mono.Insanity.Symptoms;
 // har har har har har har har har har har  har har har har har har har har
 public class JumpScares : InsanitySymptom
 {
-    private const float MinDelay = 60 * 5;
-    private const float MaxDelay = 60 * 10;
-    private const float Radius = 40;
-    private const float MinInsanity = 35;
+    private const float MinDelay = 60 * 3;
+    private const float MaxDelay = 60 * 7;
+    private const float Radius = 34;
+    private const float MinInsanity = 20;
     private float _timeSpawnAgain;
 
     private static readonly FMODAsset JumpscareSound = AudioUtils.GetFmodAsset("WarperJumpscare");
+    private static readonly FMODAsset SkeletonAmbience = AudioUtils.GetFmodAsset("SkeletonAmbience");
 
-    private readonly string[] _corpseClassIDs = new[] {"InfectedCorpse", "SkeletonCorpse"};
+    private readonly string[] _corpseClassIDs = {"InfectedCorpse", "SkeletonCorpse"};
 
     public static JumpScares main;
+
+    private GameObject _warpOutEffect;
+
+    private Vector3 _lastSpawnPos;
 
     private void Awake()
     {
@@ -49,12 +55,21 @@ public class JumpScares : InsanitySymptom
         despawn.moveRadius = 35f;
         despawn.disappearWhenLookedAtForTooLong = true;
         despawn.jumpscareWhenTooClose = true;
+        despawn.OnDestroyCallback = OnMutantDestroyed;
         model.AddComponent<Util.LookAtPlayer>();
         if (Player.main.IsInBase())
         {
             model.transform.localScale *= 0.7f;
         }
         return model;
+    }
+
+    private void OnMutantDestroyed()
+    {
+        if (_warpOutEffect != null)
+        {
+            Instantiate(_warpOutEffect, _lastSpawnPos + Vector3.up, Quaternion.identity);
+        }
     }
 
     private IEnumerator SpawnCorpse(Vector3 pos)
@@ -97,6 +112,7 @@ public class JumpScares : InsanitySymptom
         {
             var model = Spawn();
             model.transform.position = jumpscarePosition;
+            _lastSpawnPos = jumpscarePosition;
             var diff = jumpscarePosition - Player.main.transform.position;
             diff.y = 0;
             model.transform.forward = diff.normalized;
@@ -109,12 +125,33 @@ public class JumpScares : InsanitySymptom
             {
                 Utils.PlayFMODAsset(JumpscareSound, jumpscarePosition);
             }
+            else
+            {
+                Utils.PlayFMODAsset(SkeletonAmbience, jumpscarePosition);
+            }
         }
     }
 
     protected override IEnumerator OnLoadAssets()
     {
-        yield break;
+        var warperTask = CraftData.GetPrefabForTechTypeAsync(TechType.Warper);
+        yield return warperTask;
+        var warper = warperTask.GetResult();
+        if (warper == null)
+        {
+            Plugin.Logger.LogWarning("Failed to load warper prefab");
+            yield break;
+        }
+
+        try
+        {
+            var warperComponent = warper.GetComponent<Warper>();
+            _warpOutEffect = warperComponent.warpOutEffectPrefab;
+        }
+        catch (Exception e)
+        {
+            Plugin.Logger.LogError(e);
+        }
     }
 
     protected override void OnActivate()

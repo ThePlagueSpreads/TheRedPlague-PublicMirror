@@ -24,7 +24,7 @@ public static class BiochemicalProtectionSuit
         };
         prefab.SetPdaGroupCategoryAfter(TechGroup.Personal, TechCategory.Equipment, TechType.Compass);
         prefab.SetRecipe(new RecipeData(
-                new CraftData.Ingredient(TechType.ComputerChip), new CraftData.Ingredient(TechType.Silicone, 2)))
+                new Ingredient(TechType.ComputerChip, 1), new Ingredient(TechType.Silicone, 2)))
             .WithFabricatorType(CraftTree.Type.Fabricator)
             .WithCraftingTime(5)
             .WithStepsToFabricatorTab(CraftTreeHandler.Paths.FabricatorEquipment);

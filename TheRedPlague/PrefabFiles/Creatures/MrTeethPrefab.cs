@@ -4,6 +4,7 @@ using ECCLibrary.Data;
 using Nautilus.Assets;
 using TheRedPlague.Mono.CreatureBehaviour.MrTeeth;
 using TheRedPlague.Mono.InfectionLogic;
+using TheRedPlague.Utilities;
 using UnityEngine;
 
 namespace TheRedPlague.PrefabFiles.Creatures;
@@ -39,7 +40,7 @@ public class MrTeethPrefab : CreatureAsset
         attackTrigger.animator = components.Animator;
         attackTrigger.rootObject = prefab;
 
-        prefab.EnsureComponent<RedPlagueHost>().mode = RedPlagueHost.Mode.PlagueCreation;
+        TrpPrefabUtils.AddPlagueCreationComponents(prefab);
 
         foreach (var rb in prefab.GetComponentsInChildren<Rigidbody>())
         {

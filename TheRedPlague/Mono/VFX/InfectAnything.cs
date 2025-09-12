@@ -14,6 +14,9 @@ public class InfectAnything : MonoBehaviour
     public bool infectedAtStart = true;
     public float infectionHeightStrength = 0.1f;
 
+    public bool overrideGlowColor;
+    public Color newGlowColor;
+
     public float infectionAmount = 4;
     public Vector3 infectionScale = Vector3.one;
 
@@ -21,11 +24,14 @@ public class InfectAnything : MonoBehaviour
     public float infectChanceWhenHiveMindIsReleased = 1f;
     
     private const string ShaderKeyWord = "UWE_INFECTION";
+    private const string KelpFXKeyWord = "FX_KELP";
     
     private static readonly int InfectionHeightStrengthParameter = Shader.PropertyToID("_InfectionHeightStrength");
     private static readonly int InfectionScaleParameter = Shader.PropertyToID("_InfectionScale");
 
     public bool isAppliedToPlayer;
+
+    private bool? _hadKelpFx;
 
     private void Start()
     {
@@ -81,13 +87,21 @@ public class InfectAnything : MonoBehaviour
             if (infected)
             {
                 material.EnableKeyword(ShaderKeyWord);
+                _hadKelpFx ??= material.IsKeywordEnabled(KelpFXKeyWord);
+                material.DisableKeyword(KelpFXKeyWord);
                 material.SetTexture(ShaderPropertyID._InfectionAlbedomap, Plugin.ZombieInfectionTexture);
                 material.SetFloat(InfectionHeightStrengthParameter, infectionHeightStrength);
                 material.SetVector(InfectionScaleParameter, infectionScale);
+                if (overrideGlowColor)
+                {
+                    material.SetColor(ShaderPropertyID._GlowColor, newGlowColor);
+                }
             }
             else
             {
                 material.DisableKeyword(ShaderKeyWord);
+                if (_hadKelpFx.HasValue && _hadKelpFx.Value)
+                    material.EnableKeyword(KelpFXKeyWord);
             }
         }
     }

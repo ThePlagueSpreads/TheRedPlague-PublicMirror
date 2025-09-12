@@ -1,4 +1,8 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
+using Nautilus.Handlers;
+using Nautilus.Json;
+using Nautilus.Json.Attributes;
 using UnityEngine;
 using UWE;
 
@@ -10,10 +14,18 @@ public class BlisterbackResourceSpawns : MonoBehaviour
     private readonly Color _barnacleGlowColor = new(10f, 0, 0.7f);
     private readonly Color _plantGlowColor = new(2.4f, 0.1f, 0.1f);
 
+    public PrefabIdentifier identifier;
     public Transform spawnPointsParent;
 
     public float baseSpawnRate = 0.4f;
     public float minNoiseValueToSpawn = 0.32f;
+
+    private static SaveData _saveData;
+
+    internal static void RegisterSaveData()
+    {
+        _saveData = SaveDataHandler.RegisterSaveDataCache<SaveData>();
+    }
 
     private readonly NoiseSettings _availableSpawnSlotsNoiseSettings = new()
     {
@@ -61,7 +73,34 @@ public class BlisterbackResourceSpawns : MonoBehaviour
 
     private IEnumerator Start()
     {
+        if (_saveData != null)
+        {
+            if (_saveData.spawnedReefbacks == null)
+            {
+                _saveData.spawnedReefbacks = new HashSet<string>();
+            }
+            else if (_saveData.spawnedReefbacks.Contains(GetId()))
+            {
+                FixExistingPlants();
+                yield break;
+            }
+            _saveData.spawnedReefbacks.Add(GetId());
+        }
+        
         yield return SpawnCoroutine();
+    }
+
+    private void FixExistingPlants()
+    {
+        foreach (Transform child in spawnPointsParent)
+        {
+            SetUpPlant(child.gameObject);
+        }
+    }
+
+    private string GetId()
+    {
+        return identifier.Id;
     }
 
     private IEnumerator SpawnCoroutine()
@@ -77,6 +116,7 @@ public class BlisterbackResourceSpawns : MonoBehaviour
             _prefabs[i] = prefab;
         }
 
+        var toReparent = new List<GameObject>();
         foreach (Transform child in spawnPointsParent)
         {
             if (!ShouldSlotSpawn(child))
@@ -99,22 +139,44 @@ public class BlisterbackResourceSpawns : MonoBehaviour
                 spawned.transform.Rotate(Vector3.up, Random.value * 360, Space.Self);
             }
 
-            if (spawned.TryGetComponent<SkyApplier>(out var sa) && sa.renderers != null)
+            SetUpPlant(spawned);
+            
+            toReparent.Add(spawned);
+        }
+
+        foreach (var reparent in toReparent)
+        {
+            reparent.transform.SetParent(spawnPointsParent, true);
+            reparent.SetActive(true);
+        }
+    }
+
+    private void SetUpPlant(GameObject plant)
+    {
+        var largeWorldEntity = plant.GetComponent<LargeWorldEntity>();
+        if (largeWorldEntity == null)
+        {
+            return;
+        }
+        
+        largeWorldEntity.enabled = false;
+
+        if (plant.TryGetComponent<SkyApplier>(out var sa) && sa.renderers != null)
+        {
+            foreach (var renderer in sa.renderers)
             {
-                foreach (var renderer in sa.renderers)
+                if (renderer.gameObject.name == "Crystal")
+                    continue;
+                var material = renderer.material;
+                if (material.HasProperty(ShaderPropertyID._GlowColor))
                 {
-                    var material = renderer.material;
-                    if (material.HasProperty(ShaderPropertyID._GlowColor))
-                    {
-                        material.SetColor(ShaderPropertyID._GlowColor,
-                            material.name.Contains("barnacle") ? _barnacleGlowColor : _plantGlowColor);
-                    }
+                    material.SetColor(ShaderPropertyID._GlowColor,
+                        material.name.Contains("barnacle") ? _barnacleGlowColor : _plantGlowColor);
                 }
             }
-
-            spawned.AddComponent<ReefbackPlant>();
-            spawned.SetActive(true);
         }
+
+        plant.AddComponent<ReefbackPlant>();
     }
 
     private float EvaluateNoiseAtPosition(NoiseSettings settings, Vector3 position)
@@ -148,5 +210,11 @@ public class BlisterbackResourceSpawns : MonoBehaviour
         public float Min { get; init; } = 0f;
         public float Max { get; init; } = 1f;
         public float SeedOffset { get; init; }
+    }
+
+    [FileName("BlisterbackResourceSpawns")]
+    private class SaveData : SaveDataCache
+    {
+        public HashSet<string> spawnedReefbacks;
     }
 }

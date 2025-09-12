@@ -20,12 +20,11 @@ public class InsanityManager : MonoBehaviour
 
     private static readonly Dictionary<string, float> BiomeInfectionPercentages = new()
     {
-        { "skyisland", 30f },
         { "dunes", 40f },
         { "mazebase", 50f },
         { "shrinebase_hallway", 55f },
-        { "shrinebase_mainroom", 65f },
-        { "fleshcave_upper", 60f },
+        { "shrinebase_mainroom", 55f },
+        { "fleshcave_upper", 55f },
         { "fleshcave_chamber", 60f },
         { "crashedShip", 10f }
     };
@@ -120,9 +119,17 @@ public class InsanityManager : MonoBehaviour
     {
         if (PlagueDamageStat.main == null) return 0;
         if (!Plugin.Options.EnableInsanityInCreative && GameModeUtils.IsInvisible()) return 0;
-        if (InsanityDeterrenceZone.GetIsInZoneOfDeterrence(Player.main.transform.position, Player.main.IsInBase()))
-            return 0;
-        return PlagueDamageStat.main.InfectionPercent + GetBiomeInsanityPercentage();
+        if (Player.main.IsFrozenStats()) return 0;
+        var baseInsanityValue = PlagueDamageStat.main.InfectionPercent + GetBiomeInsanityPercentage();
+        
+        if (InsanityOverrideZone.TryGetZone(Player.main.transform.position, Player.main.IsInBase(),
+                out var overrideValue))
+        {
+            if (overrideValue == 0f) return 0;
+            return Mathf.Max(baseInsanityValue, overrideValue);
+        }
+
+        return baseInsanityValue;
     }
 
     // Range of 0 to 100

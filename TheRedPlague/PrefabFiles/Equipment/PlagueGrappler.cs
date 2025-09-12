@@ -28,9 +28,9 @@ public static class PlagueGrappler
         var prefab = new CustomPrefab(Info);
         prefab.SetGameObject(GetPrefab);
         prefab.SetPdaGroupCategory(CustomTechCategories.PlagueBiotechGroup, CustomTechCategories.PlagueBiotechCategory);
-        prefab.SetRecipe(new RecipeData(new CraftData.Ingredient(TechType.Titanium, 2),
-                new CraftData.Ingredient(TechType.WiringKit),
-                new CraftData.Ingredient(PlagueIngot.Info.TechType, 4)))
+        prefab.SetRecipe(new RecipeData(new Ingredient(TechType.Titanium, 2),
+                new Ingredient(TechType.WiringKit, 1),
+                new Ingredient(PlagueIngot.Info.TechType, 4)))
             .WithCraftingTime(7)
             .WithFabricatorType(PlagueAltar.CraftTreeType)
             .WithStepsToFabricatorTab(PlagueAltar.EquipmentTab);

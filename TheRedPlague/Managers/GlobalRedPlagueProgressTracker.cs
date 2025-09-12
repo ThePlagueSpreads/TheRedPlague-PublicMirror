@@ -38,6 +38,7 @@ public static class GlobalRedPlagueProgressTracker
     {
         NewSave,
         DomeConstructed,
-        InitialChecklistMissionsCompleted
+        InitialChecklistMissionsCompleted,
+        HiveMindReleased
     }
 }

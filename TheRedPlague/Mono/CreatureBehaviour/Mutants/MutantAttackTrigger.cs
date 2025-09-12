@@ -1,5 +1,6 @@
 ﻿using Nautilus.Utility;
 using TheRedPlague.PrefabFiles.Creatures;
+using TheRedPlague.Utilities;
 using UnityEngine;
 
 namespace TheRedPlague.Mono.CreatureBehaviour.Mutants;
@@ -10,7 +11,8 @@ public class MutantAttackTrigger : MonoBehaviour
     public Mutant.Settings settings;
     public float damage;
     public float instantKillChance = 0.1f;
-    public float attackDelay = 1f;
+    public float attackDelay = 8f;
+    public LiveMixin liveMixin;
 
     private GameObject _model;
     private float _timeCanAttackAgain;
@@ -31,6 +33,8 @@ public class MutantAttackTrigger : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (Time.time < _timeCanAttackAgain) return;
+        if (liveMixin != null && !liveMixin.IsAlive())
+            return;
         var player = GetTarget(other).GetComponent<Player>();
         if (player == null)
         {
@@ -42,6 +46,9 @@ public class MutantAttackTrigger : MonoBehaviour
 
     private void DamagePlayer(Player player)
     {
+        if (PreventSavingUtils.GetSavingIsDisabled())
+            return;
+        
         var calculatedDamage = DamageSystem.CalculateDamage(damage, DamageType.Normal, player.gameObject);
         if (calculatedDamage >= player.liveMixin.health && !Plugin.Options.DisableJumpScares)
         {

@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 namespace TheRedPlague.Mono.Buildables.Shuttle;
 
-public class ShuttlePadBehavior : MonoBehaviour
+public class ShuttlePadBehavior : MonoBehaviour, IScheduledUpdateBehaviour
 {
     public ShuttlePadStorageContainer container;
     public GameObject shuttlePrefab;
@@ -33,6 +33,8 @@ public class ShuttlePadBehavior : MonoBehaviour
     private bool _warnedPlayer;
 
     public bool IsShuttleActive { get; private set; }
+    
+    public int scheduledUpdateIndex { get; set; }
 
     private void Awake()
     {
@@ -45,6 +47,16 @@ public class ShuttlePadBehavior : MonoBehaviour
             MysteriousRemains.Info.TechType,
             PlagueIngot.Info.TechType
         };
+    }
+
+    private void OnEnable()
+    {
+        UpdateSchedulerUtils.Register(this);
+    }
+
+    private void OnDisable()
+    {
+        UpdateSchedulerUtils.Deregister(this);
     }
 
     public void PlayShuttleAnimation(ShuttlePath path)
@@ -269,7 +281,12 @@ public class ShuttlePadBehavior : MonoBehaviour
         Destroy(_currentShuttle);
     }
 
-    private void Update()
+    public string GetProfileTag()
+    {
+        return "TRP:ShuttlePadBehaviour";
+    }
+
+    public void ScheduledUpdate()
     {
         if (IsShuttleActive && _currentShuttle == null)
         {

@@ -13,6 +13,7 @@ using TheRedPlague.Mono.CreatureBehaviour;
 using TheRedPlague.Mono.InfectionLogic;
 using TheRedPlague.PrefabFiles.Buildable;
 using TheRedPlague.PrefabFiles.Items;
+using TheRedPlague.Utilities;
 using TheRedPlague.Utilities.Gadgets;
 using UnityEngine;
 
@@ -27,9 +28,9 @@ public class Gilbert : CreatureAsset
     {
         CustomPrefab.SetPdaGroupCategory(CustomTechCategories.PlagueBiotechGroup,
             CustomTechCategories.PlagueBiotechCategory);
-        CustomPrefab.SetRecipe(new RecipeData(new CraftData.Ingredient(ConsciousNeuralMatter.Info.TechType),
-                new CraftData.Ingredient(PlagueIngot.Info.TechType, 2),
-                new CraftData.Ingredient(BloodQuartz.Info.TechType)))
+        CustomPrefab.SetRecipe(new RecipeData(new Ingredient(ConsciousNeuralMatter.Info.TechType, 1),
+                new Ingredient(PlagueIngot.Info.TechType, 2),
+                new Ingredient(BloodQuartz.Info.TechType, 1)))
             .WithFabricatorType(PlagueAltar.CraftTreeType)
             .WithStepsToFabricatorTab(PlagueAltar.PetsTab)
             .WithCraftingTime(15);
@@ -59,7 +60,7 @@ public class Gilbert : CreatureAsset
 
     protected override IEnumerator ModifyPrefab(GameObject prefab, CreatureComponents components)
     {
-        prefab.AddComponent<RedPlagueHost>().mode = RedPlagueHost.Mode.PlagueCreation;
+        TrpPrefabUtils.AddPlagueCreationComponents(prefab).invalidTarget = true;
 
         var meleeAttack = CreaturePrefabUtils.AddMeleeAttack<MeleeAttack>(prefab, components,
             prefab.transform.Find("WorldModel/BiteTrigger").gameObject, true, 33f, 1f);

@@ -133,7 +133,6 @@ public class PlagueCyclopsIslandWreckPrefab
         sucker.transform.localPosition = pos;
         sucker.transform.localEulerAngles = angles;
         sucker.transform.localScale = scale;
-        sucker.transform.Find("BlockTriggers").gameObject.SetActive(false);
         Object.DestroyImmediate(sucker.GetComponent<LargeWorldEntity>());
     }
 

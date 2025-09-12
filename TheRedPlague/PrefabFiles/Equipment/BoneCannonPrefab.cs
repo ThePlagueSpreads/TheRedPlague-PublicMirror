@@ -24,9 +24,9 @@ public static class BoneCannonPrefab
         var prefab = new CustomPrefab(Info);
         prefab.SetGameObject(GetPrefabAsync);
         prefab.SetEquipment(EquipmentType.Hand);
-        prefab.SetRecipe(new RecipeData(new CraftData.Ingredient(PlagueIngot.Info.TechType, 3),
-                new CraftData.Ingredient(ModPrefabs.AmalgamatedBone.TechType),
-                new CraftData.Ingredient(TechType.Benzene)))
+        prefab.SetRecipe(new RecipeData(new Ingredient(PlagueIngot.Info.TechType, 3),
+                new Ingredient(ModPrefabs.AmalgamatedBone.TechType, 1),
+                new Ingredient(TechType.Benzene, 1)))
             .WithCraftingTime(10)
             .WithFabricatorType(PlagueAltar.CraftTreeType)
             .WithStepsToFabricatorTab(PlagueAltar.EquipmentTab);

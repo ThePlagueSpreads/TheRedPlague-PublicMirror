@@ -1,18 +1,22 @@
 ﻿using UnityEngine;
 using WorldHeightLib;
+using Random = UnityEngine.Random;
 
 namespace TheRedPlague.Mono.Util;
 
-public class WalkerBehavior : MonoBehaviour
+public class WalkerBehavior : MonoBehaviour, IManagedUpdateBehaviour
 {
     public float maxHeightUpdateDelay;
+
     public float horizontalMoveSpeed;
+
     // If negative, moves vertically instantly
     public float maxVerticalMoveSpeed;
     public float upwardsNormalFactor = 1f;
     public float rotateSpeed = 0.4f;
     public float depth;
     public float angleOffset;
+    public float horizontalAccelerationMultiplier = 1f;
 
     private float _timeUpdateHeightAgain;
 
@@ -21,6 +25,10 @@ public class WalkerBehavior : MonoBehaviour
 
     private Vector3 _targetPosition;
 
+    public int managedUpdateIndex { get; set; }
+
+    private float _horizontalVelocityScalar;
+
     private void Start()
     {
         _currentHeight = transform.position.y;
@@ -28,7 +36,17 @@ public class WalkerBehavior : MonoBehaviour
         _timeUpdateHeightAgain = Time.time + _timeUpdateHeightAgain * Random.value;
     }
 
-    private void Update()
+    private void OnEnable()
+    {
+        BehaviourUpdateUtils.Register(this);
+    }
+
+    private void OnDisable()
+    {
+        BehaviourUpdateUtils.Deregister(this);
+    }
+
+    public void ManagedUpdate()
     {
         if (Time.time >= _timeUpdateHeightAgain)
         {
@@ -36,15 +54,20 @@ public class WalkerBehavior : MonoBehaviour
             _timeUpdateHeightAgain = Time.time + maxHeightUpdateDelay;
         }
 
-        var newX = Mathf.MoveTowards(transform.position.x, _targetPosition.x, Time.deltaTime * horizontalMoveSpeed);
-        var newZ = Mathf.MoveTowards(transform.position.z, _targetPosition.z, Time.deltaTime * horizontalMoveSpeed);
+        _horizontalVelocityScalar = Mathf.Clamp01(_horizontalVelocityScalar + horizontalAccelerationMultiplier *
+            Time.deltaTime * (Vector3.SqrMagnitude(transform.position - _targetPosition) < 1f ? -1f : 1f));
+
+        var newX = Mathf.MoveTowards(transform.position.x, _targetPosition.x,
+            Time.deltaTime * _horizontalVelocityScalar * horizontalMoveSpeed);
+        var newZ = Mathf.MoveTowards(transform.position.z, _targetPosition.z,
+            Time.deltaTime * _horizontalVelocityScalar * horizontalMoveSpeed);
 
         var newY = maxVerticalMoveSpeed < 0
             ? _currentHeight
             : Mathf.MoveTowards(transform.position.y, _currentHeight, Time.deltaTime * maxVerticalMoveSpeed);
 
         transform.position = new Vector3(newX, newY, newZ);
-        
+
         var up = Vector3.Slerp(transform.up, _currentSurfaceNormal, Time.deltaTime * rotateSpeed);
         transform.up = up;
         transform.Rotate(Vector3.up, angleOffset, Space.Self);
@@ -63,5 +86,10 @@ public class WalkerBehavior : MonoBehaviour
         _currentSurfaceNormal = NormalMap.Instance.TryGetValueAtPosition(pos, out var normal)
             ? (normal + new Vector3(0, upwardsNormalFactor, 0)).normalized
             : Vector3.up;
+    }
+
+    public string GetProfileTag()
+    {
+        return "TRP:WalkerBehaviour";
     }
 }

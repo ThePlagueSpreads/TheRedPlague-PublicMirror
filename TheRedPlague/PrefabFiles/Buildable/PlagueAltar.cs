@@ -37,9 +37,9 @@ public static class PlagueAltar
         prefab.SetGameObject(CreatePrefab);
         prefab.SetPdaGroupCategoryAfter(TechGroup.InteriorModules, TechCategory.InteriorModule, TechType.Workbench);
         prefab.SetRecipe(new RecipeData(
-            new CraftData.Ingredient(PlagueIngot.Info.TechType, 3),
-            new CraftData.Ingredient(RedPlagueSample.Info.TechType),
-            new CraftData.Ingredient(ModPrefabs.AmalgamatedBone.TechType)));
+            new Ingredient(PlagueIngot.Info.TechType, 3),
+            new Ingredient(RedPlagueSample.Info.TechType, 1),
+            new Ingredient(ModPrefabs.AmalgamatedBone.TechType, 1)));
         prefab.SetBackgroundType(CustomBackgroundTypes.PlagueItem);
         prefab.Register();
         
@@ -68,7 +68,7 @@ public static class PlagueAltar
         var prefab = Object.Instantiate(Plugin.AssetBundle.LoadAsset<GameObject>("PlagueAltar_Prefab"));
         prefab.SetActive(false);
         PrefabUtils.AddBasicComponents(prefab, Info.ClassID, Info.TechType, LargeWorldEntity.CellLevel.Global);
-        MaterialUtils.ApplySNShaders(prefab, 7, 1, 1, new PlagueAltarMaterialModifier(),
+        MaterialUtils.ApplySNShaders(prefab, 6, 1, 1, new PlagueAltarMaterialModifier(),
             new IgnoreParticleSystemsModifier());
         var modelParent = prefab.transform.Find("Plague Altar Animated");
         PrefabUtils.AddConstructable(prefab, Info.TechType,
@@ -183,9 +183,14 @@ public static class PlagueAltar
         public override void EditMaterial(Material material, Renderer renderer, int materialIndex,
             MaterialUtils.MaterialType materialType)
         {
-            if (renderer.gameObject.name.ToLower().Contains("eye"))
+            var rendererName = renderer.gameObject.name.ToLower();
+            if (rendererName.Contains("eye"))
             {
                 material.SetColor(ShaderPropertyID._GlowColor, new Color(0.5f, 0.5f, 0.5f));
+            }
+            else if (rendererName.Contains("body"))
+            {
+                material.color = new Color(0.7f, 1, 1);
             }
         }
 

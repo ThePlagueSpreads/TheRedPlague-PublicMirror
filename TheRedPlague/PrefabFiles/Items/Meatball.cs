@@ -20,7 +20,7 @@ public class Meatball : CreatureAsset
 {
     public Meatball(PrefabInfo prefabInfo) : base(prefabInfo)
     {
-        CustomPrefab.SetRecipe(new RecipeData(new CraftData.Ingredient(RedPlagueSample.Info.TechType, 2)))
+        CustomPrefab.SetRecipe(new RecipeData(new Ingredient(RedPlagueSample.Info.TechType, 2)))
             .WithCraftingTime(3.5f)
             .WithFabricatorType(CraftTree.Type.Fabricator)
             .WithStepsToFabricatorTab(CraftTreeHandler.Paths.FabricatorMachines);
@@ -40,8 +40,8 @@ public class Meatball : CreatureAsset
         PrefabUtils.AddBasicComponents(meatballPackTemplate.Prefab, meatballPack.Info.ClassID, meatballPack.Info.TechType, LargeWorldEntity.CellLevel.Near);
         PrefabUtils.AddVFXFabricating(meatballPackTemplate.Prefab,
             "CraftModel", -0.25f, 0.5f, default, 0.5f);
-        meatballPack.SetRecipe(new RecipeData(new CraftData.Ingredient(RedPlagueSample.Info.TechType, 2),
-                new CraftData.Ingredient(PlagueCatalyst.Info.TechType))
+        meatballPack.SetRecipe(new RecipeData(new Ingredient(RedPlagueSample.Info.TechType, 2),
+                new Ingredient(PlagueCatalyst.Info.TechType, 1))
             {
                 LinkedItems = new List<TechType> { prefabInfo.TechType, prefabInfo.TechType, prefabInfo.TechType },
                 craftAmount = 0

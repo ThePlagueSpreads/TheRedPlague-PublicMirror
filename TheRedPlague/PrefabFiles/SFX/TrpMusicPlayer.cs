@@ -1,4 +1,5 @@
-﻿using Nautilus.Assets;
+﻿using System;
+using Nautilus.Assets;
 using Nautilus.Utility;
 using TheRedPlague.Mono.SFX;
 using UnityEngine;
@@ -12,6 +13,7 @@ public class TrpMusicPlayer
     private string EventName { get; }
     private float StartDistance { get; }
     private float EndDistance { get; }
+    public Action<GameObject> ModifyPrefab { get; init; }
 
     public TrpMusicPlayer(string classId, LargeWorldEntity.CellLevel cellLevel, string eventName, float startDistance, float endDistance)
     {
@@ -47,6 +49,7 @@ public class TrpMusicPlayer
         player.startRange = StartDistance;
         player.endRange = EndDistance;
         player.emitter = emitter;
+        ModifyPrefab?.Invoke(obj);
         return obj;
     }
 }

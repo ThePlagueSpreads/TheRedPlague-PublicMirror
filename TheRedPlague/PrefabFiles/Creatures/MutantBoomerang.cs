@@ -7,6 +7,7 @@ using Nautilus.Utility;
 using TheRedPlague.Data;
 using TheRedPlague.Managers;
 using TheRedPlague.Mono.InfectionLogic;
+using TheRedPlague.Utilities;
 using UnityEngine;
 
 namespace TheRedPlague.PrefabFiles.Creatures;
@@ -47,7 +48,7 @@ public class MutantBoomerang : CreatureAsset
 
     protected override IEnumerator ModifyPrefab(GameObject prefab, CreatureComponents components)
     {
-        prefab.AddComponent<RedPlagueHost>().mode = RedPlagueHost.Mode.PlagueCreation;
+        TrpPrefabUtils.AddPlagueCreationComponents(prefab);
 
         var meleeAttack = CreaturePrefabUtils.AddMeleeAttack<MeleeAttack>(prefab, components,
             prefab.transform.Find("BiteTrigger").gameObject, true, 13f, 10f, false);

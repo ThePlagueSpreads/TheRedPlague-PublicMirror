@@ -14,10 +14,14 @@ public class FleshBlockPrefab
     private static readonly TextureSet[] TextureSets =
     {
         new("Cysts"),
-        new("Eyes", m => { m.SetFloat(SideScale, 0.08f); },
+        new("Eyes", m =>
+            {
+                m.SetFloat(SideScale, 0.3f); 
+                m.SetFloat(ShaderPropertyID._Gloss, 0.7f);
+            },
             m =>
             {
-                m.SetFloat(CapScale, 0.08f);
+                m.SetFloat(CapScale, 0.3f);
                 m.SetFloat(CapBorderBlendRange, 1f);
                 m.SetFloat(CapBorderBlendOffset, -0.716f);
                 m.SetFloat(CapBorderBlendAngle, 2.658f);
@@ -26,7 +30,7 @@ public class FleshBlockPrefab
         new("Pustules", m => { m.SetFloat(SideScale, 0.5f); },
             m => { m.SetFloat(CapScale, 0.5f); }),
         new("Skin", m => { m.SetFloat(SideScale, 0.06f); },
-            m => { m.SetFloat(CapScale, 0.06f); })
+            m => { m.SetFloat(CapScale, 0.08f); })
     };
 
     // Shader property IDs
@@ -82,6 +86,7 @@ public class FleshBlockPrefab
                 material.SetTexture(SideTexture, _side.Diffuse);
                 material.SetTexture(SideBumpMap, _side.Normal);
                 material.SetTexture(SideSIGMap, _side.Sig);
+                material.SetFloat(ShaderPropertyID._Gloss, 0.4f);
                 if (_cap != null)
                 {
                     material.SetTexture(CapTexture, _cap.Diffuse);

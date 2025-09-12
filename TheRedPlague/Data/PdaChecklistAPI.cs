@@ -16,11 +16,21 @@ public static class PdaChecklistAPI
     internal static void RegisterTrpEntries()
     {
         RegisterChecklistEntry(new ChecklistEntry(StoryUtils.OfferingToThePlagueMission.key,
-            StoryUtils.ScanPlagueAltarGoal.key));
+            StoryUtils.ScanPlagueAltarGoal.key)
+        {
+            AlmostCompletedMessage = new AlmostCompletedMessageData(StoryUtils.MazeBaseDiscoveryGoal.key)
+        });
         RegisterChecklistEntry(new ChecklistEntry(StoryUtils.MrTeethMission.key,
-            StoryUtils.UnlockPlagueGrapplerGoal.key));
+            StoryUtils.UnlockPlagueGrapplerGoal.key)
+        {
+            AlmostCompletedMessage = new AlmostCompletedMessageData(StoryUtils.DriveCoreHallwayGoal.key)
+        });
         RegisterChecklistEntry(new ChecklistEntry(StoryUtils.JohnKyleMission.key,
-            StoryUtils.UnlockPlagueArmorGoal.key));
+            StoryUtils.UnlockPlagueArmorGoal.key)
+        {
+            // "PlagueArmorCommentary" is the cyclops wreck PDA goal name
+            AlmostCompletedMessage = new AlmostCompletedMessageData("PlagueArmorCommentary")
+        });
         RegisterChecklistEntry(new ChecklistEntry(StoryUtils.PlagueResearchMission.key,
             StoryUtils.GetStoryGoalKeyForShuttleDelivery(ModPrefabs.AmalgamatedBone.ClassID),
             StoryUtils.GetStoryGoalKeyForShuttleDelivery(ModPrefabs.WarperHeart.ClassID),
@@ -123,6 +133,13 @@ public static class PdaChecklistAPI
         return true;
     }
 
+    public static bool IsEntryAlmostCompleted(ChecklistEntry entry)
+    {
+        if (string.IsNullOrEmpty(entry.AlmostCompletedMessage.RequiredStoryGoal))
+            return false;
+        return StoryGoalManager.main.IsGoalComplete(entry.AlmostCompletedMessage.RequiredStoryGoal);
+    }
+
     public static IReadOnlyCollection<ChecklistEntry> GetChecklistEntries() => Entries.Values;
 
     public readonly struct ChecklistEntry
@@ -132,6 +149,7 @@ public static class PdaChecklistAPI
         public string[] RequiredGoals { get; init; }
         public FormatChecklistEntryHandler FormatHandler { get; init; }
         public CustomEntryRequirementsHandler CustomEntryRequirementsHandler { get; init; }
+        public AlmostCompletedMessageData AlmostCompletedMessage { get; init; }
 
         public ChecklistEntry(string key, params string[] requiredGoals)
         {
@@ -147,5 +165,16 @@ public static class PdaChecklistAPI
 
         public string GetNameLanguageKey => "Checklist_" + Key;
         public string GetDescLanguageKey => "ChecklistDesc_" + Key;
+        public string GetAlmostCompletedDescLanguageKey => "ChecklistAlmostCompleted_" + Key;
+    }
+
+    public struct AlmostCompletedMessageData
+    {
+        public string RequiredStoryGoal { get; init; }
+
+        public AlmostCompletedMessageData(string requiredStoryGoal)
+        {
+            RequiredStoryGoal = requiredStoryGoal;
+        }
     }
 }
