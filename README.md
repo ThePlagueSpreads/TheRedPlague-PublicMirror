@@ -7,4 +7,4 @@ Mod page: https://www.nexusmods.com/subnautica/mods/1820
 
 # Permission
 
-You have permission to utilize source code from this repository in your own Subnautica modding projects. Please do not use my work in any other context, and do NOT feed it into any AI model.
+You have permission to utilize source code from this repository in your own Subnautica modding projects. Please do not use my work in any other context, and do NOT use it in any AI-generated mods.
