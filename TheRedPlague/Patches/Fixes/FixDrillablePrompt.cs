@@ -1,5 +1,5 @@
 ﻿using HarmonyLib;
-using TheRedPlague.PrefabFiles.UpgradeModules;
+using TheRedPlague.Content.UpgradeModules;
 
 namespace TheRedPlague.Patches.Fixes;
 

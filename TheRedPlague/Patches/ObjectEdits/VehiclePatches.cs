@@ -1,5 +1,5 @@
 ﻿using HarmonyLib;
-using TheRedPlague.Mono.CreatureBehaviour.Sucker;
+using TheRedPlague.Content.Creatures.Sucker;
 
 namespace TheRedPlague.Patches.ObjectEdits;
 

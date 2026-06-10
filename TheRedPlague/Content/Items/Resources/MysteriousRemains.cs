@@ -1,0 +1,54 @@
+﻿using System.Collections;
+using Nautilus.Assets;
+using Nautilus.Utility;
+using TheRedPlague.Content.Buildables.PlagueRefinery;
+using TheRedPlague.Framework.Behaviour.Deletion;
+using TheRedPlague.Framework.Gadgets;
+using UnityEngine;
+
+namespace TheRedPlague.Content.Items.Resources;
+
+[PrefabClass]
+public static class MysteriousRemains
+{
+    public static PrefabInfo Info { get; } = PrefabInfo.WithTechType("MysteriousRemains")
+        .WithIcon(AssetBundles.Core.LoadAsset<Sprite>("MysteriousRemainsIcon"));
+
+    [PrefabRegistration]
+    private static void Register()
+    {
+        var prefab = new CustomPrefab(Info);
+        prefab.SetGameObject(GetGameObject);
+        prefab.SetBackgroundType(CustomBackgroundTypes.PlagueItem);
+        prefab.Register();
+        
+        PlagueRefinery.RegisterPlagueRefineryRecipe(Info.TechType);
+
+        BaseBioReactor.charge[Info.TechType] = 400;
+    }
+
+    private static IEnumerator GetGameObject(IOut<GameObject> prefab)
+    {
+        var obj = Object.Instantiate(AssetBundles.Core.LoadAsset<GameObject>("MysteriousRemainsPrefab"));
+        obj.SetActive(false);
+        PrefabUtils.AddBasicComponents(obj, Info.ClassID, Info.TechType, LargeWorldEntity.CellLevel.Near);
+        MaterialUtils.ApplySNShaders(obj, 6f);
+        PrefabUtils.AddWorldForces(obj, 20, isKinematic: true);
+        PrefabUtils.AddResourceTracker(obj, Info.TechType);
+        obj.AddComponent<Pickupable>();
+        var peeperTask = CraftData.GetPrefabForTechTypeAsync(TechType.Peeper);
+        yield return peeperTask;
+        var peeper = peeperTask.GetResult();
+        var peeperMaterial = new Material(peeper.transform.Find("model/peeper/aqua_bird/peeper").gameObject
+            .GetComponent<Renderer>().sharedMaterials[1]);
+        foreach (var renderer in obj.GetComponentsInChildren<Renderer>(true))
+        {
+            var materials = renderer.materials;
+            materials[3] = peeperMaterial;
+            renderer.materials = materials;
+        }
+
+        obj.AddComponent<DestroyWhenAtOrigin>();
+        prefab.Set(obj);
+    }
+}

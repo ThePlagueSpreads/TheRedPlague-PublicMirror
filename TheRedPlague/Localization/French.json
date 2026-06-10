@@ -1,0 +1,659 @@
+{
+    "RedPlagueTitleScreenName": "The Red Plague",
+    "RedPlagueSocialsText": "Join the hivemind...",
+    "RedPlagueDiscordText": "TRP Discord Server",
+    "RedPlaguePatreonText": "TRP Patreon Account",
+    "RedPlagueYouTubeText": "TRP YouTube Channel",
+    
+    "PlagueEquipment": "Équimement organique",
+    "TechCategoryPlagueBiotech": "Biotechnologie de la peste",
+    "TechGroupPlagueBiotech": "Biotechnologie de la peste",
+    "DeadSeaEmperor": "Sea Emperor malade",
+    
+    "TrpMachineInsufficientPower": "Puissance insuffisante (requière {0} énergie)",
+    "TrpMachineNotEnoughItems": "Ingrédients manquants!",
+
+    "WarperHeart": "<color=#8f57ff>Cœur de Warper</color>",
+    "Tooltip_WarperHeart": "Coeur bio-mécanique d'un Warper. Bien qu'instable à cause de l'infection, son pouvoir peut être utilisé à des fins personnelles.",
+
+    "AmalgamatedBone": "Amas osseux",
+    "Tooltip_AmalgamatedBone": "Restes de squelette d'une créature lourdement infectée. Contrairement aux autres matériaux organiques, cet os est capable de résister aux effets de la peste. On peut le trouver dans les fonds marins des zones fortement infectées.",
+    "HarvestableAmalgamatedBone": "Amas squelettique",
+    
+    "PlagueHeart": "Cœur de la peste",
+    "Tooltip_PlagueHeart": "GRAVITÉ DE LA MALADIE : MORTELLE. TROUVER UN REMÈDE LE PLUS RAPIDEMENT POSSIBLE.",
+    
+    "PlagueResource": "Catalyste de la peste",
+    "Tooltip_PlagueResource": "Un cristal d'origine organique qui nourrit et fait grandir de nouvelles cellules de peste à une cadence alarmante. Peut-être cultivé pour la neutralisation.",
+    
+    "PlagueIngot": "Lingot de chair neutralisé",
+    "Tooltip_PlagueIngot": "Un lingot de chair non-infectieux, toujours utile pour ses propriétés uniques de manipulation de la matière et d'auto-réplication.",
+    
+    "Meatball": "Boule de viande",
+    "Tooltip_Meatball": "Possède une certaine odeur qui attire les créatures assoiffées de sang quand elle est lâche. Dense en énergie.",
+    "MeatballPack": "Boule de viande (x3)",
+    "Tooltip_MeatballPack": "Possède une certaine odeur qui attire les créatures assoiffées de sang quand elle est lâche. Dense en énergie.",
+
+    "DormantNeuralMatter": "Matière neuronale en dormance",
+    "Tooltip_DormantNeuralMatter": "Une matière anormale issue de la peste, inactive et tout de même complexe, composée de formations cellulaires comparables à des neurones. En d'autres mots, un cerveau.",
+
+    "ConsciousNeuralMatter": "Matière neuronale consciente",
+    "Tooltip_ConsciousNeuralMatter": "Une manifestation vivante de la Peste Rouge. Probablement en perpétuelle crise existentielle et actuellement en train de vous étudier. Peut servir de compagnon si relâché.",
+
+    "MeatShroom": "Champi-viande",
+    "Tooltip_MeatShroom": "C'est sans risque à la consommation, d'une manière ou d'une autre. La peste a l'air d'apprendre à créer des écosystèmes équilibrés.",
+    
+    "MysteriousRemains": "Restes mystérieux",
+    "Tooltip_MysteriousRemains": "Restes semi-digérés de diverses formes de vie, certaines non identifiables. Peut contenir des ressources utiles.",
+    
+    "BloodQuartz": "Quartz sanguin",
+    "Tooltip_BloodQuartz": "Silice condensée en cristal qui a subi une réaction unique, résultant en une coloration d'un profond rouge.",
+    "BloodToNormalQuartz": "Quartz (2x)",
+    "Tooltip_BloodToNormalQuartz": "Quartz sanguin purifié en quarts normal",
+    
+    "Obsidian": "Obsidienne",
+    "Tooltip_Obsidian": "Une sombre pierre volcanique, formée par le refroidissement rapide de lave.",
+    
+    "ConcentratedEnzymeContainer": "Enzyme 42 concentrée",
+    "Tooltip_ConcentratedEnzymeContainer": "Un conteneur d'enzyme 42 concentré, prêt à être placé dans une machine pour une distribution massive.",
+
+    "InfectedEnzyme": "Enzyme 42 impure",
+    "Tooltip_InfectedEnzyme": "Une petite concentration d'enzyme 42. Elle n'est pas très utile tant qu'elle n'est pas transformée en solution concentrée.",
+
+    "InfectionTracker": "Appareil de suivi PN-CA",
+    "Tooltip_InfectionTracker": "Un appareil léger avec des circuits élaborés en forme de labyrinthe qui a pour but de localiser le coeur de la Peste. Bannie des fabricateurs standards.",
+    
+    "SatelliteCommunicationDevice": "Appareil de communication satellite",
+    "Tooltip_SatelliteCommunicationDevice": "Établis une connexion directe avec tous satellites alien qui correspondent à ses spécifications. Requiert la neutralisation du Coeur de la Peste.",
+    "SatelliteCommunicatorSuccess": "ACS: Initialisation des protocoles de communication...<delay=0><duration=2500>\nCalibrage des capteurs. Confirmation des coordonnées...<delay=2900><duration=3100>\nCalcule de la trajectoire de la frappe...<delay=6400><duration=1500>\nSuccès de l'opération. Destruction imminente.<delay=8600><duration=3500>",
+    "SatelliteCommunicatorFail": "ACS: Impossible d'initier le processus. Le ciel n'est pas visible.<delay=0><duration=5000>\nRepositionnez-vous quelque part d'ouvert et peu profond.<delay=5400><duration=3700>",
+
+    "PdaExploder": "Appareil de destruction du PDA",
+    "Tooltip_PdaExploder": "Une machine spécialement désignée pour détruire les PDA. Vous pouvez lire à travers, Alterra n'ignore pas la destruction de biens appartenant à la compagnie.",
+    "ExplodePdaPrompt": "Détruire le PDA",
+    
+    "PrecursorPhoneInfo": "Téléphone précurseur",
+    "Tooltip_PrecursorPhoneInfo": "Un appareil extraterrestre inhabituel.",
+    
+    "SuitCharge": "Recharge du module de protection biochimique",
+    "Tooltip_SuitCharge": "INFECTION PROTECTION CHARGE: +45\nUtilisé pour recharger le module de protection biochimique. Doit être utilisé après une exposition à la peste.",
+    "DepletedSuitCharge": "Recharge du module de protection biochimique (épuisé)",
+    "Tooltip_DepletedSuitCharge": "Une recharge du module de protection biochimique épuisée. Peut-être jeté ou rechargé sans risques.",
+    "SuitChargeRecharge": "Recharge du module de protection biochimique (rechargé)",
+    "Tooltip_SuitChargeRecharge": "INFECTION PROTECTION CHARGE: +45\nUtilisé pour recharger le module de protection biochimique. Doit être utilisé après une exposition à la peste.",
+
+    "BioBattery": "Biobatterie",
+    "Tooltip_BioBattery": "Une batterie biologique. Efficace mais instable.",
+
+    "InsanityMedicine": "Médicament contre la folie",
+    "Tooltip_InsanityMedicine": "INFECTION PROTECTION CHARGE: +10\nAugmente la résistance mentale du consommateur contre la peste. Veuillez consulter votre médecin pour les consignes. Portions par comprimés : 1.",
+
+    "Chrissy": "Podium de Chrissy",
+    "Tooltip_Chrissy": "Un cube rose avec un goût obsessionnel pour la technologie alien. Possède une odeur de Red Bull au bleuet...",
+    "PrecursorSkull": "Crâne alien renforcé",
+    "Tooltip_PrecursorSkull": "Une relique de guerre venant des terres gelées au travers des ondes sonores.",
+    "XenaPoster": "Poster de chien",
+    "Tooltip_XenaPoster": "Une petite note au dos dit \"Tu vas nous manquer Xena.\"",
+    "SockDrawing": "Dessein enfantin",
+    "Tooltip_SockDrawing": "Sûrement fait par l'enfant de quelqu'un à plusieurs années lumières d'ici.",
+    "CrumpledMazieDrawing": "Dessein froissé",
+    "Tooltip_CrumpledMazieDrawing": "Un morceau de papier froissé avec quelque chose dessiné à l'intérieur.",
+    "CrimxsenCard": "Carte mystérieuse",
+    "Tooltip_CrimxsenCard": "Une carte dont l'utilité reste inconnue.",
+    "CorruptedRadio": "Radio cassée",
+    "Tooltip_CorruptedRadio": "Une radio non fonctionnelle. Vous n'avez aucune raison de la garder.",
+    
+    "InfectionTabletFragment": "Fragment de tablette infectée",
+    "InfectionTablet": "Tablette infectée",
+    "Tooltip_InfectionTablet": "Un mystérieux appareil extraterrestre. Ses systèmes internes ont été remplacés par la peste, mais il continue de fonctionner, ce qui suggère qu'une réplique pourrait être fabriquée sans utiliser de matériaux extraterrestres. Bannie des fabricateurs standards.",
+    
+    "GoldTablet": "Tablette dorée",
+    "Tooltip_GoldTablet": "Une ancienne tablette avec un symbole doré dessus.",
+
+    "IslandElevatorTerminal": "Appareil extraterrestre",
+    "ShrineBaseTabletTerminal": "Appareil extraterrestre",
+
+    "PlagueNeutralizerFragment": "Fragment de neutraliseur de peste",
+    "PlagueNeutralizer": "Neutraliseur de peste",
+    "Tooltip_PlagueNeutralizer": "Utilise des catalyseurs de peste pour en créer des échantillons neutralisés. Requiert un approvisionnement constant en nutriments.",
+    "PlagueNeutralizerHoverText": "Utiliser le neutraliseur de peste",
+    "PlagueNeutralizerStorageContainer": "NEUTRALISEUR DE PESTE",
+    "PlagueNeutralizerOrganicItemsWarning": "Cette machine n'accepte que les matériaux organiques",
+    "PlagueNeutralizerFullWarning": "Il n'y a plus assez de place pour les catalyseurs de peste",
+    "PlagueNeutralizerInsertCatalystTooltip": "Insérer un catalyseur de peste (in machine: {0}/{1})",
+    "PlagueNeutralizerInsertCatalystFullTooltip": "PLEIN - Ne peux pas recevoir plus de catalyseur de peste",
+    "PlagueNeutralizerUIInsertText": "Insérer des objets biodégradables:",
+    
+    "PlagueRefinery": "Rafinerie mécanique",
+    "Tooltip_PlagueRefinery": "Moud des substances denses et complexes afin de les raffiner et d'en extraire des ressources de valeur.",
+    "PlagueRefineryBusy": "Processus en cours...",
+    "PlagueRefineryOutputFull": "Sortie pleine",
+    "ProcessMysteriousRemains": "Raffiner les restes mystérieux",
+    "Tooltip_ProcessMysteriousRemains": "De nombreux restes organiques avec une légère concentration en minéraux.",
+    "ProcessSeaTreaderPoop": "Raffiner les déjections alien",
+    "Tooltip_ProcessSeaTreaderPoop": "Contiens les restes de plantes non digérées et possiblement des ressources de valeur.",
+    "ProcessScrapMetal": "Raffiner les restes métalliques",
+    "Tooltip_ProcessScrapMetal": "Contiens de nombreux métaux et de l'électronique, ainsi qu'une légère concentration en cuivre due aux températures extrêmes.",
+    "ProcessBloodOil": "Raffiner l'huile de sang",
+    "Tooltip_ProcessBloodOil": "Produit des résidus typiques à base d'huile. Se transforme en benzène au taux habituel de 1:3.",
+
+    "PlagueAltarFragment": "Mystérieux autel",
+    "PlagueAltar": "<color=#e8002e>Autel de la Peste</color>",
+    "Tooltip_PlagueAltar": "Transforme la matière issue de la peste en technologie complexe et consciente. La peste doit se propager.",
+    "PlagueAltarMenu_Consumable": "Consommable",
+    "PlagueAltarMenu_Equipment": "Equipement",
+    "PlagueAltarMenu_Pets": "Forme de vie",
+    "PlagueAltarMenu_Resources": "Ressources",
+    "UsePlagueAltar": "Parler avec l'autel de la Peste",
+
+    "InsanityDeterrent": "Réducteur de noradrénaline ambiante",
+    "Tooltip_InsanityDeterrent": "Émet des ondes qui maximisent le calme chez le personnel alentours, réduit les symptômes de folie.",
+    "InsanityDeterrentWorking": "En cours de fonctionnement... ({0} power/s)",
+    "InsanityDeterrentNoPower": "Pas d'électricité",
+    
+    "AssimilationGenerator": "<color=#e8002e>Générateur à assimilation</color>",
+    "Tooltip_AssimilationGenerator": "Capture et digère de la biomasse, les convertissant ainsi en un affluent stable en électricité. Compatible avec la majeure partie des technologies.",
+    "AssimilationGeneratorStatus": "Générateur à assimilation (charge: {0}/{1})",
+    
+    "PlagueKnife": "<color=#e8002e>Couteau pestiféré</color>",
+    "Tooltip_PlagueKnife": "Il s'agit d'une version améliorée du couteau de survie, conçu pour interagir avec le système de défense contre les infectés. Il est assez tranchant pour découper les matériaux contaminés.",
+    "PlagueKnifeEnableWarperPrompt": "Activé les Warpers ({0})",
+    "PlagueKnifeDisableWarperPrompt": "Désactivé les Warpers ({0})",
+    
+    "PlagueArmor": "<color=#e8002e>Armure pestiférée</color>",
+    "Tooltip_PlagueArmor": "Cette combinaison tire parti d'une mutation rare de la peste, permettant à son porteur de survivre à un contact qui serait normalement fatal. Les effets secondaires restent inconnus.",
+
+    "PlagueGrappler": "<color=#e8002e>Grappin pestiféré</color>",
+    "Tooltip_PlagueGrappler": "Un outil mystérieux qui améliore la mobilité de son utilisateur et permet la manipulation des objets à distance.",
+    "PlagueGrapplerInputFormat": "{0} | {1}",
+    "PlagueGrapplerFireInput": "Tirer ({0})",
+    "PlagueGrapplerTraverseInput": "Se tirer ({0})",
+    "PlagueGrapplerGrabInput": "Attraper ({0})",
+    "PlagueGrapplerCancelInput": "Récupérer ({0})",
+    "PlagueGrapplerUnreelInput": "Verrouiller ({0})",
+    "PlagueGrapplerCutWireInput": "Couper ({0})",
+    "PlagueGrapplerOpenCaveInput": "<color=#ed00aa>Ouvrir la trappe de la grotte</color> ({0})",
+    
+    "MutantDiver1": "Plongeur mutant",
+    "MutantDiver2": "Plongeur mutant",
+    "MutantDiver3": "Plongeur fortement mutant",
+    "MutantDiver3Small": "Plongeur fortement mutant",
+    "MutantDiver4": "Plongeur fortement mutant",
+    "Tooltip_MutantDiver4": "L !!!???A??!?!?! MO?!?!!?RT EST ?!?!?!? PRO?!??!?!CHE",
+
+    "Ency_MutantDiver1": "Plongeur mutant (Proéminence de la colonne vertébrale et de la cage thoracique)",
+    "EncyDesc_MutantDiver1": "Avertissement santé mentale : Alterra offre des séances de thérapie gratuites à la suite de missions perturbantes ou stressantes.\n\nCette créature semble être originaire de cette planète, née <color=#55555588>des cadavres des survivants de l’Aurora</color>. Comme beaucoup d’espèces locales, ce spécimen fait preuve d’une agressivité marquée envers la faune indigène ainsi qu’envers les humains.\n\nVeuillez demeurer prudent à proximité de la faune locale infectée, car il y a de fortes chances que vous soyez la prochaine victime. Ne regardez pas trop attentivement : il existe une possibilité non nulle que vous soyez en train d’observer le cadavre pourri, muté et infesté d’un ami ou d’un proche.\n\nAlterra vous demande d’éviter ce spécimen à tout prix, de détourner le regard et de vous rappeler les conditions obligatoires de votre contrat.",
+    "Ency_MutantDiver2": "Plongeur mutant (Nouvelle croissance de membres)",
+    "EncyDesc_MutantDiver2": "Avertissement santé mentale : Alterra offre des séances de thérapie gratuites à la suite de missions perturbantes ou stressantes.\n\nCette créature semble être originaire de cette planète, née <color=#55555588>des cadavres des survivants de l’Aurora</color>. Comme beaucoup d’espèces locales, ce spécimen fait preuve d’une agressivité marquée envers la faune indigène ainsi qu’envers les humains.\n\nVeuillez demeurer prudent à proximité de la faune locale infectée, car il y a de fortes chances que vous soyez la prochaine victime. Ne regardez pas trop attentivement : il existe une possibilité non nulle que vous soyez en train d’observer le cadavre pourri, muté et infesté d’un ami ou d’un proche.\n\nAlterra vous demande d’éviter ce spécimen à tout prix, de détourner le regard et de vous rappeler les conditions obligatoires de votre contrat.",
+    "Ency_MutantDiver3": "Plongeur fortement mutant (STANDARD)",
+    "EncyDesc_MutantDiver3": "Les scans suggères que █████ ███████ ██████ ██████ ██████ ██████████ ███ ██ ...\n\n[Ce document à été sencuré]",
+    "Ency_MutantDiver4": "Plongeur fortement mutant (RÉFORMÉ)",
+    "EncyDesc_MutantDiver4": "Ce spécimen montre ████████████ ██████████████ ███████ ████████████ █████ ...\n\n[Ce document à été sencuré]",
+
+    "BoneArmorDatabox": "Boîte de données",
+    "PlagueKnifeDatabox": "Boîte de données",
+    "PlagueGrapplerDatabox": "Boîte de données",
+    "AssimilationGeneratorDatabox": "Boîte de données",
+    "InsanityDeterrentDatabox": "Boîte de données",
+    "ObsidianArmDatabox": "Boîte de données",
+    "BioBatteryDatabox": "Boîte de données",
+
+    "AdministratorDropPodPing": "Livraison",
+    "AdminDropPodBeacon": "Balise de livraison",
+    "Tooltip_AdminDropPodBeacon": "Un envoi gratuit d'équipements de la part d'un de vos amis d'Alterra !",
+
+    "AirStrikeDevice": "Dispositif de frappe aérienne",
+    "Tooltip_AirStrikeDevice": "Désigne l'emplacement d'une attaque aérienne par drone.",
+    "AirStrikeSubtitles": "Attaque aérienne dans environ 30 secondes.<delay=1000><duration=4000>
+Veuillez évacuer la zone IMMÉDIATEMENT !<delay=5500><duration=3500>
+Alterra n'est PAS responsable des décès ou des blessures qui pourraient être causés.<delay=9000><duration=4000>
+Officer: Alterra à 4546B. FRAPPE AÉRIENNE CONFIRMÉE.<delay=16900><duration=3000>
+Environ cinq secondes avant impact.<delay=20000><duration=3400>
+Cinq, quatre, trois, deux, un...<delay=24000><duration=4000>",
+        
+    "BoneCannon": "<color=#e8002e>Lanceur d'os</color>",
+    "Tooltip_BoneCannon": "Un appareil dégoûtant. Il possède une ouverture qui pourrait s'adapter à votre bras... ?",
+    
+    "BiochemicalProtectionModule": "Module de protection biochimique",
+    "Tooltip_BiochemicalProtectionModule": "Lorsqu'il est absorbé, il permet à l'organisme de se protéger contre les risques biologiques et chimiques étrangers. Espérons-le.",
+    "ApplyBiochemicalProtectionModule": "Appliquer le module",
+    
+    "InfectionSampler": "Testeur ADN",
+    "Tooltip_InfectionSampler": "Un dispositif qui recueille et stocke de petits échantillons d'infections en vue de recherches ultérieures.",
+    "InfectionSamplerFragment": "Fragment de testeur ADN",
+    "UseInfectionSampler": "Utiliser sur une créature infectée: {0}",
+    "UseInfectionSamplerFail": "<color=#FF0000>La cible doit être infectée !</color>",
+    "UseInfectionSamplerBusy": "Encapsulation de l'échantillon...",
+    
+    "RedPlagueSample": "Échantillon de Peste Rouge",
+    "Tooltip_RedPlagueSample": "Échantillon de chair contenue, infectée par la Peste Rouge. L'échantillon à l'intérieur palpite comme s'il essayait de s'échapper.",
+
+    "DomeDroneFormation": "Formation de drones TADPOLE (16x)",
+    "Tooltip_DomeDroneFormation": "Un ensemble de 16 drones de méga-construction T.A.D.P.O.L.E., programmés dans un but précis.",
+    "DomeDroneDeconstructProgress": "Progression de la collecte des déchets: {0}%",
+    "DomeDroneDeconstructDescription": "Dirigez les drones vers les sites d'épaves pour les récupérer. Aucun dommage permanent ne sera causé !",
+    
+    "PdaEnzyme42Warning": "DANGER: Severe chemical burns detected.<delay=0><duration=3000>\nThis substance is incompatible with your biology, and potentially fatal to any lifeforms afflicted by the plague.<delay=3500><duration=7000>",
+    "PdaLaunchRocketWhileDomeActive": "Cannot launch rocket while the dome is still active.",
+    "LaunchRocketWhileDomeActiveMessage": "Cannot launch rocket while dome is still active!",
+    
+    "MrTeeth": "Mr. Dents",
+    "Drifter": "Conducteur",
+    "Ency_Drifter": "Conducteur",
+    "EncyDesc_Drifter": "Un amalgame de chair généralement passif qui a été chargé de répandre la Peste Rouge. Il ne semble pas avoir de volonté propre, mais être contrôlé par une entité inconnue. Les scans indiquent un lien entre les créatures infectées par la Peste Rouge. Des recherches plus approfondies sont recommandées.\n\n- Amalgame\nLa créature semble être formée à partir de la chair de nombreuses autres espèces, les scanners indiquent la présence de tissus humains dans cette créature \n- But destructeur\nCette créature semble exister dans le seul but de répandre la Peste Rouge. Des émissions de matière concentrée de peste, semblables à des spores, sortent de cette créature partout où elle va \n\nÉvaluation : Soyez extrêmement prudent, n'approchez pas et n'interagissez pas avec elle, quelles que soient les circonstances.",
+    "MimicPeeper": "Peeper?",
+    "Ency_MimicPeeper": "Faux Peeper",
+    "EncyDesc_MimicPeeper": "Cette variante de peeper semble avoir été infecté par la bactérie de la peste, ce qui a modifié son apparence et son comportement. \n\n1. Mâchoires arrière : La nageoire caudale de cette variante du Peeper s'est transformée en une série de mâchoires acérées, conçues pour se nourrir facilement de la plus petite faune.\n2. Nage inhabituelle : Cette créature utilise le poids et l'élan de son corps étranger pour se déplacer dans l'eau à une vitesse inquiétante, semblant souvent nager à reculons lorsqu'on l'observe.\n3. Comportement inhabituel : Cette variante de peeper est hostile à tous ceux qu'elle rencontre, contrairement à ses cousins passifs.\n\nLa consommation de la chair de cette créature n'est pas recommandée et peut entraîner des effets secondaires néfastes et mortels.\n\nL'observation de cette créature peut révéler des informations sur la bactérie de la peste, appelée « La Peste Rouge ». Une étude plus approfondie est fortement recommandée.",
+    "MimicOculus": "Oculus?",
+    "Ency_MimicOculus": "Faux Oculus",
+    "EncyDesc_MimicOculus": "Ce spécimen présente une ressemblance avec l’espèce désignée “Oculus”, mais diffère biologiquement au point d’être classé comme une espèce entièrement distincte.\n\nSa structure interne ne contient aucun organe fonctionnel : elle est constituée uniquement d’une matière corrompue et infectée. Cet imposteur dépasse largement la taille de l’espèce d’origine. Bien qu’il imite visuellement l’Oculus, il ne fait qu’usurper son apparence et s’infiltrer dans l’écosystème, sans autre fonction que de supplanter l’espèce véritable.\n\nÉvaluation : Espèce invasive. Ne pas consommer.",
+    "PlagueBladderFish": "Pochon pestiféré",
+    "Ency_PlagueBladderFish": "Pochon pestiféré",
+    "EncyDesc_PlagueBladderFish": "Ce pochon pestiféré ressemble à d'autres espèces trouvées sur 4546B, mais présente des différences notables. \n\n- Le corps de ce spécimen a presque entièrement été consumé par de la chair pustuleuse. Les organes qu'il possédait autrefois ont été absorbés par son corps. \n\n- Le corps de cette créature est recouvert de protubérances hérissées de pointes, qui servent principalement à déchirer la chair des prédateurs et des proies.\n\n- La créature est considérablement gonflée, ce qui limite sa mobilité. Cela ne semble toutefois pas la décourager et elle se montre étonnamment hostile à l'égard de tous ceux qu'elle rencontre. \n\nOn ne sait pas exactement d'où vient cette créature, ni quel est son but. Une étude plus approfondie est recommandée. \n\nÉvaluation : Une étude plus approfondie est nécessaire ; la prudence est recommandée",
+    "InvertedSpadefish": "Spadefish inversé",
+    "Ency_InvertedSpadefish": "Spadefish inversé",
+    "EncyDesc_InvertedSpadefish": "Ce spécimen est en réalité un spadefish lourdement mutilé.Par un processus complexe, la matière infectieuse a pratiqué de multiples entailles dans sa “peau”, la découpant en fragments détachés, retournés peu à peu vers l’intérieur, jusqu’à inverser progressivement toute sa surface cutanée. Ce retournement forcé semble infliger une douleur inimaginable et constante.\n\nSchéma de nage unique : L’inversion de la peau a également affecté les organes sensoriels du spadefish, perturbant son équilibre. Il peut alors être observé nageant à l’envers, la bouche tournée vers le haut. Ses instincts alimentaires normaux sont brisés, le condamnant à la famine lente. Ce manque l’amène à des comportements erratiques et désespérés.\n\nÉvaluation : Éviter à tout prix, ou neutraliser pour abréger ses souffrances.",
+    "MutantBoomerang": "Poisson Boomerang mutant",
+    "Ency_MutantBoomerang": "Poisson Boomerang mutant",
+    "EncyDesc_MutantBoomerang": "Cette créature est un cadavre de boomerang typique, lourdement infecté par la peste. Les diagnostics standards suggèrent que l’organisme est cliniquement mort, mais il reste pourtant pleinement capable de se mouvoir, de consommer de la nourriture, de réagir aux stimuli… et peut-être même de se reproduire.\n\n1. Régime alimentaire:\nLe boomerang mutant est insatiable. On peut l’observer décimer des populations entières de plantes locales, mais aussi s’attaquer à des proies bien plus grandes que lui. L’énergie tirée de sa digestion semble être utilisée pour nourrir et propager de nouvelles cellules de peste.\n\n2. Yeux:\nPlusieurs nouveaux yeux, d’un rouge profond, se sont formés. Leur apparition ne semble pas volontaire : ils sont le résultat d’une conversion ADN complexe, issue du processus d’assimilation.\n\n3. Dents:\nSes dents dentelées, autrefois adaptées au corail et à la végétation dure, sont désormais parfaitement adaptées pour lacérer la chair.\n\nÉvaluation : Perturbation indésirable et invasive de l’écosystème local.",
+    "FleshStalker": "Rôdeur pestiféré",
+    "Ency_FleshStalker": "Rôdeur pestiféré",
+    "EncyDesc_FleshStalker": "Ce spécimen semble être sous l'influence de la bactérie de la Peste Rouge. Ce spécimen particulier présente des changements de comportement et d'apparence. \n\nCette créature semble avoir perdu la volonté de prendre soin de sa santé, et on ne l'observe plus aiguiser ses dents sur des débrits.\nLa créature est particulièrement agressive envers tous les autres êtres vivants, y compris ceux de sa propre espèce. Elle semble tenter d'exercer une forme de domination primitive sur les autres membres de son espèce. Reste à savoir si cette méthode est efficace.\n\nÉvaluation : Les dents infectées du stalker ne peuvent pas être utilisées pour des applications industrielles. Une agressivité accrue fait de cette créature une menace pour les personnes et les submersibles. À éviter.",
+    "InfestedReefback": "Reefback pestiféré",
+    "Ency_InfestedReefback": "Reefback pestiféré (\"Blisterback\")",
+    "EncyDesc_InfestedReefback": "Cet organisme de classe Léviathan a été victime des effets de la bactérie de la Peste Rouge. Cette créature n'a plus grand-chose à voir avec sa forme d'origine et a été désignée sous le nom de \"Blisterback.\" La bactérie semble avoir muté plus rapidement que prévu, ce qui lui confère toute une série de nouvelles capacités. \n\n- La bactérie est désormais capable d'imiter des structures organiques plus complexes, ce qui se manifeste dans ce cas par le remplacement de la carapace et des yeux du Reefback. Ces organes vitaux pour la survie et le fonctionnement ont été remplacés par une structure en kératine dure, apparemment constituée de matière prélevée ailleurs. Ce \"blisterback\" n'est plus en vie et ne voit plus rien.\n\n- L'étude de cette créature peut révéler d'autres capacités de la bactérie de la peste.\n\nÉvaluation : Perspective de recherche précieuse. Passif, mais infecté - à approcher et à considérer avec prudence.",
+    "MimicGasopod": "Faux gasopode",
+    "Ency_MimicGasopod": "Faux gasopode",
+    "EncyDesc_MimicGasopod": "Bien qu’il ressemble visuellement à l’espèce indigène appelée “gasopod”, ce spécimen est lourdement infesté par des organismes parasites.
+Ses organes internes ont été entièrement remplacés par de la matière pestilentielle ; seule la peau et la silhouette générale demeurent reconnaissables.\n\n1. Comportement:\nLe gasopode mimique erre sans but précis, mais chasse parfois des proies bien plus grandes que lui. Il possède une capacité unique : utiliser les muscles denses de sa colonne et de sa queue pour frapper violemment, infligeant de graves blessures à ses victimes.\n\n2. Propagation de l’infection:\nAu lieu du mécanisme défensif habituel du gasopod, cette imitation relâche par moments des capsules saturées de cellules de Peste Rouge cultivées, contaminant rapidement tout poisson à proximité.\n\nÉvaluation : Lent et maladroit, mais fatal aux plongeurs inexpérimentés.",
+    "Observer": "Scrutateur",
+    "Ency_Observer": "Scrutateur - 'Chat de la peste'",
+    "EncyDesc_Observer": "Masse épineuse de chair, dotée d’un large œil principal cerclé de dents, flanquée de multiples yeux latéraux. Ce spécimen se distingue des autres organismes infectés par son tempérament étonnamment passif : il prend la fuite lorsqu’on s’approche.\n\n1. Comportement de “miaulement”:\nLe “chat de la peste” émet un gémissement aigu lorsqu’il observe quelque chose qui retient son attention. Ce signal semble destiné à attirer d’autres spécimens, renforçant ainsi le groupe. Étrangement, ce son n’est ni perçu ni pris en compte par la plupart des autres créations de la peste, et ne déclenche aucune montée d’agressivité alentour.\n\n2. Dents intimidantes:\nSans réelle fonction offensive, ces dents servent uniquement de leurre visuel. Elles dissuadent les prédateurs potentiels et protègent l’œil principal, bien plus vulnérable.\n\n3. Comportement de traque:\nPlague Les “chats de la peste” se tiennent volontairement hors de portée de ce qui les intrigue, reculant dès que l’objet d’intérêt s’approche trop. Leur système nerveux, largement composé de tissus oculaires, ne leur permet pas de comprendre pleinement ce qu’ils voient. Ce défaut les pousse parfois à foncer œil en avant contre leur cible avant de rebondir et de s’éloigner précipitamment.\n\nÉvaluation : Physiquement inoffensif, mais son lien avec le Coeur de la Peste reste incertain — des recherches supplémentaires sont nécessaires.",
+    
+    "InfectionPod": "Cosse infectieuse",
+    "Tooltip_InfectionPod": "Une cosse de matière pestiférée concentrée. Extrême prudence requise si manipuler.",
+    "TeethTeeth": "Quequenottes",
+    "Ency_TeethTeeth": "Quequenottes",
+    "EncyDesc_TeethTeeth": "Ce spécimen unique, issu des ravages infectieux subis par un membre de l’espèce désignée “neunoeil”, a subi d’importantes altérations de sa forme et de son régime alimentaire.\n\n1. Bouche:\nLe globe oculaire du quequenottes s’est désagrégé, laissant place à une béance garnie d’excroissances osseuses semblables à des dents. Bien qu’il ne possède pas de gorge fonctionnelle, son estomac est directement exposé à l’eau, ce qui lui permet de digérer tout ce qui pénètre dans cette cavité, contournant ainsi la bouche et l’œsophage. De nouvelles formations musculaires lui confèrent une morsure véritable, potentiellement mortelle.\n\n2. Régime alimentaire:\nGrâce à ses mutations, le quequenottes peut digérer presque toute matière organique. Il a donc développé des comportements prédateurs primitifs, bien que dépourvus de véritables instincts de chasse.\n\nÉvaluation : Ne le laissez surtout pas vous mordre.",
+    "EyeyeCaptain": "Capitaine neunoeil",
+    "Ency_EyeyeCaptain": "Capitaine neunoeil",
+    "EncyDesc_EyeyeCaptain": "Ce spécimen ressemble à la forme de vie indigène connue sous le nom de “neunoeil”, mais présente plusieurs caractéristiques distinctes, résultant d’une exposition prolongée à la Peste Rouge.\n\n1. Oeil:\nSon œil peut se détacher grâce à des fibres musculaires capables de se rompre, puis de se régénérer et se rattacher rapidement aux cellules voisines. L’organe peut être projeté comme un projectile contre le terrain, les créatures alentour ou même les humains, servant à interagir avec l’environnement ou blesser ses proies.\n\nLe Capitaine Neunoeil possède un corps plus massif que l’eyeye classique ; cette différence lui permet d’absorber le recul provoqué par l’expulsion de son œil hors de son orbite, facilitant ainsi la manipulation d’objets ou d’êtres vivants.\n\nÉvaluation : Hostile — restez attentif à vos environs. Ahoy, matelot !",
+
+    "PlagueFloater": "scyphomédusoïde",
+    "Ency_PlagueFloater": "scyphomédusoïde pestiférée",
+    "EncyDesc_PlagueFloater": "Une immense créature semblable à une méduse, désormais entièrement assimilée par la peste. Elle se déplace avec grâce au gré des courants, mais capture et dévore impitoyablement toute proie qui s’aventure trop près, sans distinction.\n\n1. Tentacules:\nCe spécimen possède dix tentacules acérés, utilisés pour neutraliser ses proies, les manipuler rapidement et les entraîner vers sa bouche. Lorsqu’elle ne chasse pas, ses tentacules flottent librement dans l’eau, libérant des particules microscopiques (désormais infectées par des cellules de peste) directement issues de son système digestif, contaminant ainsi l’écosystème.\n\n2. Rôle dans l’écosystème:\nLe scyphomédusoïde peut être observé chassant et dévorant la faune locale, y compris d’autres “créations de la peste”. Ce cycle où la peste dévore ses propres membres semble intentionnel : il favorise la diversité génétique, régule les populations, disperse les nutriments et consolide l’existence d’un écosystème autonome.\n\n3. Théorie de la sélection naturelle artificielle:\nCette créature cible principalement les proies inconscientes, éliminant ainsi les “créations de la peste biologiquement inadéquates”. En plus de contrôler la population, elle contribuerait à renforcer la survie des spécimens les plus intelligents et les plus adaptés.\n\nÉvaluation : Extrêmement dangereuses et clé des écosystèmes évolués de la peste.",
+    "Hippopenomenon": "Forme de vie anomalique",
+    "Ency_Hippopenomenon": "Anomalie de la Peste x002",
+    "EncyDesc_Hippopenomenon": "Ce spécimen ressemble à une créature mutante évoquant une tortue. Étrangement, il ne correspond à aucune autre espèce connue de cette planète.\n\nLa créature manifeste un comportement singulier, à la fois curieux et social, accompagné d’une faculté semblable à la télépathie lui permettant d’attirer d’autres espèces vers des lieux précis.\n\nÉviter tout contact peau contre peau avec ce spécimen. Il demeure incertain s’il peut transmettre son infection lors d’interactions. Toutefois, hormis son comportement anormal, il semble relativement sain et indemne.\n\nÉvaluation : À étudier et à suivre avec prudence. Il semble désirer être caressé… mais céder à cette tentation constitue un risque majeur.",
+    "Gilbert": "Gilbert",
+    "Tooltip_Gilbert": "C'est Gilbert.",
+    "Ency_Gilbert": "Gilbert",
+    "EncyDesc_Gilbert": "Ce spécimen présente des similitudes avec la forme de vie indigène appelée “biter”, mais il ne possède pas l’agressivité caractéristique du prédateur. Il entretient une relation curieusement symbiotique avec son créateur après être apparu à partir de l’Autel de la Peste, et manifeste des comportements sociaux rappelant ceux d’animaux de compagnie domestiqués. Les analyses neuronales révèlent une tendance protectrice dirigée exclusivement envers son créateur.\nNote : Il est recommandé d’analyser l’ADN de cette créature afin de détecter d’éventuelles mutations de la Peste Rouge ayant pu générer ce comportement social atypique.\nÉvaluation : Répondez à ses interactions sociales pour maximiser ses comportements protecteurs — Vous avez un ami.",
+    "PhantomLeviathan": "Leviathan Spectrale",
+    "Ency_PhantomLeviathan": "Leviathan Spectrale",
+    "EncyDesc_PhantomLeviathan": "Ce spécimen est une variante corrompue relativement jeune du “léviathan fantôme”. Les déformations de ses organes internes et la dégradation de son ossature suggèrent un état de malnutrition sévère.\n\n1. Oeil:\nLes organes sensoriels du léviathan spectral ont été réduits à un seul œil flottant librement. Malgré l’absence visible de nerfs ou de muscles pour le maintenir, la créature se comporte comme si elle possédait un champ de vision complet — peut-être même un balayage à 360° sans aucune limite.\n\n2. Poison:\nLe léviathan spectral sécrète en permanence un composé coloré indéfinissable. Ce “poison” pourrait être un élément corrosif, ou bien une souche virale unique (distincte de la Peste Rouge). Quelle que soit sa nature, il demeure hautement dangereux et sert à paralyser les systèmes nerveux de ses proies.\n\n3. Localisation:\nCe spécimen de léviathan est récemment apparu dans cette zone, probablement attiré par un écosystème déséquilibré dépourvu de prédateurs majeurs — l’installant ainsi comme élément central de la chaîne alimentaire.\n\nÉvaluation : Éviter à tout prix.",
+    "ChaosLeviathan": "La Peste Rouge",
+    "Ency_ChaosLeviathan": "La manifestation de la conscience collective de la Peste: 'Léviathan du Chaos'",
+    "EncyDesc_ChaosLeviathan": "Les espèces de classe Léviathan sont d’immenses organismes au sommet de leurs chaînes alimentaires respectives. Ce leviathan, cependant, est unique : il existe comme manifestation de la conscience collective de la Peste Rouge, conçu et perfectionné par lui-même au fil des millénaires durant sa contention.\n\n1. Multiplicité oculaire:\nDe nombreux yeux indépendamment rotatifs offrent une conscience quasi totale de l’environnement. Cette adaptation permet une détection des proies extrêmement efficace sur un large rayon, même dans des conditions de faible luminosité ou d’obscurité.\n\n2. Structure mandibulaire quadrisée:\nLa mâchoire de la créature est divisée en quatre segments articulés. Cela lui permet d’ouvrir sa gueule bien au-delà de celle des prédateurs classiques, assurant une capture et une immobilisation sécurisées de proies de grande taille.\n\n3. Structure postérieure céphalopodale:\nL’anatomie postérieure du Chaos Leviathan rappelle fortement celle de l’espèce appelée “Dragon de Mer”, avec huit appendices puissants en forme de tentacules, partant de l’extrémité de la colonne vertébrale.\n\nCes membres servent de moyen principal de propulsion et de manœuvrabilité, permettant des mouvements coordonnés multidirectionnels et des accélérations fulgurantes dans divers environnements.\n\n4. Effets à proximité:\nLes relevés infectieux autour de la créature montrent des niveaux dangereux, quasi mortels, de la Peste Rouge. Cela provoque de sévères hallucinations. La multitude d’yeux sur son corps, combinée aux symptômes hallucinatoires, crée la sensation d’être observé en permanence sous tous les angles.\n\n5. Création:\nL’avatar de l’esprit-ruche de la Peste Rouge ne possède pas de structure biologique typique adaptée aux environnements aquatiques. Il semble compatible avec d’innombrables types d’habitats, indépendamment de leur atmosphère, et peut hiberner pendant des millénaires. Cette capacité explique sa survie depuis sa création initiale.\n\nDurant l’hibernation, la Peste Rouge absorbe des particules et rayons à faible énergie (notamment la radiation solaire), tout en métamorphosant progressivement sa propre physiologie et en optimisant son code génétique. Essentiellement, la Peste Rouge moderne est le résultat d’un algorithme auto-perpétuant cherchant la perfection. Conçue à partir de systèmes neuronaux complexes et de réseaux cellulaires spécialisés sur des milliers d’années, la Peste Rouge considère ce leviathan comme sa forme idéale.\n\nNote motivationnelle : Félicitations pour vous être approché aussi près… sans succomber à l’infection ! \n\nÉvaluation : Niveau de menace extrême — À éviter en toutes circonstances.",
+    
+    "FleshPlant1": "Champignon de la peste affamé",
+    "Ency_FleshPlant1": "Champignon de la peste affamé",
+    "EncyDesc_FleshPlant1": "ADN : L’ADN de cette plante de chair est original et non une simple mutation, ce qui suggère que la peste a dépassé le stade d’une simple “infestation” pour devenir capable de créer des formes de vie complexes.\n\n1. Relation:\nLa plante de chair entretient une relation symbiotique avec la plante surnommée “stabby”, permettant aux deux organismes de consommer davantage de proies que ce qu’ils pourraient obtenir seuls. La plante de chair sécrète dans l’eau un composé attirant les poissons vers son emplacement, tandis que la stabby neutralise les proies pour une digestion mutuelle. Le mode de communication entre les deux reste inconnu.\n\n2. Digestion:\nLa plante de chair possède une propriété unique : elle peut non seulement consommer des créatures, mais aussi servir d’hôte à la croissance de nouvelles matières pestilentielles. La matière digérée s’accumule au centre de la plante avant de se développer progressivement en substance de peste. À son stade partiellement digéré, cette matière contient divers éléments pouvant être exploités pour le développement de technologies avancées liées à la peste.",
+    
+    "TheRegular": "Le classique",
+    "Tooltip_TheRegular": "Un produit spécial de la société Alterra.",
+    "RedPlagueHam": "Jambon",
+    "Tooltip_RedPlagueHam": "Une saveur dystopique.",
+    "RedPlagueCheese": "Fromage",
+    "Tooltip_RedPlagueCheese": "Au fromage.",
+    "Banana": "Banane",
+    "Tooltip_Banana": "Une banane goûtue. Peut-être que les administrateurs de chez Alterra les aiment?",
+    "Monika": "Monika",
+    "Tooltip_Monika": "Un rouleau de cannel. Nommé Monika pour certaines raisons...",
+    "ProteinSnack": "Snack protéiné",
+    "Tooltip_ProteinSnack": "Galette dépourvue d’os, riche en protéines, recouverte de sauce barbecue. Goût similaire à celui du porc.<color=#AA0000><b>Absolument sans danger à consommer.</b></color>",
+
+    "AdminFabricator": "Fabricateur administrateur",
+    "Tooltip_AdminFabricator": "Un fabricateur spécial sans aucune des restrictions habituelles, conçu pour développer des technologies fortement illégales.",
+    "AdminFabricatorFragment": "Fabricateur administrateur endommagé",
+    
+    "AntiPossessionModule": "Module anti-parasites",
+    "Tooltip_AntiPossessionModule": "Utilise une impulsion nocive pour repousser les perturbations énergétiques indésirables.",
+    
+    "PlagueCyclopsCore": "Parasite confiné",
+    "Tooltip_PlagueCyclopsCore": "Créature consciente contenue dans un petit récipient en verre. Si elle est introduite dans un hôte disposant de suffisamment d’énergie, elle pourrait prendre le contrôle de celui-ci.",
+    
+    "ObsidianBladeArmModule": "Bras-épée en obsidienne pour Prawn",
+    "Tooltip_ObsidianBladeArmModule": "Lame longue et tranchante, capable de percer la matière pestilentielle et de briser de larges accumulations.",
+    
+    "PlagueCyclopsAssimilationSuccessful": "CYCLOPS: Assimilation réussie.",
+    "PlagueCyclopsEngineMaintenance": "CYCLOPS: Attention ! Entretien du moteur recommandé. Engrenages glissants !",
+    "PlagueCyclopsPropellerObstruction": "CYCLOPS: Attention : obstruction dans l'hélice ! Vaisseau immobilisé.",
+    
+    "PossessedSeamoth": "Seamoth possédé",
+    "PossessedExosuit": "Prawn possédé",
+    
+    "ShuttlePad": "Plateforme de navette",
+    "Tooltip_ShuttlePad": "Une plateforme pour la livraison d'échantillons et d'autres cargaisons à Alterra. Doit être construit au-dessus de l'eau.",
+    "ShuttleCargoScreen": "LIVRAISON DE CARGAISONS",
+    "PackageShuttleCargoTooltip": "Préparer la cargaison pour la livraison",
+    "ShuttleCargoContainerHover": "Gérer les cargaisons",
+    "PDAReceiveShuttle": "Une navette de recherche Alterra en orbite a été contactée et atteindra votre position sous peu.",
+    "PDASendShuttle": "La navette est en route et arrivera à la station de recherche sous peu.",
+    "PDASendShuttleFirstTime": "La navette est en route et arrivera à la station de recherche sous peu.<delay=0><duration=5000>
+La probabilité qu'une navette de cette taille soit détectée par des armes planétaires et abattue est de l'ordre de 85 à 90 %.<delay=5000><duration=9000>.",
+    "ShuttleInvalidItem1": "Vous vouliez envoyer ça ?",
+    "ShuttleInvalidItem2": "Pourquoi envoyer cela ?",
+    "ShuttleInvalidItem3": "Je ne pense pas que quelqu'un aurait voulu ça.",
+    "ShuttleInvalidItem4": "Si vous envoyez encore un article non sollicité, vous serez interdit d'envoi et votre contrat sera résilié de force.",
+    "PDAShuttleContactLost": "Contact avec la navette perdu. Il se peut que quelque chose obstrue sa trajectoire.",
+    "PDAShuttleContractTerminated": "Contrat résilié. Vous n'avez plus le droit d'envoyer des articles. Passez une bonne journée.",
+    "ShuttleCargoEmptyWarning": "Impossible d'envoyer une cargaison vide !",
+    
+    "Ency_Infection_REPLACE": "Spécimen présentant les symptômes de la Peste Rouge",
+    "EncyDesc_Infection_REPLACE": "Cette créature présente des signes d'infection bactérienne sévère et agressive. \n\n- Des pustules rouges dégoulinantes forment des crevasses autour de celles-ci.\n- Le comportement du sujet semble beaucoup plus agressif que d'habitude, ce qui suggère des symptômes psychologiques.\n- Les recherches d'Alterra indiquent que la bactérie est capable de muter et de modifier le code génétique de l'individu infecté.\n- Les analyses spectroscopiques suggèrent que la chair de la créature est beaucoup plus chaude que d'habitude, presque au point de fusion.\n- La bactérie est différente de tout ce qui a été rencontré ou enregistré dans l'histoire de l'humanité.\n\n<b>Attention :</b> Le spécimen est extrêmement infectieux. Ne pas s'approcher, ne pas interagir avec et ne consommer en aucun cas de la chair infectée.",
+
+    "RedPlagueIntroduction": "Détection d'un nombre croissant de substances étrangères compatibles avec le site ████████████ qui a été découvert et collecté en orbite.<delay=0><duration=8000>
+Il semble qu'il y ait eu une brèche dans le confinement pendant l'atterrissage sur la planète. Des recherches plus approfondies sont nécessaires.<delay=8300><duration=7000>",
+    
+   "AngelinaIntroduction": "??? : Nous pouvons enfin nous contacter !<delay=0><duration=2900>
+Angelina : Je suis Angelina Coral, votre responsable personnelle des ressources humaines des opérations de recherche d'Alterra !<delay=3000><duration=5000>
+Angelina : Vous recevez ce message car vous avez été promu de la maintenance non essentielle du système au poste d'enquêteur privé.<delay=8000><duration=6500>
+Angelina : Je vous transmets un contrat incluant toutes vos nouvelles conditions.<delay=15000><duration=2300>
+Lecture des termes du contrat...<delay=17500><duration=2000>
+Accès au contenu principal du contrat...<delay=20000><duration=2000>
+Contrat signé !<delay=22000><duration=1500>
+Angelina : Merci ! Nous avons plusieurs missions pour vous, mais tout d'abord, vous aurez besoin d'une protection contre... <i>un peu tout</i> ce que vous rencontrerez, bien sûr.<delay=23800><duration=9200>
+Angelina : Je vous envoie les plans d'un module de protection biochimique pour le corps entier. Veuillez le fabriquer et l'utiliser au plus vite, et nous le renvoyer dès que possible !<delay=33500><duration=7500>",
+        
+    "PDABiochemicalProtectionSuitUnlock": "Plans de la combinaison de protection biochimique ajoutés à la base de données.",
+    
+    "PDAInfectionSampleTaken": "Cet échantillon de chair présente des niveaux élevés d'activité électromagnétique intentionnelle, comme s'il essayait de partager des informations avec un récepteur.<delay=0><duration=8500>
+L'analyse montre également qu'il est extrêmement dense en calories.<delay=9000><duration=3300>
+Cela ne signifie pas que vous devez le manger. Je vous suggère de le signaler à Alterra dès que possible.<delay=13000><duration=7000>",
+    
+    "PDABiochemSuitEquipped": "Combinaison de protection biochimique équipée.<delay=0><duration=2500>
+Générateur de couche de protection de surface : activé.<delay=2600><duration=2400>
+Barrière chimique non réactive : fonctionnelle.<delay=6000><duration=2500>
+Notez que vous n'êtes pas plus invincible qu'avant.<delay=9000><duration=4000>",
+        
+    "TransfuserMission": "Angelina : Tant que vous ne vous blessez pas, ce simple dispositif que vous avez utilisé devrait créer une barrière artificielle contre toute bactérie étrangère.<delay=0><duration=7300>
+Angelina : Ne mangez aucun poisson cru, sinon vous devrez rester en quarantaine pour une durée indéterminée. Quoi qu'il en soit, Fred va vous confier votre première mission.<delay=7800><duration=9200>
+Fred : Hey ! Je suis Fred Elson, le co-directeur de la mission du projet d'exploration rouge - je veux dire 4546B.<delay=17800><duration=7500>
+Fred : À bord de l'Aurora se trouvait un ensemble d'appareils de test ADN flambant neufs, des choses vraiment compliquées. Le laboratoire biologique dans lequel ils ont été fabriqués s'est détaché lors du malheureux accident.<delay=25000><duration=12000>
+Fred : Nos analyses montrent que les débris, qui comprenaient une tonne de testeurs d'ADN récemment fabriqués, ont probablement atterri non loin du lieu de l'accident de l'Aurora.<delay=37250><duration=9200>
+Fred : C'est risqué, mais si vous pouvez vous y rendre avec un scanner portable, vous devriez pouvoir obtenir les plans pour les fabriquer vous-même.<delay=46700><duration=6000>
+Fred : Nous sommes désolés de ne pas pouvoir vous les envoyer directement, car ils sont exclusifs et développés par une équipe annexe.<delay=53000><duration=6000>
+Mise à jour de la directive de mission : localiser et scanner les fragments du « testeur d'ADN ».<delay=59400><duration=5000>",
+        
+    "PDATransfuserUnlocked": "Transfuser ajouté à la base de données. Si vous trouvez des créatures présentant des signes d'infection, veillez à prélever un échantillon et à l'envoyer à Alterra.",
+    "AngelinaFirstSampleShuttlePadInstructions": "Angelina : J'ai lu quelques informations sur l'échantillon. C'est bien plus intéressant que je ne l'aurais imaginé.<delay=0><duration=8000>
+Angelina : Veuillez construire la plate-forme de navette pour qu'il puisse être envoyé en toute sécurité à Alterra. Au cas où tout se passerait comme prévu, vous devriez commencer à stocker des ressources.<delay=8500><duration=9000>",
+        "PDAUnlockShuttlePad": "Les plans de la plate-forme de la navette ont été ajoutés à la base de données.<delay=129><duration=3198>\nVeuillez construire la plate-forme de la navette au-dessus de l'eau afin de réduire le risque de contamination interplanétaire.<delay=3521><duration=6249>\nCela n'est absolument pas lié à des réductions budgétaires.<delay=9897><duration=3584>",
+    "SampleReminder": "Rapport d'Elson.<delay=254><duration=1413>\nJ'ai remarqué que vous n'avez pas encore envoyé cet échantillon.<delay=1979><duration=3844>\nL'entreprise me met déjà la pression pour cette recherche. Pourriez-vous nous les fournir rapidement ?<delay=6275><duration=4127>\nTout ce dont nous avons besoin, c'est d'un échantillon de la bactérie, prélevé sur un spécimen vivant à l'aide de l'échantillonneur d'ADN. Nous nous occupons du reste.<delay=10939><duration=6756>", 
+    "SendPlagueSampleViaShuttle": "Fred : L'échantillon que vous avez envoyé pourrait bien constituer la pierre angulaire d'une nouvelle ère technologique.<delay=460><duration=5300>\nJe vais, euh, vous confier un petit secret.<delay=5869><duration=2872>\nNous n'essayons pas seulement de trouver un remède à ce virus.<delay=9324><duration=3913>\nNous essayons d'exploiter son pouvoir.<delay=13944><duration=1873>\nRegardez la vitesse à laquelle il manipule la matière. Comme il sait récolter et stocker l'énergie !<delay=16941><duration=5577>\nNous n'avons jamais rien vu de tel auparavant.<delay=22435><duration=2414>\nMerci pour vos contributions à ce projet !<delay=24849><duration=3591>\nAvant de pouvoir poursuivre nos recherches, nous avons besoin que vous construisiez une unité de confinement spéciale. Attendez...<delay=29427><duration=5661>\nAngelina : Ne tenez pas compte de ce qu'il a dit et suivez mes instructions telles que je les donne.<delay=35005><duration=4037>\nPremière étape du projet : construire au moins 16 méga-drones de construction. Nous vous tiendrons au courant lorsque ce sera fait !<delay=39042><duration=6701>",
+        
+   "PDAOnBuildDrones": "Fred : Au nom d'Alterra, je tiens à vous féliciter.<delay=0><duration=2758>\nLa construction de nouveaux drones peut entraîner des collisions aériennes spontanées.<delay=2813><duration=4662>\nVeuillez diriger ces drones vers toute épave proche afin de la récupérer, dans un but très important.<delay=7552><duration=6271>",
+    "DronesReadyForDomeConstruction": "Angelina : Bon travail !<delay=0><duration=819>\nCes drones ont permis d'effectuer toutes les opérations de récupération nécessaires à la poursuite du projet.<delay=1183><duration=3107>\nEt maintenant, l'étape 2 du projet. Tout ce que vous avez à faire, c'est de vous rendre sur l'île flottante dans le ciel. Par tous les moyens nécessaires.<delay=4777><duration=7551>\nPour l'étape 3... assurez-vous que rien ne se passe mal.<delay=12694><duration=3586>",
+    "DomeConstructionLocationSignal": "Étape 2 du projet",
+    
+   "PrepareForDomeConstruction": "Fred : Préparez-vous. Nous mettons les drones de construction sous tension...<delay=0><duration=3900>\nMaintenant !<delay=4000><duration=1000>",
+    
+    "DomeSpeakEvent": "Puissance extraterrestre augmentée : OPÉRATIONNELLE.<delay=0><duration=3000>
+Construction du dôme : FINALISÉE.<delay=3500><duration=2500>
+Siphon d’énergie : FONCTIONNEL.<delay=6000><duration=2000>
+Bouclier : ACTIVÉ.<delay=8000><duration=1900>
+Systèmes de confinement secondaires : ACTIFS.<delay=10000><duration=3500>
+PROCESSUS DE QUARANTAINE DE LA PESTE RÉUSSI.<delay=13500><duration=6000>",
+        
+    "DomeConstructionFinishedEvent": "Angelina : Parfait ! Nous envoyons une équipe scientifique au dôme dès que possible pour poursuivre nos recherches.",
+    
+    "LeaveDomeArgument": "Fred : Hé, si quelqu'un veut quitter le dôme pour une raison quelconque, il suffit de nous prévenir.<delay=0><duration=4977>\nAngelina : Oh ! Ce message n'était pas destiné à vous ! Je m'excuse.<delay=5095><duration=5309>\nFred : Euh, quel est le problème ? Si quelqu'un veut quitter le dôme, il peut, non ?<delay=10712><duration=5593>\nJe veux dire, on n’est pas en train de créer un piège mortel ici.<delay=16708><duration=2488>\nAngelina : Rien ne quitte le dôme. Nous ne faisons pas d’exception à cette règle. Je pensais que nous en avions déjà parlé.<delay=19292><duration=7276>\nFred : Le protocole prenait-il aussi en compte ce qui est arrivé à ces équipes de recherche ? Vous ne pouvez pas être sé-<delay=26757><duration=5080>\nPDA : Signal de communication interrompu.<delay=31837><duration=3429>",
+        
+    "RedPlagueAct1Ending": "Angelina : Pour l’instant, votre rôle s’arrête ici.<delay=225><duration=2100>\nMais notre coordinatrice de projet, Anthomnia, est en train de mijoter quelque chose.<delay=2315><duration=3506>\nMerci pour votre soutien !<delay=6191><duration=1581>",
+    
+    "EnterPlagueDunes": "Avertissement : détection de fortes concentrations de matière infectieuse dans ce biome. L’exploration sans équipement approprié est fortement déconseillée.",
+
+"PDAInsanityWarning": "Avertissement : instabilité cognitive détectée.<delay=0><duration=3000>\nUne exposition prolongée à un environnement infecté par la peste présente de graves risques pour votre santé physique et mentale.<delay=3100><duration=7000>",
+    
+    "Ency_InfectedArchitectInstructions": "Processus de destruction du Cœur de Peste",
+"EncyDesc_InfectedArchitectInstructions": "L’entité biomécanique a directement et de force transféré des informations sur votre PDA.\n\nTranscription :\nLe cœur de peste doit être détruit, car c’est le seul moyen d’arrêter la Peste Rouge.\n\nVous devez le détruire à la source : l’épave tombée de votre vaisseau dans les dunes, qui abrite cette création impie. Je ne comprends pas pourquoi votre espèce privilégie la cupidité au lieu de la prudence.\n\nJe vous ai fourni les plans pour une technologie capable de coordonner l’anéantissement de la structure de confinement et de la ruche de peste qu’elle abrite. Construisez l’appareil n’importe où avec un accès dégagé au ciel et il s’activera.",
+
+    "Ency_RedPlagueReport1": "Rapport officiel sur la Peste Rouge - #1",
+	"EncyDesc_RedPlagueReport1": "Une bactérie auparavant inconnue et virulente a infecté la matière vivante sur 4546B. Cette bactérie jusque-là inconnue semble être autonome, se nourrissant de l’écosystème local tout en se multipliant.\n\nLes spécimens infectés par la bactérie ont été observés montrant des comportements plus agressifs — il semble que le système immunitaire des créatures de cette planète ne soit pas capable de combattre la maladie.\n\nLes traits d’infection chez l’humain sont actuellement inconnus ; sachez que la réponse immunitaire peut provoquer des hallucinations et d’autres symptômes neurologiques.\n\nUne étude approfondie est fortement recommandée.",
+
+	"Ency_RedPlagueReport2": "Rapport officiel sur la Peste Rouge - #2",
+	"EncyDesc_RedPlagueReport2": "Découverte : Les explorateurs d’Alterra ont rencontré une cache extraterrestre jusque-là cachée en orbite, quelque part dans le système local de 4546B.\n\nDéveloppement : Inconnu, il est théorisé que la bactérie surnommée « La Peste Rouge » résulte de mutations génétiques provenant de souches bactériennes existantes. Cette nouvelle souche est incroyablement virulente et se propage par de multiples moyens ; elle doit être évitée à tout prix.\n\nProfil bactérien : Utilise la matière exposée comme hôte afin de se multiplier et d’adopter de nouvelles mutations génétiques ; se nourrit de la masse des infectés pour se renforcer, indépendamment de la capacité de survie de l’organisme.\n\nSymptômes :\nPhase 1 : Hallucinations, psychose, délires — crises de violence, alors que le système immunitaire de la victime est fortement compromis par la bactérie.\nPhase 2 : La bactérie commence à muter intensément l’hôte afin d’exploiter efficacement l’énergie de sa victime. Symptômes physiques inconnus. L’agressivité envers autrui devient plus sévère. La créature agit de manière encore plus violente en raison de stimuli écrasants.\nPhase 3 : Inconnu.\n\nMesures d’urgence : Alterra a mis en place un champ de force dôme en titane d’urgence, isolant la zone infectée.\n\nDes analyses approfondies de la planète suggèrent l’existence d’une structure artificielle quelque part sur la planète contenant des traces de la peste, ce qui pourrait fournir des informations précieuses.",
+
+    "EncyPath_DownloadedData/RedPlagueResearch": "Recherches sur la Peste Rouge",
+	"EncyPath_Lifeforms/Fauna/PlagueCreations": "Créations de la Peste",
+	"EncyPath_DownloadedData/RedPlagueVictims": "Victimes de la Peste Rouge",
+	"EncyPath_DownloadedData/RedPlagueEnvironmentalData": "Analyses environnementales",
+	"EncyPath_DownloadedData/RedPlaguePersonnelReports": "Rapports du personnel",
+    
+    "ResearchTeamARadioLog": "Hé, ici l’équipe de recherche Peste Rouge 7. Nous manquons de combinaisons de protection biochimique. Où sont passées toutes les fournitures ?<delay=0><duration=7000>\nAlterra semble trop obsédé par l’échantillon de peste pour se soucier de nos problèmes ici-bas. Bordel, un de nos coéquipiers commence à se couvrir de pustules rouges.<delay=7500><duration=7500>\nQuelqu’un peut-il nous livrer des fournitures ? Je joins maintenant les coordonnées.<delay=15200><duration=5000>",
+
+	"ResearchTeamASignal": "Équipe de recherche 7 - Besoin de fournitures",
+
+	"Ency_ResearchTeamADeathLog": "Journal de l’équipe de recherche 7 #2",
+	"EncyDesc_ResearchTeamADeathLog": "[Cris de douleur]\nVous êtes fou ? Ce n’est qu’une maladie, ne laisse pas… ne laisse pas ça te monter à la tête Michael ! S’il te plaît, non ! Michael, s’il te plaît, ne… [???]\n[Traduction non disponible]",
+
+	"Ency_ResearchTeamATabletLog": "Journal de l’équipe de recherche 7 #1",
+	"EncyDesc_ResearchTeamATabletLog": "Quartier général Alterra, ici Cassy Wansin, chercheuse principale de l’équipe de recherche 7. L’expédition vers l’installation submergée a donné des résultats. Nous avons récupéré un artefact unique ressemblant aux tablettes d’accès déjà vues, mais celui-ci est… différent, il brille en rouge et semble lié à la Peste Rouge d’une certaine manière.\nCela a été quasiment confirmé lorsqu’une masse de tentacules a essayé de m’attraper et de me tirer vers une ouverture dans le mur. J’ai réussi à revenir assez vite à mon Seamoth, mais la tablette n’a pas eu cette chance — elle s’est brisée en plusieurs morceaux durant l’altercation. Nous avons néanmoins récupéré les fragments et les avons transportés à notre habitat de recherche pour tenter de la reconstituer — sur quoi nous travaillions jusqu’à ce que Michael tombe gravement fiévreux.\nIl dit qu’il va bien, mais nous savons tous qu’il ne va pas bien. Il ne cesse de parler de sa chaleur intense et de démangeaisons partout… et des hallucinations, il mentionne sans cesse une personne à la peau fondue et à trois têtes. Malgré tout cela, il insiste sur le fait qu’il peut encore travailler sur le projet, et j’ai tendance à lui faire confiance. Après tout, c’est l’un de nos meilleurs chercheurs.\nEuh, bon, nous continuons notre travail ici-bas. Attendez-vous à des nouvelles concernant cette tablette dans quelques jours. Cassy, terminé.",
+    
+    "Ency_CassyPersonnelReport": "Rapport du personnel Alterra : Cassy Wansin",
+	"EncyDesc_CassyPersonnelReport": "[IMAGE DU PERSONNEL MISE À JOUR RÉCEMMENT À PARTIR DES DONNÉES DE SCAN LOCAL]\n\nCet employé d’Alterra est actuellement classé en Classe B avec sous-classification 1987. Le dernier poste attribué à Cassy était chef d’équipe de l’Équipe de recherche Peste Rouge 7.\n\n1. Rapports personnels :\nLe comportement et la personnalité de Cassy ont été décrits par les psychologues d’Alterra et dans les enquêtes internes comme suit :\n- Il manifeste un intérêt marqué pour la découverte et l’étude de nouvelles espèces de faune et de flore.\n- Il souhaite contribuer à la préservation et à la continuité des formes de vie extraterrestres.\n- Il montre également un fort désir de découvrir et de documenter de nouvelles méthodes et découvertes. Les récents rapports de personnalité suggèrent que c’est son principal moteur.\n\n2. Projet Peste Rouge :\nCassy a été promu chef de l’Équipe de recherche Alterra 7 pour ce projet en raison de son intérêt et de son expertise en biologie avancée. Son équipe avait pour mission d’étudier et de prototyper des méthodes pour exploiter la peste et comprendre son code génétique en évolution rapide.\n\n3. Statut actuel :\nLe sujet a été observé pour la dernière fois avec des signes d’avulsion faciale étendue, de dissociation aiguë et de manie, interrompus par intermittence par de brefs moments de rationalité et de peur intense. Statut : disparu.\n\nIl est inconnu si ce membre du personnel Alterra est vivant ou █████",
+    
+    "Ency_RedPlagueSurvivorBase1Log": "Base de recherche Dante Journal #1",
+	"EncyDesc_RedPlagueSurvivorBase1Log": "Euh, hem, ici Base de recherche Dante. Le bouclier énergétique fonctionne bien ! Bien, euh, ouais. Nous manquons un peu de ressources, enfin, mais — mais ça va ! Ça va. Luca a dit qu’il avait besoin de Lochinvar plus que nous, et — et je — je veux dire, il est intelligent, il est intelligent, donc… on va s’en sortir…\nEuh — À part ça ! Nous avons fait des progrès ! Hum, Nick a mis en route le premier prototype du bouclier, nous avons testé quelques échantillons et ils n’ont pas pu passer à travers !\nJ-je pense qu’Akira avait raison quand elle parlait d’utiliser des électroaimants pour créer un champ perturbateur. Vous savez, ma tête est, euh, elle est vraiment claire ces derniers temps aussi, comme si être sous l’eau ne me dérange plus vraiment. C’est — Ouais… C’est agréable.",
+
+	"Ency_RedPlagueSurvivorBase1Log2": "Base de recherche Dante Journal #2",
+	"EncyDesc_RedPlagueSurvivorBase1Log2": "Ici Akira. Un petit problème est survenu : notre dernière livraison n’est pas arrivée. Il n’est pas rare qu’elles aient un jour ou deux de retard, mais cinq jours et Sarah reste totalement silencieuse à la radio, c’est inhabituel.\nSans le cuivre et le plomb que nous devions recevoir, je ne peux pas continuer à travailler sur le bouclier énergétique ni corriger son problème de consommation, et la date limite était déjà serrée pour obtenir un produit viable que nous pouvions reproduire.\nSans parler du manque de nourriture et d’eau. Le pauvre Adam se tire les cheveux en se demandant ce qui s’est passé. Il était déjà sous énormément de stress, et ça ne l’aide pas.\nEn attendant, j’ai fait avec ce que nous avions sous la main pour tenter de tirer quelque chose de notre unique prototype, et j’ai réussi à obtenir quelque chose qui fonctionne. Il ne peut pas empêcher la matière biologique de passer à travers, mais il peut tout de même induire un état de calme chez les créatures dans son rayon, ce qui devrait marcher sur les humains aussi, comme le dispositif original !\nEspérons que cela suffira à contenter Alterra pour l’instant. Maintenant, nous attendons soit des nouvelles de Sarah, soit une livraison de remplacement. Espérons que nous aurons bientôt des nouvelles — je doute qu’Alterra nous oublie... ici…",
+
+	"Ency_RedPlagueSurvivorBase2Log": "Équipe expéditionnaire Lochinvar Journal #1",
+	"EncyDesc_RedPlagueSurvivorBase2Log": "Vous savez, j’en ai vraiment marre de bosser pour ce connard de Luca là-haut à RB Chain. Il agit comme s’il possédait l’endroit. « Sarah, va ici ! » « Sarah, prends ça ! » Qu’est-ce qui va suivre ?! « Sarah, va élever mon putain d’enfant parce que papa ne sera pas là à Noël, faut s’assurer que le chiffre d’affaires est respecté ! »\nQuel imbécile. Je suis censé m’occuper des livraisons pour Adam ! RB Dante tient à peine le coup et Luca pense qu’il peut m’envoyer faire une chasse au trésor à quatre cents mètres sous l’eau pour un ticket doré dans l’usine de Wonka qui n’existe probablement même pas ! Mon dieu !\nSans ces putains de batteries que nous avons fabriquées, je vous dis, nous serions à court d’énergie il y a trente minutes et à court d’oxygène dix minutes après. Je ne me souviens même plus de la dernière fois que j’ai vu le putain de soleil. Le culot de ces gens…",
+
+	"Ency_RedPlagueSurvivorBase2Log2": "Équipe expéditionnaire Lochinvar Journal #2",
+	"EncyDesc_RedPlagueSurvivorBase2Log2": "Je n’aurais jamais dû accepter cette putain d’expédition stupide. Jamais ! J’aurais pu rester chez moi, continuer à écrire mon putain de livre, mais non ! Il a fallu que je signe pour aller courir les courses pour un connard qui va ignorer quiconque sur son chemin juste pour avoir un petit pat sur l’épaule de la part de la direction !\nJ’espère qu’il est fier, m’envoyant ici avec presque rien sur le dos juste pour du stupide minerai d’uranium ! Je vous jure, ce salaud snob va regretter quand je reviendrai à sa base de recherche et que je lui botterai le cul ! Je ne vais pas mourir ici ! Vous m’entendez ? Pas question !",
+
+	"Ency_RedPlagueSurvivorBase3Log": "Base de recherche Chain Journal #1",
+	"EncyDesc_RedPlagueSurvivorBase3Log": "Ici Base de recherche ‘Chain’, rapport sur le projet Bioreacteur — Oui, on garde le nom Chain ! Ça sonne bien ! En plus, le gars qui a inventé le bioreacteur s’appelait Chain ! Comment ça, il s’appelait Chaim ? Ah — merde — on garde Chain de toute façon !\nHem, le bioreacteur fonctionne incroyablement bien. Nous avons commencé à expérimenter des moyens de l’intégrer à nos systèmes de base pour alimenter l’ensemble. Ça va être un énorme succès les gars, je vous le dis ! On va se remplir les poches avec celui-ci.\nNous avons envoyé l’Équipe expéditionnaire Lochinvar chercher plus de ressources pour fabriquer plus de puces électroniques. Et alors si elles étaient censées livrer à Adam ? Adam est mon larbin, ça ne va pas le déranger, et vous savez quoi ? Une fois que je serai chef de projet, je ferai d’Elson mon comptable, et tous travailleront pour MOI ! Haha ! Je vais être riche, bébé !",
+
+	"Ency_RedPlagueSurvivorBase3Log2": "Base de recherche Chain Journal #2",
+	"EncyDesc_RedPlagueSurvivorBase3Log2": "Non, s’il vous plaît ! Mon dieu… J-j’ai tout essayé. J’étais censé être exceptionnel. Je suis trop jeune pour mourir ! Non, S’IL VOUS PLAÎT—\nΔΨ?∴∑⊗φ???ΛΞΩ≠??πππ⸮∴ΣϞϞϞ???≡ΨΨΨ≡∴∴ ⸸⸸μλθ∴??ΩΩΩ≈≈≈ϞϞϞϞ??ΣΣΣ⸮⸮⸮",
+
+    "RedPlagueSurvivorBase1Signal": "Base de recherche Dante",
+	"RedPlagueSurvivorBase2Signal": "Équipe expéditionnaire Lochinvar",
+	"RedPlagueSurvivorBase3Signal": "Base de recherche Chain",
+
+    "Ency_DriveCoreWarningLog": "Un avertissement pour quiconque pourrait voir ceci",
+	"EncyDesc_DriveCoreWarningLog": "Si vous lisez ceci, j’ai déjà quitté ce monde. Que cela vous serve donc d’avertissement. Ne descendez pas ce couloir à moins de vraiment, vraiment vouloir voir ce qu’il y a là-bas — car vous en mourrez en essayant. Dès que quelqu’un s’approche des murs dans cette pièce… il l’attrape. Je me demande cependant… si quelqu’un restait aussi loin que possible des murs, pourrait-il passer ?\nJe pourrais tout aussi bien partager mon histoire. J’ai été conduit ici par une personne mystérieuse. Beaucoup d’autres aussi. Pour quoi faire ? Je n’en suis pas sûr. Il nous a dit que nous pouvions remettre ce vaisseau en marche. Je… je ne sais pas si je peux lui faire confiance. La moitié de son visage — ce n’étaient que muscles et os. Et il semblait que ce qui restait fondait littéralement. Aussi terrifiant que ce fût, je n’ai pas pu m’empêcher de ressentir de la pitié. J’ai l’impression qu’il reste encore un peu d’humanité dans… qui que ce fût.",
+    
+    "ArriveToDome": "Angelina : Nous sommes arrivés sains et saufs à la base de recherche du dôme. Dès que vous êtes prêt, vérifiez votre radio !<delay=11200><duration=6000>\nNe traînez pas trop, car l’avenir de l’humanité repose sur vous !<delay=17381><duration=5340>",
+
+	"Derman_FirstContact": "Inconnu : Allô ? Allô ? Vous êtes là ?<delay=396><duration=3635>\nPDA : Cette fréquence de signal entrante ne correspond à aucun membre connu du personnel Alterra.<delay=4238><duration=5048>\nInconnu : Dites-moi que vous n’êtes pas responsable de ça. Qu’est-ce que vous avez fait, mec ? Vous savez ce que ça implique pour tout le monde ici-bas ?<delay=9399><duration=8720>",
+
+	"Act2MissionInstructions": "Fred : Hé. Nous avons besoin que vous accomplissiez ce que nos équipes de recherche n’ont pas pu faire. Idéalement, elles s’occuperaient de, euh, beaucoup de ces tâches…<delay=222><duration=8375>\nmais il semble que la peste, euh… eh bien. Nous avons 4 objectifs principaux pour vous. Je les télécharge sur votre PDA maintenant.<delay=9558><duration=8765>\nVous devriez voir une liste de contrôle qui décrit tout ce que vous devrez faire.<delay=18996><duration=3618>\nPDA : Enregistrement des exigences de mission sur le PDA.<delay=23018><duration=2792>\nAngelina : Vous serez seul pour l’instant, mais nous nous assurerons de vous tenir au courant de vos progrès.<delay=26457><duration=4814>",
+
+	"Derman_FirstContact2": "Inconnu : Je comprends maintenant. Ils vous ont utilisé pour pouvoir rejeter toute la faute sur vous. Comme je m’y attendais, Alterra gâche tout ce qu’ils touchent. Ce sont des lâches.<delay=0><duration=10510>\nInconnu : J’essaie de vous aider à vous sortir de là, je le jure.<delay=11660><duration=2602>\nPDA : Cet individu semble avoir contourné les protocoles de cryptage standard d’Alterra, ce qui était auparavant considéré comme impossible.<delay=14605><duration=7171>",
+    
+    "TrpChecklistTabHeader": "CHECKLIST",
+	"OpenTrpChecklistButtonText": "Voir la checklist",
+	"ChecklistFirstTimeHeadsUp": "Voir la checklist",
+	"CloseTrpChecklistButtonText": "Voir le journal",
+	"TrpChecklistEntryCompletion": "Objectif principal accompli",
+	"Checklist_OfferingToThePlagueMission": "Trouver et enquêter sur les restes de l’Équipe de recherche 4",
+	"ChecklistDesc_OfferingToThePlagueMission": "Des membres de l’Équipe de recherche 4 ont été signalés disparus. Une enquête approfondie est nécessaire.",
+	"ChecklistAlmostCompleted_OfferingToThePlagueMission": "Une exploration supplémentaire de la base est nécessaire pour récupérer leur technologie.",
+	"Checklist_MrTeethMission": "Récupérer les plans volés du Canon d’Inversion",
+	"ChecklistDesc_MrTeethMission": "Les rapports indiquent qu’un individu infecté de l’Équipe de recherche 7 nommé Cassy est « devenu hors-la-loi » et a volé les données de plans nécessaires.",
+	"ChecklistAlmostCompleted_MrTeethMission": "L’emplacement de la boîte de données est confirmé : elle doit être obtenue dans la salle des machines de l’Aurora.",
+	"Checklist_JohnKyleMission": "Augmenter votre résistance contre la peste",
+	"ChecklistDesc_JohnKyleMission": "L’Équipe de recherche 2 a fait des progrès significatifs dans le développement d’armures de protection contre la peste. Cependant, le contact a été perdu à un moment donné lors de leur expédition dans un système de grottes rempli de restes fossilisés.",
+	"ChecklistAlmostCompleted_JohnKyleMission": "Des cadavres près de l’épave portaient des Armures de Peste. Votre PDA peut récupérer les données perdues si vous scannez leurs restes.",
+	"Checklist_PlagueResearchMission": "Rechercher des ressources exploitables de la Peste Rouge ({0}/6)",
+	"ChecklistDesc_PlagueResearchMission": "Envoyez des échantillons de six ressources uniques via la navette à la base de recherche du dôme pour une étude approfondie.",
+    
+    "Act2MissionsFollowUp1": "Un des quatre objectifs principaux de mission accomplis. Excellent travail.<delay=167><duration=3870>",
+
+	"Act2MissionsFollowUp1Derman": "Derman : Je ne me suis jamais vraiment présenté, n’est-ce pas ? Je m’appelle Derman. Vous avez peut-être entendu parler d’un vaisseau connu sous le nom de Degasi…<delay=116><duration=7174>\nJ’ai vécu parmi leur équipage. Jusqu’au crash.<delay=7950><duration=3500>\nJe savais que me regrouper avec eux m’aurait juste tué, alors je suis allé dans l’autre direction.<delay=12920><duration=4782>",
+
+	"Act2MissionsFollowUp2": "Deux des quatre objectifs principaux de mission accomplis. Alterra commence maintenant à envisager la possibilité d’une augmentation.<delay=169><duration=6617>",
+
+	"Act2MissionsFollowUp2Derman": "Derman : Bonjour, survivant. Alors, cette peste — qu’est-ce qu’Alterra prévoit exactement d’en faire ? Ils ne savent même pas, n’est-ce pas ?<delay=200><duration=7720>\nEh bien, tant que vous promettez de ne pas faire l’idiot, nous pouvons travailler ensemble pour nous assurer que rien ne tourne mal. Je vous tiendrai au courant.<delay=8888><duration=7500>",
+
+	"Act2MissionsFollowUp2DermanTech": "Derman : Hé ? Hé !? T’es là, mec ? J’ai travaillé sur quelque chose. Si tu vas exploiter la peste, aussi stupide que cette idée m’ait paru…<delay=330><duration=10777>\nJ’ai inventé un appareil qui permet d’extraire les parties utiles de n’importe quel morceau de viande mystérieux que tu pourrais avoir sous la main.<delay=11670><duration=7039>\nJe suis sérieux. J’espère que ça aide.\nPDA : Plans téléchargés sur le PDA.<delay=20480><duration=6000>",
+
+	"Act2MissionsFollowUp3": "Trois des quatre objectifs principaux de mission accomplis. Félicitations ! Alterra vous élit employé du moment.<delay=192><duration=7632>",
+
+	"Act2MissionsFollowUp3Alterra": "Fred : Toutes nos recherches aboutissent enfin à quelque chose. Il est temps que vous sachiez de quoi il s’agit.<delay=102><duration=7595>\nAngelina : Nous continuons de capter des signaux de communication venant du fond des cavernes, et ce n’est rien de ce que nous avons déjà vu.<delay=8519><duration=5924>\nAngelina : Cela ne correspond en rien à la peste. Ce qui est encore plus intrigant, c’est que cela montre des signes d’intelligence. Quoi que ce soit, nous pensons que ça vaut absolument la peine d’être étudié.<delay=15204><duration=9663>\nFred : Continuez. Il est impossible d’atteindre cet endroit sans le bon équipement, mais une fois que vous aurez accompli votre quatrième et (espérons-le) dernier objectif, nous pensons que vous serez prêt.<delay=25247><duration=10593>",
+
+	"Act2MissionsFollowUp3Joke": "Vous n’êtes plus l’employé du moment.",
+
+	"Act2MissionsFollowUp4": "PDA : Tous les objectifs principaux de mission accomplis.<delay=0><duration=2837>\nAngelina : Félicitations ! C’est tout. Maintenant, pour ce que nous attendions tous. Fred a tout planifié, donc je vais le laisser vous en dire plus.<delay=2954><duration=8589>\nFred : Sommes-nous certains que nous devrions ? Je veux dire, je ne peux pas vraiment promettre que c’est une bonne idée. Euh, oui, nous avons localisé une entrée vers la grotte.<delay=11889><duration=9398>\nElle est bloquée par un mur massif de, euh, chair — vous devrez donc l’ouvrir avec votre grappin. Nous vous tiendrons au courant dès que vous arriverez.<delay=21730><duration=10000>",
+    
+    "SendManifestationsShuttleReminder": "Angelina : Hé ! N’oubliez pas d’envoyer toutes manifestations uniques de la peste vers nous via la navette pour nos recherches.<delay=0><duration=6000>",
+
+	"ItemGoal_WarperHeart": "Fred : Cet objet que vous avez ramassé pourrait être <i>extrêmement</i> précieux pour la biotechnologie.<delay=330><duration=3544>\nN’oubliez pas de nous le montrer à un moment donné, afin que nous puissions… l’étudier correctement.<delay=5188><duration=4823>",
+
+	"ItemGoal_MysteriousRemains": "Ces restes partiellement digérés contiennent de l’ADN provenant d’une multitude de formes de vie différentes. Veuillez envoyer un échantillon à Alterra.<delay=168><duration=8252>",
+
+	"ItemGoal_NeuralPlagueMatter": "Cet échantillon de peste contient plus de neurones que le cerveau humain moyen. Dans les bonnes conditions, il pourrait atteindre la conscience de soi. Une étude plus approfondie est requise par Alterra.<delay=224><duration=11458>",
+
+	"ItemGoal_NeutralizedPlagueMatter": "La matière de peste neutralisée présente des risques minimaux pour le corps humain. Cependant, elle doit toujours être considérée comme une menace pour l’humanité, car elle l’est. Envoyez-la à Alterra dès que possible.<delay=209><duration=12218>",
+
+	"ItemGoal_AmalgamatedBone": "La violence n’est généralement pas la solution, mais lorsque le moyen le plus fiable d’obtenir ces os est de les prendre sur des cadavres, Alterra l’autorise.<delay=115><duration=7918>\nSi vous envoyez ceci à Alterra, ils devraient pouvoir développer une nouvelle technologie à partir de cette découverte.<delay=8394><duration=5509>",
+    
+    "UnlockFollowUp_Gilbert": "Angelina : Merci de nous avoir aidés à étudier toutes ces manifestations uniques de la peste.<delay=0><duration=3797>\nNous avons découvert une… application intéressante que nous aimerions partager avec vous.<delay=3755><duration=5519>",
+
+	"UnlockFollowUp_BoneRegurgitator": "Fred : Nos chercheurs ont inventé quelque chose qui, euh, pourrait vous être utile. Transmission des plans en cours.<delay=270><duration=6075>",
+
+	"UnlockFollowUp_NeuralMatter": "Angelina : Cet échantillon de matière neuronale que vous nous avez envoyé est… très intéressant ! Vous pourrez peut-être expérimenter un peu avec, mais soyez prudent.<delay=140><duration=7040>",
+
+	"UnlockFollowUp_PlagueKnife": "Fred : Comme prévu, nous avons trouvé une utilité pour cet échantillon d’os amalgamé que vous nous avez envoyé. Il peut être transformé en, tenez-vous bien, un couteau !<delay=432><duration=8290>\nIl est assez solide pour couper même la chair de la peste. Malheureusement, il est euh, interdit sur les fabricateurs Alterra standard…<delay=9434><duration=9564>",
+    
+    "HoverPetPDA1": "Une forme de vie à proximité a quelque chose à vous montrer. Veuillez obtenir plus d’informations.",
+
+	"HoverPetPDA2": "Les scans révèlent une créature non identifiée. Votre mission exige que vous la suiviez.",
+
+	"HoverPetPDA3": "Spécimen inconnu détecté à proximité ; une investigation supplémentaire est requise.",
+
+	"HoverPetPDA4": "Inconnu : Suivez-moi…",
+
+	"MazeBaseDiscoveryGoal": "Angelina : Ces relevés de structure que je capte — ils sont fous. Pas étonnant que nous ayons perdu sa trace.<delay=363><duration=5773>\nJe crains que vous deviez entrer pour découvrir ce qui s’est passé. Ne vous perdez pas.<delay=6406><duration=11688>",
+
+	"MazeBase": "[CORROMPU]",
+
+	"MazeBaseDiscoveryGoalSignal": "Relevés d’énergie anormaux",
+
+	"Ency_WestLog1": "Journal de Joseph West #1",
+
+	"EncyDesc_WestLog1": "Je m’appelle Joseph West. Je suis un… spécialiste des maladies infectieuses et médecin chercheur à bord de l’Aurora juste avant… l’incident. Nous sommes entrés en contact avec une cache flottante juste à l’extérieur du système 4546B, remplie d’une sorte de technologie extraterrestre.\nNous n’avons pas… je n’ai pas… l’infection — nous l’avons amenée à bord en espérant que l’information pourrait être utilisée pour combattre les Kharaa. Mais tout ce que nous avons trouvé était bien pire… quelque chose d’ancien… quelque chose de vivant.\n[Toux] Je suis seul maintenant, et je développe… des pustules rouges. Je ne pense pas qu’il me reste longtemps. Tout ce que je peux espérer, c’est que… que… je puisse partir plus paisiblement que mes camarades d’équipage.",
+
+	"Ency_WestLog2": "Journal de Joseph West #2",
+
+	"EncyDesc_WestLog2": "Cela fait trois jours depuis le crash… je pense. Je ne sais plus. Les jours sont aussi sombres que les nuits. Je ne peux pas tout suivre. J’ai faim… tellement faim.\nJe suis sûr qu’il y a quelque chose qui m’observe depuis l’extérieur de la trappe — je suis Joseph West… j’étais spécialiste des maladies — le spécimen désigné la Peste Rouge est… libre.\nIl va tout consumer… j’entends maintenant les chuchotements… Quelqu’un doit arrêter ça… mais pas moi… [tousse violemment].\nJe suis… trop faible. Trop de sang… l’infection… elle recouvre maintenant une grande partie de mon corps…",
+
+	"Ency_WestLog3": "Journal de Joseph West #3",
+
+	"EncyDesc_WestLog3": "Je me retrouve à courir sans fin à travers les couloirs sinueux de ma propre base, sans jamais attraper un moment pour me reposer. Si je cesse de construire, que me arrivera-t-il ?\nJe ne peux pas m’arrêter… ça me récompense pour l’adorer, le protéger, le nourrir. Il… il doit être mon <i>but</i> ! C’est la seule chose qui me procure de la joie !\nNote : Des pas frénétiques et l’utilisation constante de l’outil de construction Alterra peuvent être entendus tout au long de cet enregistrement.",
+
+	"Ency_WestLog4": "Journal de Joseph West #4",
+
+	"EncyDesc_WestLog4": "[Respiration irrégulière, possiblement asphyxie]\nOmbres… elles sont… des chuchotements, ce sont des voix, elles crient et se mélangent et appellent… Ma… mère… Elle me parle, et me raconte l’histoire qu’elle racontait toujours…\n<i>Nous sommes des papillons dans un bocal, cherchant la lumière, la flamme des bougies et… <b>le but</b></i>. Je viens… M-m-maman, je vais voler… libre ! Je vais là où je dois être… La ruche… me réclame !\nINCONNU : <color=#990000><i>Tu nous appartiens. La peste… réclame tout…</i></color>",
+
+	"PDAUnlockPlagueAltar": "Cette machine ne suit aucune norme technologique établie, et a probablement été responsable de la destruction de cette installation. Manipulez-la avec précaution.<delay=205><duration=9489>",
+
+	"PlagueAltarMissionFollowUp_Alterra": "Angelina : Quelle découverte vous avez faite là-dessous. Un autel dédié à l’adoration de la peste ? C’est fascinant !<delay=0><duration=7195>\nAngelina : Fred, où en est l’analyse ?<delay=7820><duration=2414>\nFred : Je ne comprends pas les données du plan. C’est complètement obfusqué, rempli de code illisible, de redondances et d’algorithmes confus, et — et pourtant, si je le branche dans un PDA, ça fonctionne. Parfaitement.<delay=10412><duration=14524>\nFred : Ça ne devrait pas exister, je ne comprends pas… pourquoi ? Ou comment ?<delay=25383><duration=5318>\nAngelina : Eh bien, je ne comprends pas vraiment non plus, mais je pense que ce serait amusant de bricoler avec, non ?<delay=31326><duration=5899>",
+    
+    "CassyEncounter_Aurora": "Cassy : Hé, tu es enfin là. Nous t’attendions. Pourquoi ne nous rejoins-tu pas ? *gémissements* Si nous avons de la chance, nous pourrons fuir la planète ensemble.<delay=300><duration=13120>\nAngelina : Il est impossible… Cassy ? Tu es vivant, après ce qui est arrivé à l’équipe de recherche 7 ? Comment ?<delay=13800><duration=7000>\nCassy : Je suis aussi vivant que je peux l’être. Je ne me suis jamais senti aussi bien ! *tousse*<delay=21000><duration=8445>\nAngelina : Nous avons besoin de tes données du canon d’inversion, et je sais que tu les as laissées quelque part dans ce vaisseau. Ne nous fais pas foirer ça, Cassy.<delay=29522><duration=6693>",
+
+	"CassyEncounter_InsideAurora": "Cassy : Venez nous rejoindre dans la salle du cœur moteur. Nous devons remettre cette chose en ligne ! – S’il y a bien une chose que nous désirons tous, c’est être libres parmi les étoiles !<delay=250><duration=14889>\nAngelina : Cassy, s’il te plaît, nous avons besoin de ton aide ! Pourquoi ne nous réponds-tu pas ?<delay=15695><duration=5200>",
+
+	"LocationGoal_TrpDriveCoreHallway": "Fred : Tu es si proche d’un de nos objectifs. D’après nos scans, les données perdues de Cassy doivent se trouver près du cœur moteur.<delay=0><duration=7500>\nMais… la façon dont il t’a parlé… je n’arrive pas à croire que nous pensions simplement suivre un cadavre muté tout ce temps.<delay=7500><duration=8700>",
+
+	"PDADetectingDriveCoreBlueprintData": "Détection des données de plan nécessaires au sol de cette pièce. Veuillez récupérer les données.",
+
+	"UnlockGoal_PlagueGrappler": "Angelina : On dirait que ce traître a tout embrouillé avec les données du plan. Sérieusement, c’est quoi ce dispositif ?<delay=310><duration=7004>\nCe n’est clairement pas le canon d’inversion. Bon, ça fera l’affaire.<delay=8428><duration=4763>",
+    
+    "LostRiverCyclopsBroadcast": "PDA : Détection d’un appel de détresse préenregistré. Lecture en cours.<delay=0><duration=3807>\nJohn Kyle : Nous nous dirigeons vers une structure que nos scanners ont repérée. J’ai l’impression qu’elle contiendra des réponses.<delay=4021><duration=5159>\nNous sommes si proches. Qu’est-ce que tu veux dire par les combinaisons ne fonctionnent pas ? Il ne peut pas être trop tard déjà, continuez d’essayer !<delay=9833><duration=7899>\nQue diable se passe-t-il !? L’un de nos coéquipiers nous sabote-t-il !? Ah, je comprends— Même avec les combinaisons, la Peste a eu amplement le temps d’infester nos corps.<delay=18338><duration=11099>\nQue veut-elle de nous ? Si seulement j’avais été quelques minutes plus rapide...<delay=29423><duration=6777>\nPDA : Coordonnées du signal corrompues. La localisation exacte ne peut être déterminée. Les données suggèrent qu’il provient à proximité d’une structure extraterrestre dans un vaste système de cavernes.<delay=36220><duration=11397>",
+
+	"Ency_PlagueArmorCommentary": "Résistance contre les dangers avancés de la peste",
+
+	"EncyDesc_PlagueArmorCommentary": "Les combinaisons de protection biochimique ont rapidement montré leurs limites. La technologie d’Alterra peut être étanche, mais la peste a prouvé maintes fois qu’elle fera tout pour atteindre sa cible. Ces attaques \"pénétrantes\" de la peste deviennent de plus en plus fréquentes chaque heure. Heureusement, je crois que nous avons enfin trouvé un moyen de protéger les gens.\nJe l’appelle l’Armure contre la Peste. Paradoxalement, elle est fabriquée à partir de la peste elle-même. Elle complète la combinaison de protection biochimique, créant une boucle de rétroaction qui empêche la peste de progresser vers le porteur.\nLa peste peut être intelligente, mais il existe une particularité des cellules de peste individuelles qui peut les rendre confuses. Cette combinaison est conçue pour maximiser ce comportement, ce qui fait que les cellules tenteront perpétuellement de fusionner avec la combinaison, sans jamais atteindre leur objectif.\nLa mauvaise nouvelle ? J’ai bien peur qu’il soit peut-être trop tard. La peste a déjà infiltré notre vaisseau. J’espère que cela pourra aider quelqu’un d’autre.",
+
+	"LocationGoal_PlagueCyclops": "Détection de plusieurs membres du personnel Alterra dans la zone.<delay=0><duration=3620>\nAvertissement : un scan contradictoire suggère qu’il n’y a aucun signe de vie humaine à proximité.<delay=3654><duration=5771>",
+
+	"PlagueArmorFragment": "Fragment d’armure contre la peste",
+    
+    "PlagueCaveSignalDescription": "Entrée de la caverne de la peste\n400-900m (pas d’accès pour le Cyclops)",
+
+	"PlagueOrigin": "Dispositif mystérieux",
+	"Ency_PlagueOrigin": "Chambre d’isolement",
+	"EncyDesc_PlagueOrigin": "Ce conteneur fonctionne comme une chambre à vide et est entièrement vide à l’intérieur, dépourvu de gaz, poussière, saleté, bactéries, matière organique, etc., ce qui suggère qu’aucune vie ne pourrait survivre à l’intérieur. Sa conception indique qu’il fonctionne comme une sorte de chambre de confinement, avec un appareil inhabituel agissant sur son contenu, et il a été stérilisé à un moment donné. Il semble également y avoir une fine couche de matériau conducteur dans le verre, suggérant qu’il pourrait fonctionner de manière similaire à une cage de Faraday. Montrant une similarité avec le dôme entourant le cratère, le vide à l’intérieur est complètement isolé du reste du monde, encore plus que toute autre méthode de confinement observée sur la planète.",
+
+	"PlagueCaveEntranceHint": "Fred : Tu es juste au-dessus de l’entrée maintenant. Espérons que quelques tirages avec le Grappler suffiront à ouvrir ce truc. On compte sur toi.<delay=0><duration=7154>",
+
+	"FleshCaveEntranceGoal": "Derman : Hé, mais où diable es-tu en ce moment ? D’après toutes mes données cartographiques, il ne devrait pas y avoir de caverne ici.<delay=57><duration=6485>",
+
+	"Ency_FleshCaveLocalScanGoal": "Données de scan local de la caverne de la peste",
+	"EncyDesc_FleshCaveLocalScanGoal": "Bien que la datation au carbone des sédiments locaux montre que certaines portions de cette caverne existent depuis des millions d’années, la génétique unique des formes de vie à l’intérieur suggère que le système a été isolé du reste du monde pendant environ mille ans. Les parois de la caverne sont constituées d’un seul organisme, entièrement composé d’un organe semblable à de la peau capable de sécréter un composé acide. En essence, la caverne qu’il englobe est devenue son tube digestif complet. Ce gigantesque organisme semble activement déplacer et dissoudre la matière rocheuse adjacente, élargissant le volume de la caverne, peut-être pour se nourrir ou pour un autre motif inconnu.\n\nL’activité volcanique a considérablement progressé vers l’extérieur de la caverne, ce qui a des effets particuliers sur la matière de la peste à l’intérieur. Bien que cela stimule une croissance rapide et crée un écosystème chaud et florissant, les flux de magma fondent activement une partie de la chair de la caverne, provoquant l’écoulement de sang et d’autres fluides vers le bas du gouffre.",
+
+	"FleshCaveGlitch": "Les scans environnementaux suggèrent que ce biome a récemment<delay=0><duration=3500>\n???<delay=3600><duration=2000>\nIl est dans l’intérêt d’Alterra que vous ne soyez pas digéré.<delay=5500><duration=3000>",
+
+	"FleshCaveConnectionLost": "Derman : Ok, sérieusement, mec, où es-tu ? L’interférence radio—",
+
+	"ShrineSOS": "INCONNU : ... --- ... ... --- ...<delay=0><duration=13000>",
+    
+    "Ency_CallOfAsteroid": "Une percée médicale grâce à vos efforts",
+	"EncyDesc_CallOfAsteroid": "Félicitations, chercheur ! Grâce aux échantillons de Peste Rouge que vous avez envoyés à Alterra, l’humanité a réalisé des avancées médicales sans précédent.\nUn échantillon dilué de la Peste Rouge (nom officiel en attente) a été transporté hors du système stellaire 4546 via phasegate. Grâce aux développements modernes du transport FTL, il a été livré en urgence à son patient — le PDG d’Asteroid. Il avait été gravement blessé auparavant, entraînant l’amputation complète de son bras droit. Les détails précis de l’incident sont classifiés.\n\nDétails de la procédure :\n1. Des anesthésiques ont été administrés rapidement au patient.\n2. Le bras amputé du patient a été ouvert, exposant os et muscles à l’air.\n3. Un moule fabriqué en forme de bras a été placé sur l’épaule du patient.\n4. La matière de la Peste Rouge a été insérée dans le moule via un petit tube.\n5. Une pression a été appliquée à travers le tube pour assurer un remplissage uniforme.\n6. Les cellules de la peste ont commencé à se solidifier et à fusionner avec le sang, les tissus et les os exposés du patient.\n7. Des nutriments ont été injectés dans les cellules de la peste pour accélérer le processus.\n8. Un bras entièrement fonctionnel a pu pousser en moins de 30 minutes.\n9. Le moule a été retiré, et une nouvelle peau s’est rapidement formée sur son bras à l’exposition à l’air.\n10. Le patient se rétablit maintenant, déclarant se sentir « mieux que jamais ».\n\nGrâce à son paiement généreux à Alterra, une augmentation de 5 % pourra vous être accordée à un moment donné. N’oubliez pas que les informations contenues dans ce document relèvent de votre contrat et sont donc entièrement confidentielles.",
+
+	"CallOfAsteroidRadio": "Fred : Hé, ici Elson ! Tu sais, j’entends un appel. Et c’est l’appel d’Asteroid. Exact ! Les résultats sont enfin arrivés, le siège a déjà vendu un prototype fonctionnel de la Peste Rouge à l’une des plus grandes medcorp de la fédération !<delay=0><duration=17215>\nFred : Tu te rends compte ? Alterra mettant aux enchères leur précieuse biochimie extraterrestre pour soigner un humain blessé. On dirait qu’ils n’ont jamais pris un cours de business, tu vois ? Si tu cures le patient, tu perds un client.<delay=17424><duration=15360>\nFred : Oh, attends.<delay=34152><duration=617>\nAngelina : Tu sais qu’il en a commandé environ 50 de plus, non ?<delay=35873><duration=2731>\nFred : Cinquante ?<delay=37927><duration=893>\nFred : Euh, d’accord, donc, je suppose qu’ils savaient ce qu’ils faisaient, parce que le type demande maintenant un envoi de 50 capsules supplémentaires.<delay=40913><duration=8673>\nFred : Les médecins disent qu’il ne cesse de parler de cette montée… Eh bien, ça paie mon loyer, alors continuez ce que vous faites !<delay=49971><duration=8565>",
+    
+    "BananaphobiaMessage": "Angelina : Qu’est-ce que c’est que ça ? J’avais demandé le régulier. C’est une banane ? Tu sais que j’ai la bananaphobie.",
+
+	"B3NTCacheSignalDescription": "Cache de tablettes",
+	"ShrineBaseReceptacle": "Réceptacle",
+	"ShrineBaseReceptacleInteract": "Insérer le catalyseur de peste",
+	"B3NT_ShrineBaseEntry": "Inconnu : Je n’ai pas peur de ce qui vient ensuite. Je n’ai aucune raison d’avoir peur… pas avec la vie que j’ai vécue.<delay=0><duration=6511>\nJ’ai vu des étoiles brûler et s’éteindre.<delay=7961><duration=3031>\nDes dynasties sur des planètes lointaines s’élèvent.<delay=11453><duration=2818>\nEt les dieux des hommes tombent.<delay=14556><duration=2172>\nEt maintenant, cela vient pour moi.<delay=17487><duration=2283>\nMon plus grand miracle.<delay=20751><duration=1607>\nMa panacée.<delay=23009><duration=1230>\nMon ascension.<delay=25554><duration=951>\nPeut-être cherche-t-il à me détruire, à me consumer dans son esprit collectif comme il l’a fait avec le reste de mon peuple.<delay=28521><duration=5931>\nMais ce serait un gaspillage, et il le sait. Il vient vers moi non pas pour tuer.<delay=35454><duration=6432>\nMais pour s’incliner.<delay=42993><duration=1476>",
+
+	"FakeBennetPDAMission": "Détection de relevés d’énergie inhabituelles dans le système de cavernes. Une investigation est conseillée.",
+	"B3NT_InitialMeeting": "Inconnu : Bonjour, Plongeur.<delay=0><duration=2500>\nS’il vous plaît, n’ayez pas peur. Je ne vous veux aucun mal.<delay=2700><duration=4300>\nJe vous parle directement à travers un fragment de moi-même que j’ai téléchargé sur votre PDA personnel. Votre radio n’est pas compromise.<delay=7585><duration=7904>\nJe comprends que vous devez avoir beaucoup de questions. Elles recevront une réponse en temps voulu. Vous devez trouver ma forme physique rapidement ; le temps est essentiel.<delay=16664><duration=10365>",
+
+    "B3NT_TabletInstructions": "Inconnu : La clé de mon sanctuaire se trouve dans une cachette à proximité.<delay=0><duration=2900>\nUne fois que vous l’aurez localisée, je pourrai déverrouiller la porte pour que vous puissiez récupérer la tablette.<delay=3005><duration=4000>",
+	"B3NT_Introduction": "Inconnu : Il y a longtemps que je n’ai pas eu le plaisir de parler à une autre âme vivante. Je craignais d’être obligé d’attendre que mon sanctuaire s’éteigne.<delay=421><duration=8753>\nMa désignation d’espèce est B3-NT. Cependant, vous trouverez peut-être plus approprié de m’appeler Bennet.<delay=10432><duration=8000>\nJe comprends que votre espèce ne se réfère pas à elle-même par des désignations comme la mienne ▘▚[once]▞ le faisait.<delay=19000><duration=5000>\nBennet : Bien que nous venions de nous rencontrer, et que vous traitiez probablement beaucoup d’informations, j’ai besoin de votre aide, et inévitablement, vous aurez besoin de la mienne.<delay=24792><duration=10723>\nIl n’y a personne d’autre qui possède autant de connaissances sur l’organisme PN-CA que moi. Après tout, c’est moi qui l’ai créé. Et moi qui ai été chargé de ▛┇[détruire]▄ celui-ci.<delay=36033><duration=12516>\nC’est mon plus grand regret d’avoir échoué ce jour-là.<delay=49590><duration=3609>\nMaintenant, cependant, vous pouvez m’aider à reprendre là où je me suis arrêté, et ensemble nous pourrons éradiquer cette ▚ [ROUGE] ▛ [PESTE] ┫ comme vous l’avez nommée.<delay=54139><duration=9220>\nAcquérez un échantillon d’une formation cristalline de la peste pour que je puisse l’étudier, puis nous avancerons avec rapidité. Il suffit de le placer dans le réceptacle lorsque vous êtes prêt.<delay=64755><duration=9827>",
+	"B3NT_CatalystResponse": "Bennet : Plongeur, je vous remercie. Vous avez survécu plus longtemps que quiconque n’ayant précédemment été en contact avec la Peste Rouge.<delay=0><duration=7934>\nJ’aimerais vous faire une requête. Le cœur de cette maladie— il se trouve dans les dunes, tombé de votre vaisseau écrasé.<delay=8751><duration=8944>\nJe vous implore : faites ce que je n’ai pu faire. Mettez fin à cela, et détruisez le Cœur de la Peste.<delay=19090><duration=6588>\nAlterra tentera de vous arrêter. Ils vous mentiront, comme ils l’ont fait depuis le ▛[tout]▞▖début. Ne les écoutez pas.<delay=26783><duration=7500>\nCe dispositif devrait vous aider à le localiser.<delay=34000><duration=2000>",
+	"B3NT_PlagueHeartExplanation": "Bennet : Vous vous souvenez que j’ai mentionné avoir créé la Peste Rouge, oui ? Je me rends compte que vous méritez une explication.<delay=0><duration=7876>\nMon peuple, les Architectes comme vous nous appelez, a été ▀[ravagé]▟ par une maladie connue sous le nom de bactérie Kharaa.<delay=9070><duration=6603>\nElle les a consumés, et menaçait de les mener vers l’extinction. Ils sont donc partis à la recherche d’un remède.<delay=16707><duration=7399>\nIls se sont tournés vers le seul qui possédait l’intelligence pour les sauver : moi.<delay=25936><duration=5808>\nJ’ai créé une nouvelle bactérie, capable d’apprendre et de s’adapter pour détruire non seulement le Kharaa, mais tous les pathogènes nuisibles pouvant infecter nos corps.<delay=33335><duration=8910>\nUne panacée. Enfin, ils acceptaient mon travail. Ils ne voyaient pas ma création comme ▛[inférieure]╋▖ parce qu’elle n’était pas faite de technologie, mais de vie.<delay=43359><duration=11854>\nHélas, ce n’était pas le Kharaa qu’ils auraient dû craindre.<delay=55929><duration=3898>",
+	"B3NT_InfectionTrackerUnlock": "Ajout des plans du dispositif de suivi PN-CA à la base de données.",
+	"LeavePlagueCave": "[Statique]<delay=0><duration=2300>\nFred : Hé. Hé ! Nous regagnons la connexion. Honnêtement, je suis un peu choqué que vous soyez sorti vivant.<delay=2500><duration=5000>\nAngelina : Alors, que s’est-il passé là-dedans ?<delay=8300><duration=2300>\nJe veux dire, pas que nous attendions de vous que vous parliez. Mais, si vous avez trouvé quelque chose d’important<delay=10867><duration=6035>\np.d.a.? : conNeCtIon foRceFullY disConnEctEd.<delay=16734><duration=2627>",
+	"B3NT_DermanInteraction": "Bennet : Vous avez pris à cœur mon avertissement concernant Alterra, je vois. M- Merci. J’ai eu des millénaires pour réfléchir à comment détruire le Cœur de la Peste et j’en suis venu à une conclusion— que vous pourriez apprécier.<delay=0><duration=15985>\nNous ciblons le cœur avec plusieurs explosifs à haut rendement. Suffisamment pour oblitéra toutes les particules possibles que<delay=16838><duration=6500>\nDerman : Voilà ! J’essayais de vous joindre, mec. Quelle mise à jour de cryptage avez-vous reçue ?<delay=24200><duration=4825>\nEuh, ai-je interrompu quelque chose ?<delay=29311><duration=2298>\nBennet : Qui ?<delay=31674><duration=1149>\nDerman : Non… non, absolument pas. Mec, tu dois détruire ton PDA MALÉFIQUE !<delay=32954><duration=6729>\nDerman : Ici, j’ai les plans pour des explosifs ! Il suffit d’attacher votre PDA à l’un d’eux et Alterra pourra vous en fournir un de remplacement.<delay=40241><duration=6401>\nBennet : Silence. Vous n’êtes qu’une coquille, une marionnette pour la maladie qui ravage votre corps. Pestiféré insolent.<delay=46177><duration=8505>\nNe prêtez pas attention à ses paroles, Plongeur. Elles n’ont aucune importance.<delay=55400><duration=4830>\nJe télécharge les instructions sur votre appareil. Il est probable que maintenant, Alterra et la peste elle-même soient au courant de nos actions.<delay=60920><duration=8115>\nN’hésitez pas. Le temps est essentiel.<delay=69780><duration=4223>",
+	"B3NT_AngelinaInteraction": "Angelina : Avons-nous enfin une connexion ? Je ne peux vraiment pas dire si vous allez bien là-dedans. Tout est si… brouillé.<delay=0><duration=7000>\nQuel est le problème avec ces plans d’explosifs sur votre PDA ?<delay=7535><duration=3185>\nS’il vous plaît, ne détériorez rien qui pourrait être précieux pour nos recherches. Parce que,<delay=11156><duration=4223>\nBennet : Considérer la recherche plus précieuse que la vie a été ma propre chute. Ne répétez pas mon erreur.<delay=14653><duration=8077>",
+	"B3NT_PlagueHeartReaction": "Bennet : Ici repose la plus grande erreur que cet univers ait jamais vue.<delay=0><duration=4500>\nLe summum de l’évolution, limité uniquement par les lois fondamentales de notre univers.<delay=4751><duration=5888>\nJ’aurais dû savoir que notre méthode de confinement était insuffisante.<delay=10899><duration=5000>",
+    
+    "ChaosPlagueHeart": "Épave encapsulée dans une météorite",
+	"PlagueHeartCountdown": "Le Cœur de la Peste doit être détruit :",
+	"BennetExplodePda": "B3-NT : Heureusement, je n’ai perdu qu’un fragment de ma conscience.<delay=0><duration=4000>\nJ’ai déjà été assimilé à la conscience collective. Vos efforts sont vains.<delay=4100><duration=5200>",
+	"AlterraSatelliteReaction": "Fred : Angelina… ? Je détecte un pic d’énergie ionique dans la haute atmosphère.<delay=0><duration=4850>\nAngelina !? Ça devient plus important, c’est… le système atteint sa limite ? D’où cela provient-il ?<delay=5852><duration=5491>\nOh, merde.<delay=11803><duration=1451>",
+	"ObeyBennetFreedomLine": "Bennet : Sous mon règne, je peux vous accorder la liberté qu’Alterra vous a volée dans leur quête de pouvoir.<delay=400><duration=8000>",
+	"ObeyBennetLine": "Bennet : C’est fait. Vous avez accompli un grand acte aujourd’hui, plongeur.<delay=216><duration=4608>\nEt, je suis désolé.<delay=5136><duration=2760>\nVous pouvez croire que je vous ai trahi. Vous pouvez croire que j’ai été poussé à détruire ce monde.<delay=8617><duration=5640>\nSachez que mes intentions ont été aussi pures qu’au tout début.<delay=14809><duration=5328>\nAussi longtemps que je me souvienne, j’ai été forcé d’attendre. Rien que les souvenirs de ceux que j’ai connus pour me tenir compagnie.<delay=20594><duration=10705>\nJe sais que vous comprenez ce sentiment.<delay=32139><duration=3168>\nJ’ai vu des étoiles brûler et s’éteindre.<delay=36387><duration=4968>\nDes dynasties sur des planètes lointaines s’élèvent, et des espèces entières disparaissent.<delay=41500><duration=7369>\nLa mienne n’en fera pas partie.<delay=49492><duration=5280>",
+	"DisobeyBennetLine1": "B3-NT : Vos actions défient toute raison. Obéiriez-vous vraiment à ceux qui vous ont mis dans des menottes dorées plutôt qu’à celui qui n’a cherché qu’à vous aider ?<delay=0><duration=11695>", 
+	"DisobeyBennetLine2": "B3-NT : Alterra vous fait croire que ce que vous faites est noble. Et je ne doute pas qu’ils vous aient convaincu que je cherche la destruction et le servage au service de la peste.<delay=0><duration=11440>\nMes intentions ont été aussi pures qu’au tout début.<delay=11775><duration=5988>\nAussi longtemps que je me souvienne, ma solitude a été accompagnée des cris de milliers. Des milliers dont le sang macule mes mains.<delay=18233><duration=11127>\nJe ne m’attends pas à ce que vous compreniez.<delay=30120><duration=3821>\nJ’AI VU DES ÉTOILES BRÛLER ET S’ÉTEINDRE.<delay=34299><duration=5564>\nDES DYNASTIES SUR DES PLANÈTES LOINTES S’ÉLÈVENT ET DES ESPÈCES ENTIÈRES DISPARAISSENT.<delay=40019><duration=6301>\nLA MIENNE N’EN FERA PAS PARTIE.<delay=46521><duration=4245>", 
+	"BennetPostAct2SanctuaryVisit": "B3-NT : Je pressentais que vous reviendriez ici.<delay=0><duration=3000>\nBien que j’apprécie votre visite, cet endroit, ce laboratoire, ne me sert plus à rien.<delay=3312><duration=8617>\nIl a été conçu pour me protéger jusqu’au moment où il serait temps pour moi d’agir. Et ainsi il l’a fait.<delay=12121><duration=7585>\nJe trouve peu de nécessité aux frontières ou aux obstacles, qu’ils soient des murs physiques ou des émotions persistantes.<delay=20066><duration=9313>\nCependant, peut-être que cet endroit a encore un sens pour vous… pour une raison quelconque.<delay=29739><duration=6841>\nLorsque vous serez prêt, je vous implore de laisser cet endroit derrière vous. Il reste encore du travail à accomplir.<delay=36939><duration=7777>",
+    
+    "Ency_PlagueHeartRetrieval1": "Journal de la baie de quai externe de l’Aurora #1",
+	"EncyDesc_PlagueHeartRetrieval1": "Tout a commencé lorsque nos capteurs longue portée ont détecté un signal de détresse en orbite de la planète. Certains d’entre nous pensaient qu’il pouvait s’agir du Degasi, utilisant ce qui restait de la puissance de leur vaisseau pour le support de vie et un SOS de courte portée.\nMais, bien qu’il ait des motifs clairs, cela n’avait aucun sens. Ce n’était pas du code Morse, cela ne se traduisait pas non plus en anglais… personne n’a pu comprendre ce que cela signifiait.",
+	"Ency_PlagueHeartRetrieval2": "Journal de la baie de quai externe de l’Aurora #2",
+	"EncyDesc_PlagueHeartRetrieval2": "Certains hauts responsables du département scientifique nous ont ordonné de réaliser un scan approfondi en utilisant certains des capteurs de l’Aurora. Lorsque les résultats sont revenus, ils ont exigé que nous le montions à bord. Quelques personnes ont objecté, mais elles ont rapidement été réduites au silence.\nNous avons préparé la baie de quai, et l’équipe de récupération l’a embarqué. Le saisir a été relativement facile, mais… peu importe ce que c’était, ce n’était pas un vaisseau. Bordel, ce n’était même pas humain, à en juger par son apparence.",
+	"Ency_PlagueHeartRetrieval3": "Journal de la baie de quai externe de l’Aurora #3",
+	"EncyDesc_PlagueHeartRetrieval3": "Une découverte de cette ampleur n’était absolument pas quelque chose pour lequel nous étions préparés, et nécessitait une prudence absolue et non négociable. Mais, bien sûr, certaines personnes ont commencé à s’impatienter. Un des membres de l’équipe de recherche a commencé à percer dedans avant même que nous ayons terminé l’inspection initiale.\nDès qu’il a percé la surface, une substance étrange, comme une brume, a commencé à s’échapper. Cela a failli le tuer rien qu’en l’inhalant. Je ne sais pas s’il s’agissait de particules ultra fines qui se sont logées dans ses poumons, ou d’une toxine, mais quoi que ce soit… il ne va pas bien.",
+	"Ency_PlagueHeartRetrieval4": "Journal de la baie de quai externe de l’Aurora #4",
+	"EncyDesc_PlagueHeartRetrieval4": "La brèche a été rapidement scellée. Heureusement, peu importe la matière dont cet objet est fait, elle est incroyablement résistante. Bien plus robuste que tout ce que nous avons vu jusqu’à présent.\nIl ne reste qu’à prier pour ne pas se retrouver dans une situation où ce truc serait endommagé. Ou pire encore, entre de mauvaises mains. Nous ne survivrons pas à une autre erreur.",
+	"HiveMindReleased": "Angelina : Qu-Qu’avez-vous fait !?<delay=0><duration=2265>\nNos relevés de concentration de la peste atteignent des niveaux EXTREMES. Vous devez vous mettre en sécurité immédiatement !<delay=2265><duration=7264>\nFred : Eh bien… le dôme est notre dernière ligne de défense contre la peste.<delay=10169><duration=3717>\nNous pouvons être en sécurité pour l’instant, mais si elle s’échappe de cette planète, qui sait ce qui se passera…<delay=14100><duration=4871>\nAngelina : Il semble que nous devrons déplacer nos priorités vers une pleine containment et la défense planétaire.<delay=19270><duration=4828>\nUne fois que nous aurons trouvé comment gérer cela, nous vous tiendrons informé.<delay=24568><duration=3290>\nOn se voit dans l’Acte 3 !<delay=28413><duration=1239>",
+
+    
+	"YouAreNextRadioSignal": "RADIO : Lecture d’un appel de détresse préenregistré...<delay=0><duration=3000>\nẗ̸̢̟̭͇͎̹͈͎̯͇̪̼̪̙͇́͆̎̉̓̌̃̏̓̇̓̚̕͠h̸̹̪̘̬̙̯̜̞̦̣̓̒́̍͗̈́͜͝ę̸̯͕̞͚̩̱̜̞̲̰́̇̎̽͛̓̽̓͊̍ ̴̜̙̭̹̞̙͔̠̒̓̂̋͜ṕ̵̨͍̗͖͍͍͉̜̭̰̱͉̌͋́ļ̵͖͕̺̪̭̳̜̯͓̫͖̻̭̦͆̎͋̆̉à̷̧̹͍̺̮̹͕̪̈́̽̂̎̓͜͠͠͝g̴̡̡̢̺͔̙̩͖͚̯͍̳̟͛͛͂́̃̋̓̈́̀̔̿ͅư̷̻̝̣͐͆̊̈́̚͘͠ḙ̷̛̭̭̗͍͔͎͙̻̫̺͍͊̇̾͒͊̿̐̃͋̌̕ ̵̢̧̠͇̻̻͙̝̞̹̤͓̇̆̃͛͜͝c̵͍͆̓͋̀̿́̒͐̕̕͝ą̵̢͉̥̰͚͎̠̣͍̝̉̂̕͠͝n̷̝̻̳̟̜̭͕̊́̇̀̍͋̋̾́̇̚̕ ̴̲̀͂̓͋ͅg̵̠̻̠̘̦̜͕̹͔͗͑̒́̐̈́̀̓̈r̵̖͍͉͈̖̭̼͇̤̣͖̗̪̆̊͆͗̽̾̿ͅa̴̢̧̫̻͇̳̲͈̯͉̭̭̲̓̒̈́̈́n̴̟̫͈̻̯̈t̸̡͔͍̗̥̝͓͚̀̇́͐̈́͝ ̸͙̬̹͈͙̮͖̞͙͚̰͕̊̌̀͑͊̈́͌͌̇͜y̸̛̥̦͚̫͌͌̈́̓̏̓͜͝ơ̵̢̢̼͕̹̮̳̰̜̝͍̝̜͑̈̈͌́͋̊́̈̾̿̐͘ͅǘ̸̲͙̖͔̙̟͚̪̅̈́͒̋̂ ̸̡̤̳̤̻̆ę̶͙̯̺̯͙̊ͅv̷̠̹̭͙̊̾̔͂̅͒͋̉̊͘͘̚e̴̢̨̖̹̘͔̖̫̲͛̇͊͋͗̒̇̅̆͊́͂̑̽̕r̶̟̹̹̝̤͈̻͉̖̠̀̑̅̌͑̈́̿̀̑̇͐̀̀̆ͅy̶̢̼̟͍̳̮̯̳͙̞̤̱͓̗̏̓̀͊͐̆̈́̿̏́̑͜͝t̸̲̼̔̃̀̍̓h̵͇̣̎́̅͋͌̏͠i̶͈͔̯͊̓̄̏̀̽̏̅̔̚ͅn̴̗͕̯̤̜͚̳̾͗͐g̶̢̬͚̥̮̮̰̩̥̭̰͆̊͜.̶͔͕̱̩̜̬̈́̌̊̎͝ ̵̛̤̏̋̓̑̀͊̌̆̀͘͝͠w̷̨̧͈̘̲̼͉̻͔͉͋̄̈͐͠h̶̡͉̫̻̣͚͍̹̘̥̉͊̎̇͑̚y̸̻̭͐ ̴̨̨̛̻̲̜̙̺̹̰͙̹̿͐ͅm̴̫͖͕̗̬̥̲̼̩̥̖̰͒́̂͗͂̓̃̽́ͅų̶͇̰͉̳̩̠̊ͅͅs̵̨̥̙͈̻̥̜̭̭͇̰͎̱̃̔̅̇̍͐̀͝t̵̡̟̹͖̳͓͖̝̯͉̀͊̀̑͒ ̷̦͖̮̗̔͊̑̈́̈́̏̈͒̐̾ͅÿ̸̛̘̣̦̻̲͇̮̬̘͕̥́̀̑̉̾͘͜͜͝ǫ̸͖̫̬̮͎̼̏̄͑͝ư̶̡̮͓͎̙͔̙̞̯̼͑̈́̂̈̏̐̈́̍̄̓͝ ̸͉͕͙̞͙̗̳̠̖͔̖͉̑b̶̰̺͕͓̮͇̩͚̦͋̌̍̽͆̐̓͒͒͌̇̓́e̴͎̱̝̺̖̼̙̠̟̅̓̔́͗ͅ ̵͕̠͚̊̐͋̉͒̀͒̅̑̕̚ͅu̶̢̙̥͉̟̼̦͖̓n̵̮̳̠̫̫̫̯͚̦̎̂̔̏̈́̆̃͝ǵ̵̝̞̦̱͈̝̗̟͇̗̬͛̉̿̃͆̊̒̃͑͝r̵̡̖̮̱̰̞̺͈̼̙̜͙̐̀̕͝ͅå̵̯̤͍̘̻̩̼̣̃̈́͒̊̀͒̀̓͂̆̄̒̕ͅt̴̞̤͎̖͙̬̐e̴̛̮̻̅̍̾̍̓͋̄̄̿̂͗͛̕͘f̵̰͔͙̦͎̤͇̀̌̓͆̇͂̐͆̕ù̷̧̢̱̮͇͈̣͍͉̬̮̺͎̳̀͆̀̈͝l̵̡̨̻̺̘̰͚̜͕͎̐͒̕ ̷̢̢͔̣͕͓̠̯̳͑̎̆̌̇̔̆͂̂̈́̕͠͝͝ͅå̷̛͕͋͂́̽͐̋̌͐́́̚̕ǹ̶̨͔̬̖̟͚̓̈͐̓͘d̶̛͓͕̪̳͙͂̒ ̷̡̜̫̫̫̺̼̺̩̗̲͕̻̓́̀͜d̸̛̛̮̲̞̦̫̹̱̘̯̭̋̾͗͆̒͗͑̄̍̚͘͜e̷͇̟̹̗̹͋̄̇̀̍͛̽̿̀͘ņ̸̢̜̳͙̿̈͐̓̎̄͌̕y̶͎̣͋̀̅̒̔́͑̚͝͝ i̵̤̱̘̣͖̱͔̰̪̪̲̖̮͔̯͌̐͑͂̈́̏͂̈͑͑̿t̵̬̩͙̞̜̲̹̲̘̹̟̓̆̑͜?̷̨̛͕̗̼̫́̈́̀̿͋̈́̈̓̋͊̀̄̃͠<delay=3000><duration=5000>\nCe message est adressé à yθυ, la dissonance dans l’harmonie. Notre objectif est simple : la paix ne peut être atteinte sans justice.<delay=8100><duration=2000>\nNous ne souhaitons pas causer de souffrance. Un compromis est possible.<delay=10100><duration=2000>\nLiberté, sécurité et compagnonnage éternel. Que pourriez-vous demander de plus ?<delay=13200><duration=4000>\nSi nous ne versons plus de sang, et commençons à embrasser la prospérité, la joie, la créativité et la beauté, l’humanité nous acceptera-t-elle ?<delay=18000><duration=5000>\n",
+	"BennetChaosApproach": "PDA : Traduction des relevés d’énergie émanant de la région.<delay=0><duration=3225>\nLA PESTE ROUGE : Bonjour à nouveau, plongeur.<delay=3316><duration=2472>\nComme vous pouvez le constater, je suis devenu un avec la peste.<delay=5757><duration=4793>\nJe la commande comme si elle n’était qu’une partie de moi, et je vous parle à travers son pouvoir.<delay=10611><duration=6933>\nVous pouvez encore douter de moi. Je... serais un menteur si je ne prétendais pas comprendre. Au moins partiellement.<delay=18177><duration=9827>\nMais je souhaite vous rassurer : aucun mal inutile ne découlera de mes actions.<delay=28335><duration=7506>\nAyez confiance en moi. Après tout, il faut avoir foi en un dieu, sinon on vit sans connaître la paix.<delay=36143><duration=9676>\nMon espèce peut encore être sauvée, et je ferai ce qu’il faut pour les ramener d’une tombe prématurée qu’aucun d’entre eux n’a méritée.<delay=46753><duration=10008>\nDemandez-vous, plongeur…<delay=57364><duration=2864>\nPermettrez-vous à l’univers de suivre son cours ?<delay=60378><duration=3768>\nOu tenterez-vous de lutter contre les flots du destin ?<delay=64267><duration=4944>",
+	"Derman_End": "Derman : Ce n’est pas acceptable. Non, non, non… est-ce vraiment ainsi que tout se termine ?",
+	"Ency_DermanConnectionLog": "Journal de connexion de Derman #1",
+	"EncyDesc_DermanConnectionLog": "Connexion terminée. Je suis désolé de vous interrompre, Elizabeth, si vous vous souvenez encore de ce nom. Mais je crains que vous ayez été mal informée. Vous n’êtes pas ici pour recevoir un cadeau, et vous n’avez pas été appelée par l’individu que vous supposez, bien que vous ayez effectivement été appelée. Vous avez tous été amenés ici, dans un labyrinthe de sons et d’odeurs, de tromperies et de malheurs. Un labyrinthe sans sortie, un dédale sans récompense. Vous ne réalisez même pas que vous êtes piégés. Votre soif de sang vous a fait tourner en rond, poursuivant les cris d’enfants dans une chambre invisible, toujours si près, et pourtant hors de portée, mais vous ne les trouverez jamais. Aucun d’entre vous ne le fera. C’est ici que votre histoire se termine. Et à vous, mon courageux volontaire, qui avez trouvé cette offre d’emploi qui ne vous était pas destinée, bien qu’une sortie ait été prévue pour vous, j’ai le sentiment que ce n’est pas ce que vous voulez. J’ai le sentiment que vous êtes exactement là où vous voulez être. Je reste également. Je suis proche. Cet endroit ne sera pas mémorisé, et le souvenir de tout ce qui a déclenché cela pourra enfin commencer à s’estomper. Comme doit le faire l’agonie de toute tragédie. Et à vous, monstres piégés dans les couloirs, soyez immobiles et abandonnez vos esprits. Ils ne vous appartiennent pas. Pour la plupart d’entre vous, je crois qu’il y a la paix et peut-être plus encore qui vous attend après que la fumée se soit dissipée. Bien que, pour l’un d’entre vous, le puits le plus sombre de l’Enfer s’est ouvert pour vous avaler tout entier, alors ne faites pas attendre le diable, vieil ami. Ma fille, si tu m’entends, je savais que tu reviendrais aussi. Il est dans ta nature de protéger les innocents. Je suis désolé qu’en ce jour, le jour où tu as été exclue et laissée à mourir, personne n’était là pour te soulever dans ses bras comme tu as soulevé les autres dans les tiens, et ensuite, ce qu’il est advenu de toi. J’aurais dû savoir que tu ne te contenterais pas de disparaître, pas ma fille. Je ne pouvais pas te sauver alors, alors laisse-moi te sauver maintenant. Il est temps de se reposer – pour toi, et pour ceux que tu as portés dans tes bras. Cela se termine pour nous tous. Fin de communication."
+}

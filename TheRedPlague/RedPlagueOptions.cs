@@ -1,9 +1,7 @@
 ﻿using Nautilus.Json;
 using Nautilus.Options;
 using Nautilus.Options.Attributes;
-using TheRedPlague.Managers;
-using TheRedPlague.Patches.MainMenu;
-using TheRedPlague.Patches.UI;
+using TheRedPlague.Content.TitleScreen;
 
 namespace TheRedPlague;
 
@@ -18,6 +16,9 @@ public class RedPlagueOptions : ConfigFile
 
     [Toggle("Disable power fluctuations")]
     public bool DisablePowerFluctuations = false;
+    
+    [Toggle("Disable sucker latching behavior")]
+    public bool DisableSuckerLatching = false;
 
     [Toggle("Enable insanity in creative mode")]
     public bool EnableInsanityInCreative = false;

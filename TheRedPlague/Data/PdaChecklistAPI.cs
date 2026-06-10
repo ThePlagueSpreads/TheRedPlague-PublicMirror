@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Story;
-using TheRedPlague.PrefabFiles.Items;
+using TheRedPlague.Content.Items.Resources;
 
 namespace TheRedPlague.Data;
 
@@ -15,25 +15,25 @@ public static class PdaChecklistAPI
 
     internal static void RegisterTrpEntries()
     {
-        RegisterChecklistEntry(new ChecklistEntry(StoryUtils.OfferingToThePlagueMission.key,
-            StoryUtils.ScanPlagueAltarGoal.key)
+        RegisterChecklistEntry(new ChecklistEntry(Act2Story.OfferingToThePlagueMission.key,
+            Act2Story.ScanPlagueAltarGoal.key)
         {
-            AlmostCompletedMessage = new AlmostCompletedMessageData(StoryUtils.MazeBaseDiscoveryGoal.key)
+            AlmostCompletedMessage = new AlmostCompletedMessageData(Act2Story.MazeBaseDiscoveryGoal.key)
         });
-        RegisterChecklistEntry(new ChecklistEntry(StoryUtils.MrTeethMission.key,
-            StoryUtils.UnlockPlagueGrapplerGoal.key)
+        RegisterChecklistEntry(new ChecklistEntry(Act2Story.MrTeethMission.key,
+            Act2Story.UnlockPlagueGrapplerGoal.key)
         {
-            AlmostCompletedMessage = new AlmostCompletedMessageData(StoryUtils.DriveCoreHallwayGoal.key)
+            AlmostCompletedMessage = new AlmostCompletedMessageData(Act2Story.DriveCoreHallwayGoal.key)
         });
-        RegisterChecklistEntry(new ChecklistEntry(StoryUtils.JohnKyleMission.key,
-            StoryUtils.UnlockPlagueArmorGoal.key)
+        RegisterChecklistEntry(new ChecklistEntry(Act2Story.JohnKyleMission.key,
+            Act2Story.UnlockPlagueArmorGoal.key)
         {
             // "PlagueArmorCommentary" is the cyclops wreck PDA goal name
             AlmostCompletedMessage = new AlmostCompletedMessageData("PlagueArmorCommentary")
         });
-        RegisterChecklistEntry(new ChecklistEntry(StoryUtils.PlagueResearchMission.key,
-            StoryUtils.GetStoryGoalKeyForShuttleDelivery(ModPrefabs.AmalgamatedBone.ClassID),
-            StoryUtils.GetStoryGoalKeyForShuttleDelivery(ModPrefabs.WarperHeart.ClassID),
+        RegisterChecklistEntry(new ChecklistEntry(Act2Story.PlagueResearchMission.key,
+            StoryUtils.GetStoryGoalKeyForShuttleDelivery(AmalgamatedBone.Info.ClassID),
+            StoryUtils.GetStoryGoalKeyForShuttleDelivery(WarperHeart.Info.ClassID),
             StoryUtils.GetStoryGoalKeyForShuttleDelivery(PlagueCatalyst.Info.ClassID),
             StoryUtils.GetStoryGoalKeyForShuttleDelivery(PlagueIngot.Info.ClassID),
             StoryUtils.GetStoryGoalKeyForShuttleDelivery(DormantNeuralMatter.Info.ClassID),

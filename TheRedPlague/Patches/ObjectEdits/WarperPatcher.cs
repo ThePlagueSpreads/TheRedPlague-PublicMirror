@@ -1,8 +1,8 @@
 ﻿using HarmonyLib;
 using Nautilus.Utility;
-using TheRedPlague.Mono.CreatureBehaviour;
-using TheRedPlague.Mono.InfectionLogic;
-using TheRedPlague.Mono.SFX;
+using TheRedPlague.Content.Infection;
+using TheRedPlague.Framework.CreatureBehaviours;
+using TheRedPlague.Framework.SFX;
 
 namespace TheRedPlague.Patches.ObjectEdits;
 

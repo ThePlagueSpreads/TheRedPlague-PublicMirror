@@ -1,0 +1,84 @@
+﻿using Nautilus.Assets;
+using Nautilus.Assets.Gadgets;
+using Nautilus.Crafting;
+using Nautilus.Utility;
+using TheRedPlague.Content.Buildables.AdministratorFabricator;
+using TheRedPlague.Framework.Migration;
+using UnityEngine;
+
+namespace TheRedPlague.Content.Items.Placeable;
+
+public class Toy
+{
+    private PrefabInfo Info { get; }
+    private string PrefabName { get; }
+    public bool IsBigoted { private get; init; }
+    
+    public Toy(string classId, string prefabName, string iconName)
+    {
+        Info = PrefabInfo.WithTechType(classId)
+            .WithFolderPath(TrpPrefabFolders.EasterEggs);
+        if (!string.IsNullOrEmpty(iconName))
+            Info.WithIcon(AssetBundles.Core.LoadAsset<Sprite>(iconName));
+        PrefabName = prefabName;
+    }
+
+    public void Register()
+    {
+        var customPrefab = new CustomPrefab(Info);
+        
+        customPrefab.SetGameObject(GetGameObject);
+        if (!IsBigoted)
+        {
+            customPrefab.SetRecipe(new RecipeData(
+                    new Ingredient(TechType.Titanium, 1),
+                    new Ingredient(TechType.FiberMesh, 1)))
+                .WithFabricatorType(AdminFabricator.AdminCraftTree)
+                .WithCraftingTime(5f);
+            customPrefab.SetPdaGroupCategory(TechGroup.Machines, TechCategory.Machines);
+        }
+        customPrefab.SetEquipment(EquipmentType.Hand);
+        customPrefab.Register();
+    }
+
+    protected virtual void ApplyMaterials(GameObject prefab) =>
+        MaterialUtils.ApplySNShaders(prefab, 6f, 1f, 2f);
+
+    protected virtual void AddVFXFabricating(GameObject prefab) =>
+        PrefabUtils.AddVFXFabricating(prefab, PathToWorldModel, -0.01f, 0.3f, default, 0.4f);
+
+    protected virtual string PathToWorldModel => "worldmodel";
+    protected virtual string PathToViewModel => "fpmodel";
+    
+    private GameObject GetGameObject()
+    {
+        var prefab = Object.Instantiate(AssetBundles.Core.LoadAsset<GameObject>(PrefabName));
+        prefab.SetActive(false);
+        PrefabUtils.AddBasicComponents(prefab, Info.ClassID, Info.TechType, LargeWorldEntity.CellLevel.Near);
+        ApplyMaterials(prefab);
+        var rb = prefab.AddComponent<Rigidbody>();
+        rb.useGravity = false;
+        rb.isKinematic = true;
+        var wf = prefab.AddComponent<WorldForces>();
+        wf.useRigidbody = rb;
+        wf.underwaterGravity = 0;
+        prefab.AddComponent<Pickupable>();
+        var placeTool = prefab.AddComponent<PlaceTool>();
+        placeTool.allowedOutside = true;
+        placeTool.rotationEnabled = true;
+        placeTool.hasAnimations = false;
+        var fpModel = prefab.AddComponent<FPModel>();
+        fpModel.propModel = prefab.transform.Find(PathToWorldModel).gameObject;
+        fpModel.viewModel = prefab.transform.Find(PathToViewModel).gameObject;
+        var bounds = prefab.AddComponent<ConstructableBounds>();
+        bounds.bounds = new OrientedBounds(new Vector3(0, 0.2f, 0), Quaternion.identity, new Vector3(0.1f, 0.1f, 0.1f));
+        AddVFXFabricating(prefab);
+        if (IsBigoted)
+        {
+            var replace = prefab.AddComponent<ReplacePrefabOnStart>();
+            replace.newClassId = "TransDeskFlag";
+            replace.techTypeIsSameAsClassId = true;
+        }
+        return prefab;
+    }
+}

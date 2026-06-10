@@ -1,0 +1,23 @@
+﻿using UnityEngine;
+
+namespace TheRedPlague.Content.Act1.FloatingIsland;
+
+public class LowQualityIslandMesh : MonoBehaviour
+{
+    public float renderDistance = 220;
+    
+    private GameObject _islandModel;
+
+    private void Awake()
+    {
+        _islandModel = transform.GetChild(0).gameObject;
+    }
+
+    private void Update()
+    {
+        _islandModel.SetActive(!LaunchRocket.launchStarted &&
+                              Vector3.SqrMagnitude(
+                                  transform.position + new Vector3(-64, 100, 64) - MainCamera.camera.transform.position)
+                              > renderDistance * renderDistance);
+    }
+}

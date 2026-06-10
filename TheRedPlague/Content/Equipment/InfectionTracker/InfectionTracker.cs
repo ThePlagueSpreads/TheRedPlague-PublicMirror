@@ -1,0 +1,116 @@
+﻿using System.Collections;
+using System.Linq;
+using Nautilus.Assets;
+using Nautilus.Assets.Gadgets;
+using Nautilus.Assets.PrefabTemplates;
+using Nautilus.Crafting;
+using Nautilus.Handlers;
+using Nautilus.Utility;
+using TheRedPlague.Content.Buildables.AdministratorFabricator;
+using TheRedPlague.Content.Creatures.Neural;
+using TheRedPlague.Content.Items.Resources;
+using UnityEngine;
+
+namespace TheRedPlague.Content.Equipment.InfectionTracker;
+
+[PrefabClass]
+public static class InfectionTracker
+{
+    public static PrefabInfo Info { get; } = PrefabInfo.WithTechType("InfectionTracker");
+
+    [PrefabRegistration]
+    private static void Register()
+    {
+        var prefab = new CustomPrefab(Info);
+        var infectionTrackerTemplate = new CloneTemplate(Info, "b98da0ef-29d4-4571-9a82-53a6e6706153");
+        infectionTrackerTemplate.ModifyPrefabAsync += ModifyPrefab;
+        prefab.SetGameObject(infectionTrackerTemplate);
+        prefab.SetEquipment(EquipmentType.Hand);
+        prefab.Info.WithIcon(AssetBundles.Core.LoadAsset<Sprite>("InfectionTrackerIcon"));
+        KnownTechHandler.SetAnalysisTechEntry(Info.TechType,
+            System.Array.Empty<TechType>(), KnownTechHandler.DefaultUnlockData.BlueprintUnlockSound,
+            AssetBundles.Core.LoadAsset<Sprite>("InfectionTrackerPopup"));
+        prefab.SetRecipe(new RecipeData(new Ingredient(TechType.PrecursorIonCrystal, 1),
+                new Ingredient(ConsciousNeuralMatter.Info.TechType, 1), new Ingredient(BloodQuartz.Info.TechType, 2)))
+            .WithCraftingTime(5)
+            .WithFabricatorType(AdminFabricator.AdminCraftTree);
+        prefab.SetPdaGroupCategoryAfter(TechGroup.Personal, TechCategory.Equipment, TechType.PrecursorKey_Orange);
+        prefab.Register();
+    }
+
+    private static IEnumerator ModifyPrefab(GameObject prefab)
+    {
+        prefab.GetComponentInChildren<Renderer>(true).material
+            .SetColor(ShaderPropertyID._GlowColor, new Color(0.65f, 0, 0));
+        prefab.GetComponentsInChildren<Collider>(true).ForEach(c => c.enabled = false);
+        prefab.GetComponentsInChildren<Animator>(true).ForEach(c => c.enabled = false);
+        var collider = prefab.AddComponent<BoxCollider>();
+        collider.size = new Vector3(0.7f, 0.07f, 0.7f);
+        var tool = prefab.AddComponent<InfectionTrackerTool>();
+        tool.mainCollider = collider;
+        tool.hasAnimations = false;
+        tool.pickupable = prefab.AddComponent<Pickupable>();
+        tool.renderers = prefab.GetComponentsInChildren<Renderer>();
+        tool.hasAnimations = true;
+
+        var pingEmitter = prefab.AddComponent<FMOD_CustomEmitter>();
+        pingEmitter.SetAsset(AudioUtils.GetFmodAsset("InfectionTrackerPing"));
+        pingEmitter.followParent = true;
+        pingEmitter.restartOnPlay = true;
+        tool.pingEmitter = pingEmitter;
+
+        var closeEmitter = prefab.AddComponent<FMOD_CustomLoopingEmitter>();
+        closeEmitter.SetAsset(AudioUtils.GetFmodAsset("InfectionTrackerClose"));
+        closeEmitter.followParent = true;
+        closeEmitter.restartOnPlay = false;
+        tool.closeSoundEmitter = closeEmitter;
+
+        var worldModel = prefab.GetComponentInChildren<Animator>().gameObject;
+
+        var viewModel = Object.Instantiate(worldModel, prefab.transform);
+        viewModel.SetActive(false);
+        viewModel.transform.localScale = Vector3.one * 0.6f;
+        viewModel.transform.localPosition = new Vector3(-0.15f, 0.01f, 0.2f);
+        viewModel.transform.localEulerAngles = new Vector3(275, 180, 0);
+        tool.fpModelRenderer = viewModel.GetComponentInChildren<Renderer>();
+
+        tool.ikAimRightArm = true;
+
+        var fpModel = prefab.EnsureComponent<FPModel>();
+        fpModel.propModel = worldModel;
+        fpModel.viewModel = viewModel;
+
+        var diveReelTask = CraftData.GetPrefabForTechTypeAsync(TechType.DiveReel);
+        yield return diveReelTask;
+        var arrow = Object.Instantiate(
+            diveReelTask.GetResult().GetComponent<DiveReel>().nodePrefab.transform.Find("Arrow").gameObject,
+            prefab.transform);
+        arrow.SetActive(false);
+        var arrowCenter = new GameObject("ArrowCenter").transform;
+        arrowCenter.parent = viewModel.transform.GetChild(0).GetChild(0);
+        arrowCenter.localPosition = Vector3.forward * 0.15f;
+        arrow.GetComponentInChildren<Renderer>(true).material.color = new Color(0.4f, 0.05f, 0.1f);
+        arrow.GetComponentInChildren<Renderer>(true).material
+            .SetColor(ShaderPropertyID._ColorStrength, new Color(1.5f, 0, 0));
+        arrow.GetComponentInChildren<Renderer>(true).material
+            .SetColor(ShaderPropertyID._ColorStrengthAtNight, new Color(1.5f, 0, 0));
+
+        tool.arrowPrefab = arrow;
+        tool.viewModel = viewModel;
+
+        var rb = prefab.EnsureComponent<Rigidbody>();
+        rb.mass = 200;
+        rb.useGravity = false;
+        prefab.EnsureComponent<WorldForces>();
+
+        var skyApplier = prefab.GetComponent<SkyApplier>();
+        skyApplier.anchorSky = Skies.Auto;
+        skyApplier.dynamic = true;
+        skyApplier.customSkyPrefab = null;
+        skyApplier.renderers = prefab.GetComponentsInChildren<Renderer>(true)
+            .Where(r => !r.gameObject.name.Contains("Arrow")).ToArray();
+
+        PrefabUtils.AddVFXFabricating(worldModel, "alien_relic_ctrl/alien_relic_04", -0.03f, 0.1f,
+            new Vector3(0, 0, 0), 0.5f, new Vector3(-90, 0, 0));
+    }
+}

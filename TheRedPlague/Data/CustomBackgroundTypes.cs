@@ -9,7 +9,7 @@ public static class CustomBackgroundTypes
 
     public static void RegisterCustomBackgroundTypes()
     {
-        var itemBackground = Plugin.AssetBundle.LoadAsset<Sprite>("PlagueItemBackground");
+        var itemBackground = AssetBundles.Core.LoadAsset<Sprite>("PlagueItemBackground");
         PlagueItem = EnumHandler.AddEntry<CraftData.BackgroundType>("PlagueItem")
             .WithBackground(itemBackground);
     }

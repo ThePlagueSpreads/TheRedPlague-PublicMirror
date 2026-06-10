@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
-using TheRedPlague.Mono.VFX;
+using TheRedPlague.Content.Scares;
+using TheRedPlague.Framework.Behaviour.Horror;
 
 namespace TheRedPlague.Patches.ObjectEdits;
 

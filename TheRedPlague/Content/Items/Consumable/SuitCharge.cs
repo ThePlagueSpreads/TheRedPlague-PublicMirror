@@ -1,0 +1,127 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using Nautilus.Assets;
+using Nautilus.Assets.Gadgets;
+using Nautilus.Crafting;
+using Nautilus.Handlers;
+using Nautilus.Utility;
+using TheRedPlague.Content.PlayerInfection;
+using TheRedPlague.Framework.Inventory;
+using UnityEngine;
+
+namespace TheRedPlague.Content.Items.Consumable;
+
+[PrefabClass]
+public static class SuitCharge
+{
+    private const float ChargeAmount = 45;
+    
+    public static PrefabInfo Info { get; } = PrefabInfo.WithTechType("SuitCharge")
+        .WithIcon(AssetBundles.Core.LoadAsset<Sprite>("SuitChargeIcon"))
+        .WithSizeInInventory(new Vector2int(1, 2));
+
+    private static PrefabInfo DepletedInfo { get; } = PrefabInfo.WithTechType("DepletedSuitCharge")
+        .WithIcon(AssetBundles.Core.LoadAsset<Sprite>("SuitChargeIcon"))
+        .WithSizeInInventory(new Vector2int(1, 2));
+
+    private static PrefabInfo RechargeInfo { get; } = PrefabInfo.WithTechType("SuitChargeRecharge")
+        .WithIcon(AssetBundles.Core.LoadAsset<Sprite>("SuitChargeRechargeIcon"))
+        .WithSizeInInventory(new Vector2int(1, 2));
+
+    private static readonly FMODAsset UseSound = AudioUtils.GetFmodAsset("event:/tools/divereel/set_anchor");
+    private const float UseSoundDuration = 2f;
+
+    private static float _timeLastSoundPlayed;
+
+    [PrefabRegistration]
+    private static void Register()
+    {
+        var prefab = new CustomPrefab(Info);
+        prefab.SetGameObject(GetGameObject);
+        prefab.SetPdaGroupCategoryAfter(TechGroup.Personal, TechCategory.Equipment, TechType.FirstAidKit);
+        prefab.SetRecipe(new RecipeData(
+                new Ingredient(TechType.Battery, 1), new Ingredient(TechType.Lubricant, 1)))
+            .WithFabricatorType(CraftTree.Type.Fabricator)
+            .WithStepsToFabricatorTab(CraftTreeHandler.Paths.FabricatorEquipment);
+        prefab.Register();
+        KnownTechHandler.SetAnalysisTechEntry(Info.TechType, System.Array.Empty<TechType>(),
+            KnownTechHandler.DefaultUnlockData.BasicUnlockSound,
+            AssetBundles.Core.LoadAsset<Sprite>("SuitChargePopup"));
+
+        var depletedPrefab = new CustomPrefab(DepletedInfo);
+        depletedPrefab.SetGameObject(GetGameObjectDepleted);
+        depletedPrefab.Register();
+
+        var rechargePrefab = new CustomPrefab(RechargeInfo);
+        rechargePrefab.SetGameObject(GetGameObjectRecharge);
+        rechargePrefab.SetPdaGroupCategoryAfter(TechGroup.Personal, TechCategory.Equipment, TechType.FirstAidKit);
+        rechargePrefab.SetRecipe(new RecipeData(
+                new Ingredient(DepletedInfo.TechType, 1), new Ingredient(TechType.WhiteMushroom, 2))
+            {
+                craftAmount = 0,
+                LinkedItems = new List<TechType> { Info.TechType }
+            })
+            .WithFabricatorType(CraftTree.Type.Fabricator)
+            .WithStepsToFabricatorTab(CraftTreeHandler.Paths.FabricatorEquipment);
+        rechargePrefab.SetUnlock(Info.TechType);
+        rechargePrefab.Register();
+    }
+
+    private static GameObject GetGameObject()
+    {
+        var obj = GetGameObjectShared(1);
+
+        obj.AddComponent<UsableItem>().SetOnUseAction(Info.ClassID, OnUse);
+        obj.AddComponent<StaticInventoryBarValue>().value = 1;
+
+        return obj;
+    }
+
+    private static GameObject GetGameObjectDepleted()
+    {
+        var obj = GetGameObjectShared(0);
+
+        obj.AddComponent<StaticInventoryBarValue>().value = 0;
+
+        return obj;
+    }
+
+    private static GameObject GetGameObjectRecharge()
+    {
+        return GetGameObjectShared(1);
+    }
+
+    private static GameObject GetGameObjectShared(float glowStrength)
+    {
+        var obj = Object.Instantiate(AssetBundles.Core.LoadAsset<GameObject>("SuitChargePrefab"));
+        obj.SetActive(false);
+        PrefabUtils.AddBasicComponents(obj, Info.ClassID, Info.TechType, LargeWorldEntity.CellLevel.Near);
+        MaterialUtils.ApplySNShaders(obj, 8f, glowStrength: glowStrength);
+        PrefabUtils.AddWorldForces(obj, 25f, 1.4f, isKinematic: true);
+        PrefabUtils.AddVFXFabricating(obj, "Suit Charge", 0f, 0.6f,
+            new Vector3(-0.07f, -0.021f, 0f), 60);
+        obj.AddComponent<Pickupable>();
+        return obj;
+    }
+
+    private static void OnUse(GameObject obj)
+    {
+        PlagueDamageStat.main.Charge(ChargeAmount);
+        if (Time.time > _timeLastSoundPlayed + UseSoundDuration)
+            UWE.CoroutineHost.StartCoroutine(PlayUseSound());
+        CraftData.AddToInventory(DepletedInfo.TechType, 1, true, false);
+    }
+
+    private static IEnumerator PlayUseSound()
+    {
+        _timeLastSoundPlayed = Time.time;
+        var obj = new GameObject("SuitChargeUseSoundEmitter");
+        var emitter = obj.AddComponent<FMOD_CustomEmitter>();
+        emitter.SetAsset(UseSound);
+        emitter.transform.position = Player.main.transform.position;
+        emitter.Play();
+        yield return new WaitForSeconds(UseSoundDuration);
+        emitter.Stop();
+        Object.Destroy(obj, 1);
+    }
+}

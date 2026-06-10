@@ -1,18 +1,22 @@
 ﻿using System.Collections;
 using Nautilus.Handlers;
-using TheRedPlague.Data;
-using TheRedPlague.Managers;
-using TheRedPlague.Managers.Amalgamation;
-using TheRedPlague.Mono.CreatureBehaviour;
+using Nautilus.Utility;
+using TheRedPlague.Content.Infection;
+using TheRedPlague.Content.Infection.Amalgamation;
+using TheRedPlague.Framework.CreatureBehaviours;
+using TheRedPlague.Framework.MaterialModifiers;
+using TheRedPlague.Utilities;
 using UnityEngine;
 
 namespace TheRedPlague.Compatibility;
 
 internal static class AmalgamationCompatibility
 {
+    private const int AmalgamatedBlazaSpikesSeed = 3159139;
+    private const int AmalgamatedBlazaRotationSeed = 6767672;
     public static bool SilenceModInstalled { get; private set; }
     public static bool BloopAndBlazaModInstalled { get; private set; }
-    
+
     public static void PatchCompatibility()
     {
         if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.aci.thesilence"))
@@ -20,6 +24,7 @@ internal static class AmalgamationCompatibility
             SilenceModInstalled = true;
             PatchSilenceCompatibility();
         }
+
         if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.lee23.bloopandblaza"))
         {
             BloopAndBlazaModInstalled = true;
@@ -35,7 +40,7 @@ internal static class AmalgamationCompatibility
         AmalgamationSettingsDatabase.SettingsList.Add(silenceTechType, new AmalgamationSettings(new[]
             {
                 new ParasiteAttachPoint(
-                    new[] {"SilenceModel/Armature/Root/Chest/UpperChest/Neck/Neck1/Head"},
+                    new[] { "SilenceModel/Armature/Root/Chest/UpperChest/Neck/Neck1/Head" },
                     1f,
                     new Vector3(270, 0, 0),
                     true,
@@ -47,43 +52,43 @@ internal static class AmalgamationCompatibility
                     new AttachableParasite(TechType.CrabSquid, 3f)
                 ),
                 new ParasiteAttachPoint(
-                        new[]
-                        {
-                            "SilenceModel/Armature/Root/Chest/LeftArm",
-                            "SilenceModel/Armature/Root/Chest/RightArm",
-                            /*
-                            "SilenceModel/Armature/Root/Chest/Tail/Tail.001/Tail.002",
-                            "SilenceModel/Armature/Root/Chest/Tail/Tail.001/Tail.002/LargeTailWing_L",
-                            "SilenceModel/Armature/Root/Chest/Tail/Tail.001/Tail.002/LargeTailWing_R",
-                            "SilenceModel/Armature/Root/Chest/Tail/Tail.001/Tail.002/Tail.003/Tail.004",
-                            "SilenceModel/Armature/Root/Chest/Tail/Tail.001/Tail.002/Tail.003/Tail.004/Tail.005/Tail.006/Tail.007",
-                            "SilenceModel/Armature/Root/Chest/Tail/Tail.001/Tail.002/Tail.003/Tail.004/Tail.005/Tail.006/Tail.007/MediumTailWing_L",
-                            "SilenceModel/Armature/Root/Chest/Tail/Tail.001/Tail.002/Tail.003/Tail.004/Tail.005/Tail.006/Tail.007/MediumTailWing_R",
-                            "SilenceModel/Armature/Root/Chest/Tail/Tail.001/Tail.002/Tail.003/Tail.004/Tail.005/Tail.006/Tail.007/Tail.008/Tail.009",
-                            "SilenceModel/Armature/Root/Chest/Tail/Tail.001/Tail.002/Tail.003/Tail.004/Tail.005/Tail.006/Tail.007/Tail.008/Tail.009/Tail.010/Tail.011",
-                            "SilenceModel/Armature/Root/Chest/Tail/Tail.001/Tail.002/Tail.003/Tail.004/Tail.005/Tail.006/Tail.007/Tail.008/Tail.009/Tail.010/Tail.011/Tail.012/Tail.013/Tail.014/Tail.015",
-                            */
-                        },  
-                        0.2f,
-                        new Vector3(270, 0, 0),
-                        false,
-                        new string[0],
-                        new AttachableParasite(TechType.Gasopod, 1.5f),
-                        new AttachableParasite(TechType.Stalker, 2f),
-                        new AttachableParasite(TechType.Eyeye, 10f),
-                        new AttachableParasite(TechType.SpineEel, 1f),
-                        new AttachableParasite(TechType.CrabSquid, 0.8f),
-                        new AttachableParasite(TechType.Crash, 8f),
-                        new AttachableParasite(TechType.Peeper, 7f),
-                        new AttachableParasite(TechType.Jellyray, 1f),
-                        new AttachableParasite(TechType.SeaTreader, 1f),
-                        new AttachableParasite(TechType.GhostRayBlue, 1f),
-                        new AttachableParasite(TechType.Mesmer, 4f),
-                        new AttachableParasite(TechType.CaveCrawler, 5f),
-                        new AttachableParasite(TechType.Jumper, 4f),
-                        new AttachableParasite(TechType.ReaperLeviathan, 0.3f),
-                        new AttachableParasite(TechType.BoneShark, 1.5f)
-                    )
+                    new[]
+                    {
+                        "SilenceModel/Armature/Root/Chest/LeftArm",
+                        "SilenceModel/Armature/Root/Chest/RightArm",
+                        /*
+                        "SilenceModel/Armature/Root/Chest/Tail/Tail.001/Tail.002",
+                        "SilenceModel/Armature/Root/Chest/Tail/Tail.001/Tail.002/LargeTailWing_L",
+                        "SilenceModel/Armature/Root/Chest/Tail/Tail.001/Tail.002/LargeTailWing_R",
+                        "SilenceModel/Armature/Root/Chest/Tail/Tail.001/Tail.002/Tail.003/Tail.004",
+                        "SilenceModel/Armature/Root/Chest/Tail/Tail.001/Tail.002/Tail.003/Tail.004/Tail.005/Tail.006/Tail.007",
+                        "SilenceModel/Armature/Root/Chest/Tail/Tail.001/Tail.002/Tail.003/Tail.004/Tail.005/Tail.006/Tail.007/MediumTailWing_L",
+                        "SilenceModel/Armature/Root/Chest/Tail/Tail.001/Tail.002/Tail.003/Tail.004/Tail.005/Tail.006/Tail.007/MediumTailWing_R",
+                        "SilenceModel/Armature/Root/Chest/Tail/Tail.001/Tail.002/Tail.003/Tail.004/Tail.005/Tail.006/Tail.007/Tail.008/Tail.009",
+                        "SilenceModel/Armature/Root/Chest/Tail/Tail.001/Tail.002/Tail.003/Tail.004/Tail.005/Tail.006/Tail.007/Tail.008/Tail.009/Tail.010/Tail.011",
+                        "SilenceModel/Armature/Root/Chest/Tail/Tail.001/Tail.002/Tail.003/Tail.004/Tail.005/Tail.006/Tail.007/Tail.008/Tail.009/Tail.010/Tail.011/Tail.012/Tail.013/Tail.014/Tail.015",
+                        */
+                    },
+                    0.2f,
+                    new Vector3(270, 0, 0),
+                    false,
+                    new string[0],
+                    new AttachableParasite(TechType.Gasopod, 1.5f),
+                    new AttachableParasite(TechType.Stalker, 2f),
+                    new AttachableParasite(TechType.Eyeye, 10f),
+                    new AttachableParasite(TechType.SpineEel, 1f),
+                    new AttachableParasite(TechType.CrabSquid, 0.8f),
+                    new AttachableParasite(TechType.Crash, 8f),
+                    new AttachableParasite(TechType.Peeper, 7f),
+                    new AttachableParasite(TechType.Jellyray, 1f),
+                    new AttachableParasite(TechType.SeaTreader, 1f),
+                    new AttachableParasite(TechType.GhostRayBlue, 1f),
+                    new AttachableParasite(TechType.Mesmer, 4f),
+                    new AttachableParasite(TechType.CaveCrawler, 5f),
+                    new AttachableParasite(TechType.Jumper, 4f),
+                    new AttachableParasite(TechType.ReaperLeviathan, 0.3f),
+                    new AttachableParasite(TechType.BoneShark, 1.5f)
+                )
             }
         ));
     }
@@ -92,14 +97,68 @@ internal static class AmalgamationCompatibility
     {
         if (EnumHandler.TryGetValue<TechType>("BlazaLeviathan", out var blazaLeviathanTechType))
         {
-            InfectionSettingsDatabase.InfectionSettingsList.Add(blazaLeviathanTechType, new InfectionSettings(new Color(5, 6, 5), 0.1f, Vector3.one, Vector3.zero));
+            InfectionSettingsDatabase.InfectionSettingsList.Add(blazaLeviathanTechType,
+                new InfectionSettings(new Color(0.1f, 0.1f, 0.1f), 0f, new Vector3(2, 2, 2),
+                    new Vector3(0.619f, 0.761f, 0f)));
+            AmalgamationSettingsDatabase.CustomModificationsList.Add(blazaLeviathanTechType, AmalgamateBlaza);
         }
 
         if (EnumHandler.TryGetValue<TechType>("Bloop", out var bloopTechType))
         {
-            InfectionSettingsDatabase.InfectionSettingsList.Add(bloopTechType, new InfectionSettings(new Color(2, 3, 5), -1.9f, new Vector3(10, 10, 10), new Vector3(0.142f, 0.476f, 0.333f)));
+            InfectionSettingsDatabase.InfectionSettingsList.Add(bloopTechType,
+                new InfectionSettings(new Color(2, 3, 5), -1.9f, new Vector3(10, 10, 10),
+                    new Vector3(0.142f, 0.476f, 0.333f)));
             AmalgamationSettingsDatabase.CustomModificationsList.Add(bloopTechType, AmalgamateBloop);
         }
+    }
+
+    private static IEnumerator AmalgamateBlaza(GameObject obj)
+    {
+        var renderer = obj.GetComponentInChildren<Renderer>();
+        var materials = renderer.materials;
+        foreach (var material in materials)
+        {
+            material.SetColor("_SpecColor", new Color(2, 0, 0.19f));
+            material.SetFloat("_SpecInt", 6);
+            material.SetFloat("_Fresnel", 0.7f);
+            material.SetFloat("_IBLreductionAtNight", 0.55f);
+        }
+
+        var trailManager = obj.GetComponentInChildren<TrailManager>();
+        var spine = trailManager.trails;
+        var spikesRandom = new System.Random(AmalgamatedBlazaSpikesSeed);
+        var rotationRandom = new System.Random(AmalgamatedBlazaRotationSeed);
+
+        var spikePrefab = Object.Instantiate(AssetBundles.Core.LoadAsset<GameObject>("LargePlagueCrystal"));
+        Object.DestroyImmediate(spikePrefab.GetComponentInChildren<Collider>());
+        MaterialUtils.ApplySNShaders(spikePrefab, modifiers: new PlagueCatalystMaterialModifier());
+        spikePrefab.transform.localScale = new Vector3(0.2f, 0.3f, 0.2f);
+
+        var distAtStart = 1.5f;
+        var distAtEnd = 1.4f;
+        
+        for (int i = 0; i < spine.Length; i++)
+        {
+            var spikes = spikesRandom.Next(7);
+            var bone = spine[i];
+            for (var j = 0; j < spikes; j++)
+            {
+                var spike = Object.Instantiate(spikePrefab, bone, true);
+                var angle = Mathf.PI * 2f * (float)rotationRandom.NextDouble();
+                var distance = GenericTrpUtils.RemapValue(i, 0,
+                    spine.Length, distAtStart, distAtEnd);
+                spike.transform.position = bone.position
+                                           + bone.forward * Mathf.Cos(angle) * distance
+                                           + bone.right * Mathf.Sin(angle) * distance;
+                spike.transform.up = (spike.transform.position - bone.position).normalized;
+                spike.transform.localScale *= 0.75f + (float)rotationRandom.NextDouble() / 2;
+            }
+        }
+        
+        spikePrefab.SetActive(false);
+        Object.Destroy(spikePrefab);
+
+        yield break;
     }
 
     private static IEnumerator AmalgamateBloop(GameObject obj)
@@ -130,7 +189,7 @@ internal static class AmalgamationCompatibility
             (new Vector3(-1.58f, -10.69f, -7.97f), new Vector3(97, 0, 0), Vector3.one * 1),
             (new Vector3(0, 1, -10), new Vector3(0, 0, 0), Vector3.one * 2f),
         };
-        
+
         foreach (var location in locations)
         {
             if (Random.value < 0.5f) continue;
@@ -151,6 +210,7 @@ internal static class AmalgamationCompatibility
             {
                 if (!collider.isTrigger) collider.enabled = false;
             }
+
             yield return null;
             LargeWorld.main.streamer.cellManager.UnregisterEntity(head);
         }

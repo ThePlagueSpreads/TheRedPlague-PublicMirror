@@ -2,7 +2,7 @@
 using HarmonyLib;
 using Nautilus.Utility;
 using Story;
-using TheRedPlague.PrefabFiles.Precursor;
+using TheRedPlague.Content.Act1.IslandElevator;
 using UnityEngine;
 
 namespace TheRedPlague.Patches.ObjectEdits;
@@ -20,14 +20,14 @@ public static class PrecursorElevatorPatcher
     {
         if (__instance.transform.parent == null ||
             CraftData.GetTechType(__instance.transform.parent.gameObject) != IslandElevator.Info.TechType) return;
-        if (StoryGoalManager.main.IsGoalComplete(StoryUtils.UseElevatorGoal.key))
+        if (StoryGoalManager.main.IsGoalComplete(Act1Story.UseElevatorGoal.key))
         {
             // UWE.CoroutineHost.StartCoroutine(PlaySoundDelayed(GeneralUseMusic));
         }
         else
         {
             UWE.CoroutineHost.StartCoroutine(PlaySoundDelayed(ElevatorUseMusic));
-            StoryGoalManager.main.OnGoalComplete(StoryUtils.UseElevatorGoal.key);
+            StoryGoalManager.main.OnGoalComplete(Act1Story.UseElevatorGoal.key);
         }
         UWE.CoroutineHost.StartCoroutine(DisableTopElevatorTriggerForTime(__instance.transform.parent.Find("elevator_top_trigger").gameObject, 28));
     }

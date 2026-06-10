@@ -1,5 +1,5 @@
 ﻿using HarmonyLib;
-using TheRedPlague.Mono.InfectionLogic;
+using TheRedPlague.Content.PlayerInfection;
 
 namespace TheRedPlague.Patches.ObjectEdits;
 

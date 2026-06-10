@@ -1,20 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using Nautilus.Commands;
 using Nautilus.Handlers;
 using Nautilus.Utility;
 using Newtonsoft.Json;
 using Story;
-using TheRedPlague.Mono.CinematicEvents;
-using TheRedPlague.Mono.CreatureBehaviour.Chaos;
-using TheRedPlague.Mono.CreatureBehaviour.Grabber;
-using TheRedPlague.Mono.InfectionLogic;
-using TheRedPlague.Mono.Insanity;
-using TheRedPlague.Mono.Insanity.Symptoms;
-using TheRedPlague.Mono.StoryContent;
-using TheRedPlague.Mono.StoryContent.PlagueHeart;
-using TheRedPlague.Mono.Systems;
-using TheRedPlague.PrefabFiles.Items;
+using TheRedPlague.Content.Act1.Dome;
+using TheRedPlague.Content.Act2.Ending;
+using TheRedPlague.Content.Act2.FleshCave;
+using TheRedPlague.Content.Act2.PlagueHeart;
+using TheRedPlague.Content.Act2.ThrusterEvent;
+using TheRedPlague.Content.Buildables.PlagueAltar;
+using TheRedPlague.Content.Creatures.Chaos;
+using TheRedPlague.Content.Creatures.Grabber;
+using TheRedPlague.Content.Items.Resources;
+using TheRedPlague.Content.PlayerInfection;
+using TheRedPlague.Content.PlayerInfection.Symptoms;
+using TheRedPlague.Content.Scares.GhostCyclops;
+using TheRedPlague.Content.Scares.NpcSurvivors;
+using TheRedPlague.Content.UI;
+using TheRedPlague.Content.Unused;
 using TheRedPlague.Utilities;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -39,10 +46,40 @@ public static class Commands
         ConsoleCommandsHandler.AddGotoTeleportPosition("fleshcavehatch", new Vector3(-1370, -340, -105));
         ConsoleCommandsHandler.AddGotoTeleportPosition("shrinebase", new Vector3(-1516, -885, 822));
         ConsoleCommandsHandler.AddGotoTeleportPosition("meteor", new Vector3(-1115, -306, 1070));
-        ConsoleCommandsHandler.AddGotoTeleportPosition("fleshcavecache", new Vector3(-1389, -860, 634));
+        ConsoleCommandsHandler.AddGotoTeleportPosition("domebase", new Vector3(2.8f, 2105f, 42.2f));
 
         ConsoleCommandsHandler.AddBiomeTeleportPosition("fleshcave", new Vector3(-1384, -408, -117));
         ConsoleCommandsHandler.AddBiomeTeleportPosition("fleshchamber", new Vector3(-1509, -863, 393));
+        ConsoleCommandsHandler.AddBiomeTeleportPosition("fleshcavecache", new Vector3(-1389, -860, 634));
+    }
+    
+    [ConsoleCommand("trpcommands")]
+    public static void TRPCommands()
+    {
+        var allCommands = typeof(Commands)
+            .GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static)
+            .Select(method => new
+            {
+                Method = method,
+                Attribute = method.GetCustomAttributes(false)
+                    .FirstOrDefault(attr => attr is ConsoleCommandAttribute)
+            })
+            .Where(x => x.Attribute != null)
+            .Select(x =>
+            {
+                var propertyInfo = typeof(ConsoleCommandAttribute).GetProperty("Command");
+                return propertyInfo != null
+                    ? propertyInfo.GetValue(x.Attribute)?.ToString()
+                    : null;
+            })
+            .Where(name => !string.IsNullOrEmpty(name))
+            .OrderBy(name => name)
+            .Select(c => $"<color=#{GetCommandColor(c)}>{c}</color>");
+
+        ErrorMessage.AddMessage("<color=#FF0000>All Red Plague commands</color>:");
+
+        var output = string.Join(", ", allCommands);
+        ErrorMessage.AddMessage(output);
     }
 
     [ConsoleCommand("jumpscare")]
@@ -74,7 +111,7 @@ public static class Commands
     [ConsoleCommand("prawnsuitcinematic")]
     public static void PrawnSuitCinematic()
     {
-        Mono.CinematicEvents.PrawnSuitCinematic.PlayCinematic();
+        Content.Scares.PrawnSuitCinematic.PlayCinematic();
     }
 
     [ConsoleCommand("dropadminpod")]
@@ -90,8 +127,13 @@ public static class Commands
     }
 
     [ConsoleCommand("spawndome")]
-    public static void SpawnDome()
+    public static void SpawnDome(bool instant)
     {
+        var goalManager = StoryGoalManager.main;
+        if (instant && goalManager != null)
+        {
+            goalManager.completedGoals.Add(Act1Story.DomeConstructionEvent.key);
+        }
         UWE.CoroutineHost.StartCoroutine(DomeConstructionTrigger.SpawnDome());
     }
 
@@ -100,11 +142,27 @@ public static class Commands
     {
         DomeExplosion.ExplodeDome();
     }
+    
+    [ConsoleCommand("deletedome")]
+    public static void DeleteDome()
+    {
+        var dome = InfectionDomeController.main;
+        if (dome != null)
+        {
+            Object.Destroy(dome.gameObject);
+        }
+
+        var goalManager = StoryGoalManager.main;
+        if (goalManager != null)
+        {
+            goalManager.completedGoals.Remove(Act1Story.DomeConstructionEvent.key);
+        }
+    }
 
     [ConsoleCommand("nuclearexplosion")]
     public static void NuclearExplosion()
     {
-        Mono.CinematicEvents.NuclearExplosion.PlayCinematic();
+        Content.Unused.NuclearExplosion.PlayCinematic();
     }
 
     [ConsoleCommand("createcodeforbase")]
@@ -140,7 +198,7 @@ public static class Commands
     [ConsoleCommand("loadredplaguescene")]
     public static void LoadRedPlagueScene(string scene = null)
     {
-        var scenePaths = Plugin.ScenesAssetBundle.GetAllScenePaths();
+        var scenePaths = AssetBundles.Scenes.GetAllScenePaths();
         var loadedSceneSuccessfully = false;
 
         foreach (var scenePath in scenePaths)
@@ -207,15 +265,15 @@ public static class Commands
     [ConsoleCommand("completechecklist")]
     public static void CompleteChecklist()
     {
-        StoryUtils.Act2MissionsFollowUp4.Trigger();
+        Act2Story.Act2MissionsFollowUp4.Trigger();
     }
 
     [ConsoleCommand("plagueresources")]
     public static void GivePlagueResources()
     {
         CraftData.AddToInventory(DormantNeuralMatter.Info.TechType);
-        CraftData.AddToInventory(ModPrefabs.AmalgamatedBone.TechType);
-        CraftData.AddToInventory(ModPrefabs.WarperHeart.TechType);
+        CraftData.AddToInventory(AmalgamatedBone.Info.TechType);
+        CraftData.AddToInventory(WarperHeart.Info.TechType);
         CraftData.AddToInventory(PlagueIngot.Info.TechType);
         CraftData.AddToInventory(MysteriousRemains.Info.TechType);
         CraftData.AddToInventory(PlagueCatalyst.Info.TechType);
@@ -238,15 +296,15 @@ public static class Commands
     [ConsoleCommand("obeycinematic")]
     public static void ObeyCinematic()
     {
-        StoryUtils.ObeyBennetEvent.Trigger();
+        Act2Story.ObeyBennetEvent.Trigger();
     }
-    
+
     [ConsoleCommand("disobeycinematic")]
     public static void DisobeyCinematic()
     {
-        StoryUtils.DisobeyBennetEvent.Trigger();
+        Act2Story.DisobeyBennetEvent.Trigger();
     }
-    
+
     [ConsoleCommand("previewghostcyclops")]
     public static void PreviewGhostCyclops(float startX, float startY, float startZ, float endX, float endY, float endZ)
     {
@@ -254,7 +312,7 @@ public static class Commands
             new Vector3(startX, startY, startZ),
             new Vector3(endX, endY, endZ)));
     }
-    
+
     [ConsoleCommand("savechaostrailmanagers")]
     public static void SaveChaosTrailManagers()
     {
@@ -274,7 +332,7 @@ public static class Commands
             var saved = TrailManagerUtils.GetData(trailManager);
             data.Add(id, saved);
         }
-        
+
         var json = JsonConvert.SerializeObject(new MultipleTrailManagersData
         {
             trailManagers = data
@@ -282,11 +340,40 @@ public static class Commands
         var path = System.IO.Path.Combine(BepInEx.Paths.PluginPath, "TEMP", "ChaosTrailManagers.json");
         System.IO.File.WriteAllText(path, json);
     }
-    
+
     [ConsoleCommand("hatchchaostest")]
     public static void HatchChaosTest()
     {
         UWE.CoroutineHost.StartCoroutine(ChaosLeviathanHatch.PlaySequence(PlagueHeartBehaviour.Main.transform,
-            Plugin.CreaturesBundle.LoadAsset<GameObject>("ChaosLeviathanEndCinematicPrefab")));
+            AssetBundles.Creatures.LoadAsset<GameObject>("ChaosLeviathanEndCinematicPrefab")));
+    }
+    
+    [ConsoleCommand("startact2")]
+    public static void StartAct2()
+    {
+        SkipActUtilities.StartAct2();
+    }
+
+    [ConsoleCommand("startact3")]
+    public static void StartAct3()
+    {
+        SkipActUtilities.StartAct3();
+    }
+    
+    [ConsoleCommand("plaguealtarscare")]
+    public static void PlagueAltarScare()
+    {
+        if (!AltarIntrusionEvent.TriggerTest(15))
+        {
+            ErrorMessage.AddMessage("No plague altar found nearby");
+        }
+    }
+    
+    private static string GetCommandColor(string commandName)
+    {
+        var hash = commandName.GetHashCode();
+        float hue = Mathf.Abs(hash % 1000) / 1000f;
+        var color = Color.HSVToRGB(hue, 0.8f, 1f);
+        return ColorUtility.ToHtmlStringRGB(color);
     }
 }

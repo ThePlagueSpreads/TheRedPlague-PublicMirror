@@ -1,6 +1,6 @@
 ﻿using HarmonyLib;
 using Nautilus.Utility;
-using TheRedPlague.Mono.StoryContent;
+using TheRedPlague.Content.Unused;
 using UnityEngine;
 
 namespace TheRedPlague.Patches.ObjectEdits;
@@ -16,10 +16,10 @@ public class PrecursorGunPatcher
         
         var grab = __instance.gameObject.AddComponent<GrabGunAnimation>();
         grab.gunOverrideAnimatorController =
-            Plugin.AssetBundle.LoadAsset<RuntimeAnimatorController>("PrecursorGunGrabAnimator");
+            AssetBundles.Core.LoadAsset<RuntimeAnimatorController>("PrecursorGunGrabAnimator");
         grab.gunAnimator = __instance.transform.Find("base_anim").gameObject.GetComponent<Animator>();
         
-        var gunTentacles = Object.Instantiate(Plugin.AssetBundle.LoadAsset<GameObject>("GunTentaclePrefab"),
+        var gunTentacles = Object.Instantiate(AssetBundles.Core.LoadAsset<GameObject>("GunTentaclePrefab"),
             __instance.transform, true);
         MaterialUtils.ApplySNShaders(gunTentacles, 7f, 2f, 0.5f);
         var applier = gunTentacles.AddComponent<SkyApplier>();

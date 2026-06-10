@@ -8,9 +8,13 @@ internal static class ModCompatibilityManager
 {
     private static readonly HashSet<TechType> ImmuneTechTypes = new();
     
+    public static bool WorldHeightLibInstalled { get; private set; }
+    
     public static void RegisterAllCompatibility()
     {
         AmalgamationCompatibility.PatchCompatibility();
+        
+        WorldHeightLibInstalled = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("WorldHeightLib");
 
         var inbox = new RedPlagueInbox();
         inbox.AddMessageReader(new ImmunityReader());

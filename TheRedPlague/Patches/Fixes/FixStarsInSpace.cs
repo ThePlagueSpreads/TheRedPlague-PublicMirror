@@ -1,5 +1,5 @@
 ﻿using HarmonyLib;
-using TheRedPlague.Utilities;
+using TheRedPlague.Framework.API.OuterSpace;
 using UnityEngine;
 
 namespace TheRedPlague.Patches.Fixes;

@@ -1,30 +1,30 @@
 ﻿using System.Collections;
 using System.Diagnostics;
-using System.IO;
 using System.Reflection;
 using BepInEx;
 using BepInEx.Logging;
 using HarmonyLib;
 using Nautilus.Handlers;
 using Nautilus.Utility;
+using Nautilus.Utility.ModMessages;
 using TheRedPlague.Compatibility;
-using TheRedPlague.Data;
-using TheRedPlague.Mono.CreatureBehaviour.Chaos;
-using TheRedPlague.Mono.CreatureBehaviour.Mimics;
-using TheRedPlague.Mono.SFX;
-using TheRedPlague.Mono.StoryContent;
+using TheRedPlague.Content.TitleScreen;
+using TheRedPlague.Framework.API.StructureLoading;
+using TheRedPlague.Registration;
+using TheRedPlague.Registration.Audio;
 using TheRedPlague.Utilities;
 using UnityEngine;
 
 namespace TheRedPlague;
 
 [BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
-[BepInDependency("com.snmodding.nautilus", "1.0.0.44")]
-[BepInDependency("com.lee23.ecclibrary", "2.2.0")]
-[BepInDependency("WorldHeightLib")]
-[BepInDependency("Esper89.TerrainPatcher", "1.2.2")]
+[BepInDependency("com.snmodding.nautilus", "1.0.0.50")]
+[BepInDependency("com.lee23.ecclibrary", "2.2.3")]
+[BepInDependency("WorldHeightLib", BepInDependency.DependencyFlags.SoftDependency)]
+[BepInDependency("Esper89.TerrainPatcher", "1.2.4")]
 [BepInDependency("com.aci.thesilence", BepInDependency.DependencyFlags.SoftDependency)]
 [BepInDependency("com.lee23.bloopandblaza", BepInDependency.DependencyFlags.SoftDependency)]
+[BepInDependency("com.lee23.kalliesproppack", "1.3.5")]
 public class Plugin : BaseUnityPlugin
 {
     public new static ManualLogSource Logger { get; private set; }
@@ -34,17 +34,6 @@ public class Plugin : BaseUnityPlugin
     public static AssetBundle RedPlagueMainMenu { get; } =
         AssetBundleLoadingUtils.LoadFromAssetsFolder(Assembly, "trp_mainmenu");
 
-    public static AssetBundle AssetBundle { get; private set; }
-
-    public static AssetBundle CreaturesBundle { get; private set; }
-
-    public static AssetBundle ScenesAssetBundle { get; private set; }
-    
-    public static AssetBundle CharactersBundle { get; private set; }
-
-    public static AssetBundle AudioBundle { get; private set; }
-
-    public static Texture2D ZombieInfectionTexture { get; private set; }
     public static RedPlagueOptions Options { get; } = OptionsPanelHandler.RegisterModOptions<RedPlagueOptions>();
 
     private static readonly Stopwatch Stopwatch = new();
@@ -69,7 +58,6 @@ public class Plugin : BaseUnityPlugin
         Harmony.CreateAndPatchAll(Assembly, $"{PluginInfo.PLUGIN_GUID}");
 
         LoadStartupAssets();
-        RegisterSaveDataCaches();
 
         // early loading tasks
         WaitScreenHandler.RegisterEarlyAsyncLoadTask(PluginInfo.PLUGIN_NAME, LoadRedPlagueAsync,
@@ -81,6 +69,8 @@ public class Plugin : BaseUnityPlugin
         WaitScreenHandler.RegisterLateAsyncLoadTask(PluginInfo.PLUGIN_NAME, ValidateSaveFile.DoValidation,
             "Validating save file...");
 
+        RegisterForFindMyUpdates();
+
         Logger.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");
     }
 
@@ -89,6 +79,11 @@ public class Plugin : BaseUnityPlugin
         ModAudio.RegisterMainMenuAudio();
         TrpTitleScreen.RegisterTitleScreenCompatibility(this);
         LanguageHandler.RegisterLocalizationFolder();
+    }
+    
+    private void RegisterForFindMyUpdates()
+    {
+        ModMessageSystem.SendGlobal("FindMyUpdates", "https://raw.githubusercontent.com/ThePlagueSpreads/TheRedPlague-PublicMirror/refs/heads/main/Version.json");
     }
 
     private IEnumerator LoadRedPlagueAsync(WaitScreenHandler.WaitScreenTask task)
@@ -111,46 +106,24 @@ public class Plugin : BaseUnityPlugin
 
         Stopwatch.Start();
 
-        yield return LogProcess(task, "core assets");
-        var coreAssetsBundleTask = AssetBundle.LoadFromFileAsync(GetAssetBundlePath("theredplague"));
-        yield return coreAssetsBundleTask;
-        AssetBundle = coreAssetsBundleTask.assetBundle;
-        ZombieInfectionTexture = AssetBundle.LoadAsset<Texture2D>("zombie_infection_bloody");
+        yield return LogProcess(task, "asset bundles");
 
-        yield return LogProcess(task, "creature assets");
-        var creatureBundleTask = AssetBundle.LoadFromFileAsync(GetAssetBundlePath("redplaguecreatures"));
-        yield return creatureBundleTask;
-        CreaturesBundle = creatureBundleTask.assetBundle;
-
-        yield return LogProcess(task, "scenes");
-        var scenesBundleTask = AssetBundle.LoadFromFileAsync(GetAssetBundlePath("redplaguescenes"));
-        yield return scenesBundleTask;
-        ScenesAssetBundle = scenesBundleTask.assetBundle;
+        yield return AssetBundles.LoadRedPlagueAsync(task, LogProcess);
         
-        yield return LogProcess(task, "characters");
-        var charactersBundleTask = AssetBundle.LoadFromFileAsync(GetAssetBundlePath("redplaguecharacters"));
-        yield return charactersBundleTask;
-        CharactersBundle = charactersBundleTask.assetBundle;
+        yield return LogProcess(task, "essentials");
 
-        yield return LogProcess(task, "miscellaneous data");
+        EssentialAssets.RegisterEssentials();
         CustomBackgroundTypes.RegisterCustomBackgroundTypes();
         CustomTechCategories.RegisterAll();
 
         yield return LogProcess(task, "prefabs");
-        ModPrefabs.RegisterPrefabs();
 
-        yield return LogProcess(task, "coordinated spawns");
-        CoordinatedSpawns.RegisterCoordinatedSpawns();
-
+        AutoPrefabLoader.RegisterAllPrefabs(Assembly);
+        
         yield return LogProcess(task, "commands");
         ConsoleCommandsHandler.RegisterConsoleCommands(typeof(Commands));
         Commands.RegisterTeleportCommands();
-
-        yield return LogProcess(task, "audio bundle");
-        var audioBundleTask = AssetBundle.LoadFromFileAsync(GetAssetBundlePath("theredplagueaudio"));
-        yield return audioBundleTask;
-        AudioBundle = audioBundleTask.assetBundle;
-
+        
         yield return LogProcess(task, "audio");
         StartCoroutine(ModAudio.RegisterAudioAsync(task));
         var longTimeThreshold = Time.realtimeSinceStartup + LongTimeForSoundThresholdSeconds;
@@ -172,7 +145,7 @@ public class Plugin : BaseUnityPlugin
         ModCompatibilityManager.RegisterAllCompatibility();
 
         yield return LogProcess(task, "structures");
-        StructureLoading.RegisterStructures();
+        StructureRegistrationUtils.RegisterStructures(StructureRegistrationUtils.GetStructuresFolderPath(Assembly));
 
         yield return LogProcess(task, "Done!");
 
@@ -190,18 +163,5 @@ public class Plugin : BaseUnityPlugin
         task.Status = $"Loading {upcomingTask}";
         yield return null;
         Stopwatch.Restart();
-    }
-
-    private static string GetAssetBundlePath(string assetBundleFileName)
-    {
-        return Path.Combine(Path.GetDirectoryName(Assembly.Location), "Assets", assetBundleFileName);
-    }
-
-    private static void RegisterSaveDataCaches()
-    {
-        BlisterbackResourceSpawns.RegisterSaveData();
-        DestroyPlagueHeartTimer.RegisterSaveData();
-        CassyTalkingBehindDoor.RegisterSaveData();
-        RoamingChaosLeviathanManager.RegisterSaveData();
     }
 }
